@@ -1,8 +1,9 @@
-import React, { createContext, useContext, useEffect } from 'react';
+import React, { createContext, useContext,useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { useOrgConfiguration } from '../hooks/useOrgConfiguration';
 import type { OrgSettings } from '../types/OrgSettings';
 import { defaultOrgSettings } from '../constants/defaultOrgSettings';
+import { applyTheme, resetTheme } from '../services/themeService';
 
 // Create context for organization configuration
 interface ConfigContextType {
@@ -28,26 +29,21 @@ interface ConfigProviderProps {
 export const ConfigProvider: React.FC<ConfigProviderProps> = ({ children, orgName }) => {
 	const { config, loading, error } = useOrgConfiguration(orgName);
 
-	// Log config details for debugging
-	useEffect(() => {
-		console.log('ConfigProvider received config:', config);
-		console.log('Loading state:', loading);
-		console.log('Error state:', error);
-	}, [config, loading, error]);
-
 	// Apply theme from configuration if available
 	useEffect(() => {
 		try {
-			if (config?.Theme?.Primary) {
-				document.documentElement.style.setProperty('--color-primary', config.Theme.Primary);
-			}
-			if (config?.Theme?.Secondary) {
-				document.documentElement.style.setProperty('--color-secondary', config.Theme.Secondary);
+			if (config?.Theme) {
+				applyTheme(config.Theme);
 			}
 		} catch (err) {
 			console.error('Error applying theme:', err);
 		}
-	}, [config]);
+
+		// Reset theme when component unmounts
+		return () => {
+			resetTheme();
+		};
+	}, [config?.Theme]);
 
 	// Always provide a valid configuration
 	const safeConfig = config || defaultOrgSettings;

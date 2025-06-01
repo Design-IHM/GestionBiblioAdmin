@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ConfigProvider } from './components/ConfigProvider';
 import OrgConfiguration from './components/OrgConfiguration';
 import OrgSelector from './components/OrgSelector';
+import ThemePreview from './components/ThemePreview';
 
 function App() {
   const [selectedOrg, setSelectedOrg] = useState<string>('');
@@ -26,6 +27,7 @@ function App() {
         {selectedOrg && (
           <ConfigProvider orgName={selectedOrg}>
             <OrgConfiguration />
+            <ThemePreview />
           </ConfigProvider>
         )}
       </div>
