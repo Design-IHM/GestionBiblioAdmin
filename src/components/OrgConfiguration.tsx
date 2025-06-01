@@ -1,42 +1,59 @@
 import React from 'react';
-import { useOrgConfiguration } from '../hooks/useOrgConfiguration';
-import LoadingSpinner from "./LoadingSpinner.tsx";
+import { useConfig } from './ConfigProvider';
 
-interface OrgConfigurationProps {
-	orgName: string;
-}
+// Helper function to parse opening hours from JSON string
+const parseOpeningHours = (hoursString: string) => {
+	try {
+		return JSON.parse(hoursString);
+	} catch (error) {
+		console.error('Failed to parse opening hours:', hoursString, error);
+		return { open: "Unknown", close: "Unknown" };
+	}
+};
 
-const OrgConfiguration: React.FC<OrgConfigurationProps> = ({ orgName }) => {
-	const { data: config, isLoading, error } = useOrgConfiguration(orgName);
+const OrgConfiguration: React.FC = () => {
+	const { config, loading } = useConfig();
 
-	if (isLoading) return <LoadingSpinner />;
-	if (error) return "Fail";
-	if (!config) return null;
+	if (loading) {
+		return (
+			<div className="text-center p-8">
+				<div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto"></div>
+				<p className="mt-4 text-gray-600">Loading organization configuration...</p>
+			</div>
+		);
+	}
 
-	const parseOpeningHours = (hoursString: string) => {
-		try {
-			return JSON.parse(hoursString);
-		} catch {
-			return { open: 'closed', close: 'closed' };
-		}
-	};
+	// Debug output
+	console.log('Rendering OrgConfiguration with config:', config);
 
 	return (
-		<div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-			{/* Organization Header */}
-			<div className="flex items-center mb-8 pb-6 border-b">
-				{config.Logo && (
+		<div className="bg-white p-6 rounded-lg shadow-md">
+			{/* Debug info - can be removed in production */}
+			<div className="mb-4 p-2 bg-yellow-50 border border-yellow-200 rounded text-xs">
+				<p>Current time: {new Date().toISOString()}</p>
+				<p>Config data loaded: {config ? 'Yes' : 'No'}</p>
+				<p>Organization name: {config?.Name || 'Not set'}</p>
+			</div>
+
+			{/* Header with organization info */}
+			<div className="flex items-center space-x-6 mb-8">
+				{config?.Logo && (
 					<img
 						src={config.Logo}
 						alt={`${config.Name} Logo`}
-						className="w-16 h-16 mr-4 rounded-lg object-cover"
+						className="w-16 h-16 object-contain"
+						onError={(e) => {
+							console.error('Failed to load logo');
+							// Set a default image or hide the element
+							e.currentTarget.style.display = 'none';
+						}}
 					/>
 				)}
 				<div>
 					<h1 className="text-3xl font-bold text-gray-800">
-						{config.Name || 'Organization Name'}
+						{config?.Name || 'Organization Name'}
 					</h1>
-					{config.Address && (
+					{config?.Address && (
 						<p className="text-gray-600 mt-1">{config.Address}</p>
 					)}
 				</div>
@@ -47,25 +64,25 @@ const OrgConfiguration: React.FC<OrgConfigurationProps> = ({ orgName }) => {
 				<div className="bg-gray-50 p-6 rounded-lg">
 					<h2 className="text-xl font-semibold mb-4 text-gray-800">Contact Information</h2>
 					<div className="space-y-3">
-						{config.Contact.Phone && (
+						{config?.Contact?.Phone && (
 							<div className="flex items-center">
 								<span className="font-medium text-gray-600 w-24">Phone:</span>
 								<span>{config.Contact.Phone}</span>
 							</div>
 						)}
-						{config.Contact.WhatsApp && (
+						{config?.Contact?.WhatsApp && (
 							<div className="flex items-center">
 								<span className="font-medium text-gray-600 w-24">WhatsApp:</span>
 								<span>{config.Contact.WhatsApp}</span>
 							</div>
 						)}
-						{config.Contact.Email && (
+						{config?.Contact?.Email && (
 							<div className="flex items-center">
 								<span className="font-medium text-gray-600 w-24">Email:</span>
 								<span>{config.Contact.Email}</span>
 							</div>
 						)}
-						{config.Contact.Facebook && (
+						{config?.Contact?.Facebook && (
 							<div className="flex items-center">
 								<span className="font-medium text-gray-600 w-24">Facebook:</span>
 								<a href={config.Contact.Facebook} className="text-blue-600 hover:underline">
@@ -73,7 +90,7 @@ const OrgConfiguration: React.FC<OrgConfigurationProps> = ({ orgName }) => {
 								</a>
 							</div>
 						)}
-						{config.Contact.Instagram && (
+						{config?.Contact?.Instagram && (
 							<div className="flex items-center">
 								<span className="font-medium text-gray-600 w-24">Instagram:</span>
 								<a href={config.Contact.Instagram} className="text-blue-600 hover:underline">
@@ -88,19 +105,29 @@ const OrgConfiguration: React.FC<OrgConfigurationProps> = ({ orgName }) => {
 				<div className="bg-gray-50 p-6 rounded-lg">
 					<h2 className="text-xl font-semibold mb-4 text-gray-800">Opening Hours</h2>
 					<div className="space-y-2">
-						{Object.entries(config.OpeningHours).map(([day, hours]) => {
-							const parsedHours = parseOpeningHours(hours);
-							return (
-								<div key={day} className="flex justify-between">
-									<span className="font-medium text-gray-600">{day}:</span>
-									<span>
-                    {parsedHours.open === 'closed'
-	                    ? 'Closed'
-	                    : `${parsedHours.open} - ${parsedHours.close}`
-                    }
-                  </span>
-								</div>
-							);
+						{config?.OpeningHours && Object.entries(config.OpeningHours).map(([day, hours]) => {
+							try {
+								const parsedHours = parseOpeningHours(hours);
+								return (
+									<div key={day} className="flex justify-between">
+										<span className="font-medium text-gray-600">{day}:</span>
+										<span>
+                      {parsedHours.open === 'closed'
+	                      ? 'Closed'
+	                      : `${parsedHours.open} - ${parsedHours.close}`
+                      }
+                    </span>
+									</div>
+								);
+							} catch (error) {
+								console.error(`Error rendering opening hours for ${day}:`, error);
+								return (
+									<div key={day} className="flex justify-between text-red-500">
+										<span className="font-medium">{day}:</span>
+										<span>Error displaying hours</span>
+									</div>
+								);
+							}
 						})}
 					</div>
 				</div>
@@ -112,14 +139,14 @@ const OrgConfiguration: React.FC<OrgConfigurationProps> = ({ orgName }) => {
 					<h2 className="text-xl font-semibold mb-4 text-gray-800">Borrowing Rules</h2>
 					<div className="mb-4">
 						<span className="font-medium text-gray-600">Maximum Simultaneous Loans: </span>
-						<span className="font-semibold">{config.MaximumSimultaneousLoans}</span>
+						<span className="font-semibold">{config?.MaximumSimultaneousLoans || 'Not specified'}</span>
 					</div>
-					{config.SpecificBorrowingRules.filter(rule => rule.trim()).length > 0 && (
+					{config?.SpecificBorrowingRules && config.SpecificBorrowingRules.filter(rule => rule && rule.trim()).length > 0 && (
 						<div>
 							<h3 className="font-medium text-gray-600 mb-2">Specific Rules:</h3>
 							<ul className="list-disc list-inside space-y-1">
 								{config.SpecificBorrowingRules
-									.filter(rule => rule.trim())
+									.filter(rule => rule && rule.trim())
 									.map((rule, index) => (
 										<li key={index} className="text-gray-700">{rule}</li>
 									))}
@@ -130,10 +157,10 @@ const OrgConfiguration: React.FC<OrgConfigurationProps> = ({ orgName }) => {
 
 				<div className="bg-red-50 p-6 rounded-lg">
 					<h2 className="text-xl font-semibold mb-4 text-gray-800">Late Return Penalties</h2>
-					{config.LateReturnPenalties.filter(penalty => penalty.trim()).length > 0 ? (
+					{config?.LateReturnPenalties && config.LateReturnPenalties.filter(penalty => penalty && penalty.trim()).length > 0 ? (
 						<ul className="list-disc list-inside space-y-1">
 							{config.LateReturnPenalties
-								.filter(penalty => penalty.trim())
+								.filter(penalty => penalty && penalty.trim())
 								.map((penalty, index) => (
 									<li key={index} className="text-gray-700">{penalty}</li>
 								))}
@@ -145,7 +172,7 @@ const OrgConfiguration: React.FC<OrgConfigurationProps> = ({ orgName }) => {
 			</div>
 
 			{/* Theme Colors */}
-			{(config.Theme.Primary || config.Theme.Secondary) && (
+			{config?.Theme && (config.Theme.Primary || config.Theme.Secondary) && (
 				<div className="mt-8 bg-gray-50 p-6 rounded-lg">
 					<h2 className="text-xl font-semibold mb-4 text-gray-800">Theme Colors</h2>
 					<div className="flex space-x-6">

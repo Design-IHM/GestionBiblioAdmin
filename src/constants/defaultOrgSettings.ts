@@ -1,4 +1,4 @@
-import type {OrgSettings} from "../types/OrgSettings.ts";
+import type { OrgSettings } from "../types/OrgSettings";
 
 export const defaultOrgSettings: OrgSettings = {
 	Address: "",
@@ -12,7 +12,7 @@ export const defaultOrgSettings: OrgSettings = {
 	LateReturnPenalties: [""],
 	Logo: "",
 	MaximumSimultaneousLoans: 3,
-	Name: "",
+	Name: "Default Library",
 	OpeningHours: {
 		Monday: '{"open": "08:00", "close": "18:00"}',
 		Tuesday: '{"open": "08:00", "close": "18:00"}',
