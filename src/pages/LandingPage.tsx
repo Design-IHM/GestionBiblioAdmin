@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DEFAULT_ORGANIZATION } from '../config/firebase';
+import { DEFAULT_ORGANIZATION } from '../config/firebase.ts';
 
 const LandingPage: React.FC = () => {
 	const navigate = useNavigate();

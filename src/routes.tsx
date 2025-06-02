@@ -1,8 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
-import LandingPage from './components/LandingPage';
+import LandingPage from './pages/LandingPage.tsx';
 import Dashboard from './components/Dashboard';
-import { ConfigProvider } from './components/ConfigProvider';
-import { DEFAULT_ORGANIZATION } from './config/firebase';
 
 const routes = createBrowserRouter([
 	{
@@ -12,58 +10,32 @@ const routes = createBrowserRouter([
 	{
 		path: "/dashboard",
 		element: (
-			<ConfigProvider orgName={DEFAULT_ORGANIZATION}>
 				<Dashboard />
-				</ConfigProvider>
 		),
 	},
 	{
 		path: "/dashboard/books",
-		element: (
-			<ConfigProvider orgName={DEFAULT_ORGANIZATION}>
-			<Dashboard initialSection="books" />
-				</ConfigProvider>
-		),
+		element: <Dashboard initialSection="books" />,
 	},
 	{
 		path: "/dashboard/users",
-		element: (
-			<ConfigProvider orgName={DEFAULT_ORGANIZATION}>
-			<Dashboard initialSection="users" />
-				</ConfigProvider>
-		),
+		element: <Dashboard initialSection="users" />,
 	},
 	{
 		path: "/dashboard/loans",
-		element: (
-			<ConfigProvider orgName={DEFAULT_ORGANIZATION}>
-			<Dashboard initialSection="loans" />
-				</ConfigProvider>
-		),
+		element: <Dashboard initialSection="loans" />,
 	},
 	{
 		path: "/dashboard/returns",
-		element: (
-			<ConfigProvider orgName={DEFAULT_ORGANIZATION}>
-			<Dashboard initialSection="returns" />
-				</ConfigProvider>
-		),
+		element: <Dashboard initialSection="returns" />,
 	},
 	{
 		path: "/dashboard/settings",
-		element: (
-			<ConfigProvider orgName={DEFAULT_ORGANIZATION}>
-			<Dashboard initialSection="settings" />
-				</ConfigProvider>
-		),
+		element: <Dashboard initialSection="settings" />,
 	},
 	{
 		path: "/dashboard/theme",
-		element: (
-			<ConfigProvider orgName={DEFAULT_ORGANIZATION}>
-			<Dashboard initialSection="theme" />
-				</ConfigProvider>
-		),
+		element: <Dashboard initialSection="theme" />,
 	},
 	{
 		path: "*",

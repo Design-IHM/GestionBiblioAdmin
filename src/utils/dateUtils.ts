@@ -18,5 +18,6 @@ export const getCurrentFormattedDateTime = (): string => {
  * Returns the current user login
  */
 export const getCurrentUserLogin = (): string => {
-	return 'Ntye';
+	console.log(import.meta.env.VITE_DEFAULT_ORGANIZATION)
+	return import.meta.env.VITE_DEFAULT_ORGANIZATION || 'Ntye';
 };

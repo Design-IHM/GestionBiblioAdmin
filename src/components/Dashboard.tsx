@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useConfig } from './ConfigProvider';
 import OrgConfiguration from './OrgConfiguration';
 import ThemePreview from './ThemePreview';
+import {GiBookPile} from "react-icons/gi";
+import {getCurrentFormattedDateTime, getCurrentUserLogin} from "../utils/dateUtils.ts";
 
 interface DashboardProps {
 	initialSection?: string;
@@ -13,8 +15,17 @@ const Dashboard: React.FC<DashboardProps> = ({ initialSection = 'overview' }) =>
 	const [activeSection, setActiveSection] = useState<string>(initialSection);
 
 	// Use the updated date/time and user login as specified
-	const currentDateTime = "2025-06-02 09:10:06";
-	const userLogin = "Ntye";
+	const [currentDateTime, setCurrentDateTime] = useState(getCurrentFormattedDateTime());
+	const userLogin = getCurrentUserLogin();
+
+	// Update time every second
+	useEffect(() => {
+		const timer = setInterval(() => {
+			setCurrentDateTime(getCurrentFormattedDateTime());
+		}, 1000);
+
+		return () => clearInterval(timer);
+	}, []);
 
 	useEffect(() => {
 		// Update active section if initialSection prop changes
@@ -126,9 +137,7 @@ const Dashboard: React.FC<DashboardProps> = ({ initialSection = 'overview' }) =>
 		} else {
 			// Default book icon
 			return (
-				<svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-					<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-				</svg>
+				<GiBookPile className="w-8 h-8 text-primary"/>
 			);
 		}
 	};
