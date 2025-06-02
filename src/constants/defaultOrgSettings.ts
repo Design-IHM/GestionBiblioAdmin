@@ -24,7 +24,7 @@ export const defaultOrgSettings: OrgSettings = {
 	},
 	SpecificBorrowingRules: [""],
 	Theme: {
-		Primary: "#3B82F6",
-		Secondary: "#64748B"
+		Primary: "#D2691E",   // Chocolate color
+		Secondary: "#E7DAC1", // Beige color
 	}
 };

@@ -4,17 +4,20 @@ import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-	// Your Firebase config
-	apiKey: "AIzaSyAycPH0e54OEuQKZHJlJVBzrl8PJwE5eEw",
-	authDomain: "test-b1637.firebaseapp.com",
-	databaseURL: "https://test-b1637-default-rtdb.europe-west1.firebasedatabase.app",
-	projectId: "test-b1637",
-	storageBucket: "test-b1637.appspot.com",
-	messagingSenderId: "912702084020",
-	appId: "1:912702084020:web:7c4470b95d458da35558e1",
-	measurementId: "G-PWEJXF3Q4M"
+	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+	authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+	databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+	projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+	storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+	appId: import.meta.env.VITE_FIREBASE_APP_ID,
+	measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+
+// Export default organization name from environment variables
+export const DEFAULT_ORGANIZATION = import.meta.env.VITE_DEFAULT_ORGANIZATION || 'CampusLibrary';

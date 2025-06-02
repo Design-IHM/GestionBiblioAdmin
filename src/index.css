@@ -3,6 +3,62 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@layer base {
+  html {
+    font-size: 14px; /* Make base font size smaller */
+    line-height: 1.4; /* Reduce line height for more compact text */
+    overflow-x: hidden;
+  }
+
+  body {
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    max-width: 100vw; /* Ensure body doesn't exceed viewport width */
+  }
+
+  p {
+    font-weight: 400; /* Normal weight for body text */
+    letter-spacing: -0.01em; /* Slightly tighter letter spacing */
+  }
+}
+/* Add this to your main CSS file */
+.theme-applied {
+  /* This empty class is used to force a style refresh when theme changes */
+}
+
+/* Make sure these specific utilities for secondary colors are included */
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+.bg-secondary-50 {
+  background-color: var(--color-secondary-50);
+}
+.bg-secondary-100 {
+  background-color: var(--color-secondary-100);
+}
+.bg-secondary-200 {
+  background-color: var(--color-secondary-200);
+}
+.bg-secondary-300 {
+  background-color: var(--color-secondary-300);
+}
+.bg-secondary-400 {
+  background-color: var(--color-secondary-400);
+}
+.bg-secondary-500 {
+  background-color: var(--color-secondary-500);
+}
+.bg-secondary-600 {
+  background-color: var(--color-secondary-600);
+}
+.bg-secondary-700 {
+  background-color: var(--color-secondary-700);
+}
+.bg-secondary-800 {
+  background-color: var(--color-secondary-800);
+}
+.bg-secondary-900 {
+  background-color: var(--color-secondary-900);
+}
 
 /* Smooth transitions for theme changes */
 * {

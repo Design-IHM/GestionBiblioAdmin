@@ -1,3 +1,8 @@
+export interface Theme {
+	Primary: string;
+	Secondary: string;
+}
+
 export interface Contact {
 	Email: string;
 	Facebook: string;
@@ -14,11 +19,6 @@ export interface OpeningHours {
 	Friday: string;
 	Saturday: string;
 	Sunday: string;
-}
-
-export interface Theme {
-	Primary: string;
-	Secondary: string;
 }
 
 export interface OrgSettings {

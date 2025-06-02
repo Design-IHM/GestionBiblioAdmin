@@ -1,9 +1,9 @@
-import React, { createContext, useContext,useEffect } from 'react';
-import type { ReactNode } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
+import type { ReactNode} from 'react';
 import { useOrgConfiguration } from '../hooks/useOrgConfiguration';
 import type { OrgSettings } from '../types/OrgSettings';
 import { defaultOrgSettings } from '../constants/defaultOrgSettings';
-import { applyTheme, resetTheme } from '../services/themeService';
+import { initializeDefaultTheme, applyThemeColors } from '../utils/themeInitializer';
 
 // Create context for organization configuration
 interface ConfigContextType {
@@ -29,21 +29,46 @@ interface ConfigProviderProps {
 export const ConfigProvider: React.FC<ConfigProviderProps> = ({ children, orgName }) => {
 	const { config, loading, error } = useOrgConfiguration(orgName);
 
-	// Apply theme from configuration if available
+	// Initialize default theme on first render
 	useEffect(() => {
-		try {
-			if (config?.Theme) {
-				applyTheme(config.Theme);
-			}
-		} catch (err) {
-			console.error('Error applying theme:', err);
-		}
+		console.log("🎨 Initializing default theme");
+		initializeDefaultTheme();
+	}, []);
 
-		// Reset theme when component unmounts
-		return () => {
-			resetTheme();
-		};
-	}, [config?.Theme]);
+	// Apply theme from configuration when it's loaded
+	useEffect(() => {
+		// Only apply theme when loading is complete and we have a config
+		if (!loading && config) {
+			console.log("🎭 Config loaded, checking theme:", config);
+
+			if (config?.Theme) {
+				console.log("✅ Theme found in config:", config.Theme);
+
+				// Always apply the theme colors when the configuration changes
+				const primary = config.Theme.Primary || defaultOrgSettings.Theme.Primary;
+				const secondary = config.Theme.Secondary || defaultOrgSettings.Theme.Secondary;
+
+				// Ensure we're applying valid colors
+				if (primary && secondary) {
+					console.log('🖌️ Applying colors:', { primary, secondary });
+					applyThemeColors(primary, secondary);
+				} else {
+					console.warn('⚠️ Invalid theme colors in config:', { primary, secondary });
+					applyThemeColors(
+						defaultOrgSettings.Theme.Primary,
+						defaultOrgSettings.Theme.Secondary
+					);
+				}
+			} else {
+				// Apply default theme if no theme found in config
+				console.log('⚠️ No theme found in config, applying defaults');
+				applyThemeColors(
+					defaultOrgSettings.Theme.Primary,
+					defaultOrgSettings.Theme.Secondary
+				);
+			}
+		}
+	}, [config, loading]);
 
 	// Always provide a valid configuration
 	const safeConfig = config || defaultOrgSettings;
