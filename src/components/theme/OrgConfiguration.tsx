@@ -1,5 +1,5 @@
 import React from 'react';
-import { useConfig } from './ConfigProvider';
+import { useConfig } from './ConfigProvider.tsx';
 
 // Helper function to parse opening hours from JSON string
 const parseOpeningHours = (hoursString: string) => {

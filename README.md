@@ -40,7 +40,7 @@ GestionBiblioAdmin/
 │   │   ├── useI18n.ts   # Internationalization hook
 │   │   └── ...
 │   ├── pages/           # Page components
-│   │   ├── LandingPage.tsx
+│   │   ├── Landing.tsx
 │   │   ├── DashboardPage.tsx
 │   │   └── ...
 │   ├── services/        # Service layer for API calls

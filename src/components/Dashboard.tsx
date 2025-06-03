@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useConfig } from './ConfigProvider';
-import OrgConfiguration from './OrgConfiguration';
-import ThemePreview from './ThemePreview';
+import { useConfig } from './theme/ConfigProvider.tsx';
+import OrgConfiguration from './theme/OrgConfiguration.tsx';
+import ThemePreview from './theme/ThemePreview.tsx';
 import {GiBookPile} from "react-icons/gi";
 import {getCurrentFormattedDateTime, getCurrentUserLogin} from "../utils/dateUtils.ts";
 

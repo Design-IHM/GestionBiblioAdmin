@@ -1,7 +1,7 @@
 // Location: src/components/CloudinaryImageUploader.tsx
 import React, { useState } from 'react';
-import { useCloudinaryUpload } from '../hooks/useCloudinaryUpload';
-import type { UploadedImage } from "../types/uploads.ts";
+import { useCloudinaryUpload } from '../../hooks/useCloudinaryUpload.ts';
+import type { UploadedImage } from "../../types/uploads.ts";
 
 
 const CloudinaryImageUploader: React.FC = () => {

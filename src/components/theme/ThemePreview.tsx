@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useConfig } from './ConfigProvider';
-import { getCurrentFormattedDateTime, getCurrentUserLogin } from '../utils/dateUtils';
+import { useConfig } from './ConfigProvider.tsx';
+import { getCurrentFormattedDateTime, getCurrentUserLogin } from '../../utils/dateUtils.ts';
 
 const ThemePreview: React.FC = () => {
 	const { config } = useConfig();

@@ -1,45 +1,64 @@
 import { createBrowserRouter } from 'react-router-dom';
-import LandingPage from './pages/LandingPage.tsx';
-import Dashboard from './components/Dashboard';
+import Landing from './pages/Landing.tsx';
+import Dashboard from "./components/layout/Dashboard.tsx";
+
+// Dashboard Components
+import Overview from './pages/Overview.tsx';
+import Books from './pages/Books.tsx';
+import Users from './pages/Users.tsx';
+import Loans from './pages/Loans.tsx';
+import Returns from './pages/Returns.tsx';
+import OrgConfiguration from "./components/theme/OrgConfiguration.tsx";
+import ThemePreview from "./components/theme/ThemePreview.tsx";
+import UnderDevelopment from './pages/UnderDevelopment.tsx';
+
 
 const routes = createBrowserRouter([
 	{
 		path: "/",
-		element: <LandingPage />,
+		element: <Landing />,
 	},
 	{
 		path: "/dashboard",
-		element: (
-			<Dashboard />
-		),
-	},
-	{
-		path: "/dashboard/books",
-		element: <Dashboard initialSection="books" />,
-	},
-	{
-		path: "/dashboard/users",
-		element: <Dashboard initialSection="users" />,
-	},
-	{
-		path: "/dashboard/loans",
-		element: <Dashboard initialSection="loans" />,
-	},
-	{
-		path: "/dashboard/returns",
-		element: <Dashboard initialSection="returns" />,
-	},
-	{
-		path: "/dashboard/settings",
-		element: <Dashboard initialSection="settings" />,
-	},
-	{
-		path: "/dashboard/theme",
-		element: <Dashboard initialSection="theme" />,
+		element: <Dashboard />,
+		children: [
+			{
+				index: true, // Default dashboard page
+				element: <Overview />,
+			},
+			{
+				path: "books",
+				element: <Books />,
+			},
+			{
+				path: "users",
+				element: <Users />,
+			},
+			{
+				path: "loans",
+				element: <Loans />,
+			},
+			{
+				path: "returns",
+				element: <Returns />,
+			},
+			{
+				path: "settings",
+				element: <OrgConfiguration />,
+			},
+			{
+				path: "theme",
+				element: <ThemePreview />,
+			},
+			{
+				path: "*",
+				element: <UnderDevelopment sectionName="Requested" />,
+			}
+		]
 	},
 	{
 		path: "*",
-		element: <LandingPage />,
+		element: <Landing />,
 	},
 ]);
 

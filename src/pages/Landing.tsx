@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DEFAULT_ORGANIZATION } from '../config/firebase.ts';
-import CloudinaryImageUploader from "../components/CloudinaryImageUploader.tsx";
+import CloudinaryImageUploader from "../components/uploads/CloudinaryImageUploader.tsx";
 
-const LandingPage: React.FC = () => {
+const Landing: React.FC = () => {
 	const navigate = useNavigate();
 	const currentYear = new Date().getFullYear();
 	const currentDate = new Date().toLocaleDateString('en-US', {
@@ -193,4 +193,4 @@ const LandingPage: React.FC = () => {
 	);
 };
 
-export default LandingPage;
+export default Landing;

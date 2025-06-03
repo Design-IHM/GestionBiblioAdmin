@@ -1,6 +1,6 @@
 import { RouterProvider } from 'react-router-dom';
 import routes from './routes';
-import { ConfigProvider } from './components/ConfigProvider.tsx';
+import { ConfigProvider } from './components/theme/ConfigProvider.tsx';
 import {DEFAULT_ORGANIZATION} from "./config/firebase.ts";
 
 function App() {

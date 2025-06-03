@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useEffect } from 'react';
 import type { ReactNode} from 'react';
-import { useOrgConfiguration } from '../hooks/useOrgConfiguration';
-import type { OrgSettings } from '../types/orgSettings.ts';
-import { defaultOrgSettings } from '../constants/defaultOrgSettings';
-import { initializeDefaultTheme, applyThemeColors } from '../utils/themeInitializer';
+import { useOrgConfiguration } from '../../hooks/useOrgConfiguration.ts';
+import type { OrgSettings } from '../../types/orgSettings.ts';
+import { defaultOrgSettings } from '../../constants/defaultOrgSettings.ts';
+import { initializeDefaultTheme, applyThemeColors } from '../../utils/themeInitializer.ts';
 
 // Create context for organization configuration
 interface ConfigContextType {
