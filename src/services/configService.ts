@@ -1,6 +1,6 @@
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import type { OrgSettings } from "../types/OrgSettings";
+import type {OrgSettings} from "../types/orgSettings.ts";
 import { defaultOrgSettings } from '../constants/defaultOrgSettings';
 
 /**

@@ -1,4 +1,4 @@
-import type { OrgSettings } from "../types/OrgSettings";
+import type { OrgSettings } from "../types/orgSettings.ts";
 
 export const defaultOrgSettings: OrgSettings = {
 	Address: "",

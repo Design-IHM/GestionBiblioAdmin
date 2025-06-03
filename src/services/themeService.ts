@@ -1,4 +1,4 @@
-import type { OrgSettings } from '../types/OrgSettings';
+import type { OrgSettings } from '../types/orgSettings.ts';
 import Color from 'color';
 
 // Function to generate color shades from a base color

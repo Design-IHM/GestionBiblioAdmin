@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { fetchOrgConfiguration } from '../services/configService';
-import type { OrgSettings } from "../types/OrgSettings";
+import type { OrgSettings } from "../types/orgSettings.ts";
 import { defaultOrgSettings } from '../constants/defaultOrgSettings';
 
 export const useOrgConfiguration = (orgName: string) => {

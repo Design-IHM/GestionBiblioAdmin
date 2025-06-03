@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect } from 'react';
 import type { ReactNode} from 'react';
 import { useOrgConfiguration } from '../hooks/useOrgConfiguration';
-import type { OrgSettings } from '../types/OrgSettings';
+import type { OrgSettings } from '../types/orgSettings.ts';
 import { defaultOrgSettings } from '../constants/defaultOrgSettings';
 import { initializeDefaultTheme, applyThemeColors } from '../utils/themeInitializer';
 
