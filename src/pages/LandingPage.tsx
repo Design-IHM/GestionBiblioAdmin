@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DEFAULT_ORGANIZATION } from '../config/firebase.ts';
+import {ImageManager} from "../components/ImageManager.tsx";
 
 const LandingPage: React.FC = () => {
 	const navigate = useNavigate();
@@ -40,6 +41,8 @@ const LandingPage: React.FC = () => {
 					</div>
 				</div>
 			</header>
+
+			<ImageManager/>
 
 			{/* Hero Section */}
 			<section className="bg-gradient-to-b from-primary/10 to-white py-16 md:py-24 flex-grow">
