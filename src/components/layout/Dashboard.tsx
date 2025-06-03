@@ -4,7 +4,7 @@ import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import {useConfig} from "../theme/ConfigProvider.tsx";
 
-const DashboardLayout: React.FC = () => {
+const Dashboard: React.FC = () => {
 	const { loading } = useConfig();
 
 	if (loading) {
@@ -40,4 +40,4 @@ const DashboardLayout: React.FC = () => {
 	);
 };
 
-export default DashboardLayout;
+export default Dashboard;
