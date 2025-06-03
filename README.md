@@ -1,54 +1,60 @@
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+GestionBiblioAdmin/
+├── public/
+│   ├── locales/         # Internationalization files
+│   │   ├── en/          # English translations
+│   │   │   └── common.json
+│   │   └── fr/          # French translations
+│   │       └── common.json
+│   ├── assets/          # Static assets like images
+│   │   └── ...
+│   └── index.html
+├── src/
+│   ├── components/      # Component-based architecture
+│   │   ├── auth/        # Authentication related components
+│   │   │   └── ...
+│   │   ├── books/       # Book management components
+│   │   │   ├── BookCard.tsx
+│   │   │   ├── BookList.tsx
+│   │   │   └── ...
+│   │   ├── catalogue/   # Catalogue browsing components
+│   │   │   └── ...
+│   │   ├── common/      # Common UI components
+│   │   │   ├── Button.tsx
+│   │   │   ├── Modal.tsx
+│   │   │   └── ...
+│   │   ├── layout/      # Layout components
+│   │   │   ├── Sidebar.tsx
+│   │   │   ├── Navbar.tsx
+│   │   │   └── ...
+│   │   └── admin/       # Admin-specific components
+│   │       └── ...
+│   ├── config/          # Configuration files
+│   │   └── firebase.ts
+│   ├── constants/       # Constants and defaults
+│   │   └── ...
+│   ├── context/         # React context providers
+│   │   ├── UserContext.tsx
+│   │   └── ...
+│   ├── hooks/           # Custom React hooks
+│   │   ├── useI18n.ts   # Internationalization hook
+│   │   └── ...
+│   ├── pages/           # Page components
+│   │   ├── LandingPage.tsx
+│   │   ├── DashboardPage.tsx
+│   │   └── ...
+│   ├── services/        # Service layer for API calls
+│   │   ├── configService.ts
+│   │   └── ...
+│   ├── styles/          # Global styles
+│   │   └── theme.css
+│   ├── types/           # TypeScript type definitions
+│   │   └── ...
+│   ├── utils/           # Utility functions
+│   │   ├── i18n.ts      # i18n utility functions
+│   │   └── ...
+│   ├── App.tsx
+│   └── index.tsx
+├── package.json
+└── tsconfig.json
+``

@@ -15,9 +15,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+
 
 // Export default organization name from environment variables
 export const DEFAULT_ORGANIZATION = import.meta.env.VITE_DEFAULT_ORGANIZATION || 'CampusLibrary';

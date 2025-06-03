@@ -18,7 +18,7 @@ export const fetchOrgConfiguration = async (orgName: string): Promise<OrgSetting
 		console.log('Global config exists:', biblioConfigSnap.exists());
 
 		// If org-specific config exists in Configurations collection
-		const orgConfigRef = doc(db, 'Configurations', orgName);
+		const orgConfigRef = doc(db, 'Configuration', orgName);
 		const orgConfigSnap = await getDoc(orgConfigRef);
 		console.log(`Org-specific config for ${orgName} exists:`, orgConfigSnap.exists());
 
