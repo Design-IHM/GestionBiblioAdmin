@@ -1,0 +1,75 @@
+{
+  "navbar": {
+    "search": "Search...",
+    "language": "Language",
+    "messages": "Messages",
+    "profile": "Profile",
+    "theme": "Theme",
+    "back": "Back"
+  },
+  "footer": {
+    "organization_name": "Campus Library",
+    "powered_by": "Powered by BornBeforeDesign",
+    "copyright": "- Campus Library Administration. All rights reserved."
+  },
+  "landing": {
+    "hero": {
+      "title": "Welcome to",
+      "description": "Your web application for managing of your school's library.",
+      "manage_documents": "From this platform, you, dear members of the documentation unit, have the ability to manage documents and reservations automatically, with ease and peace of mind.",
+      "cta_button": "Login Now"
+    },
+    "services": {
+        "title": "Our Services",
+        "description": "We offer a range of services to enhance your library management experience.",
+        "service1": {
+          "title": "Book Management",
+          "description": "Efficiently organize books, track borrow and return statuses, and classify them by genre and section."
+        },
+        "service2": {
+          "title": "Thesis Management",
+          "description": "Centralize academic theses, dissertations, and research documents with detailed metadata."
+        },
+        "service3": {
+          "title": "User Profile Management",
+          "description": "Allow users to manage their information and  view history."
+        },
+        "service4": {
+          "title": "Administrative Management",
+          "description": "Access administrative tools, configure system settings, and give dedicated support."
+        }
+      },
+      "statistics": {
+      "stat_1": {
+        "value": "5,000+",
+        "label": "Books Managed"
+      },
+      "stat_2": {
+        "value": "1,200+",
+        "label": "Active Users"
+      },
+      "stat_3": {
+        "value": "15+",
+        "label": "Subject Categories"
+      },
+      "stat_4": {
+        "value": "24/7",
+        "label": "System Availability"
+      }
+    }
+  },
+
+  "books": {
+    "add": "Add Book",
+    "edit": "Edit",
+    "delete": "Delete",
+    "title": "Title",
+    "author": "Author",
+    "isbn": "ISBN",
+    "year": "Year",
+    "category": "Category",
+    "status": "Status",
+    "available": "Available",
+    "borrowed": "Borrowed"
+  }
+}

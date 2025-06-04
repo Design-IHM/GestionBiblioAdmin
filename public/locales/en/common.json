@@ -1,55 +1,14 @@
 {
-  "app": {
-    "title": "Campus Library Management System",
-    "subtitle": "Book Management System"
-  },
-  "navigation": {
-    "overview": "Overview",
-    "books": "Books",
-    "users": "Users",
-    "loans": "Loans",
-    "settings": "Settings"
-  },
-  "books": {
-    "title": "Book Management",
-    "add": "Add Book",
-    "edit": "Edit Book",
-    "delete": "Delete Book",
-    "catalogue": "Browse Catalogue",
-    "fields": {
-      "title": "Title",
-      "author": "Author",
-      "department": "Department",
-      "shelf": "Shelf",
-      "room": "Room",
-      "copies": "Copies",
-      "description": "Description",
-      "category": "Category"
-    },
-    "departments": {
-      "computerScience": "Computer Science",
-      "civil": "Civil Engineering",
-      "telecommunications": "Telecommunications",
-      "electrical": "Electrical Engineering",
-      "mechanical": "Mechanical Engineering",
-      "msp": "MSP Department"
-    }
-  },
-  "users": {
-    "title": "User Management",
-    "add": "Add User",
-    "edit": "Edit User"
-  },
-  "login": {
-    "title": "Admin Login",
-    "username": "Username",
-    "password": "Password",
-    "submit": "Login"
-  },
-  "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit"
-  }
+  "app_name": "BIBLIO ENSPY",
+  "app_subtitle": "Book Management System",
+  "login": "Login",
+  "current_date": "{{date}}",
+  "language": "Language",
+  "switch_to_french": "Passer au Français",
+  "search_placeholder": "Search...",
+  "messages": "Messages",
+  "profile": "Profile",
+  "light_mode": "Light mode",
+  "dark_mode": "Dark mode",
+  "logout": "Logout"
 }

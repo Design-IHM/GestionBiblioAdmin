@@ -1,36 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BiSearch, BiUserCircle, BiMessageDetail, BiGlobe } from 'react-icons/bi';
+import { BiSearch, BiUserCircle, BiMessageDetail } from 'react-icons/bi';
 import { RiSunFill, RiMoonFill } from 'react-icons/ri';
 import { IoIosArrowBack } from 'react-icons/io';
-import { getCurrentFormattedDateTime, getCurrentUserLogin } from "../../utils/dateUtils";
+import { getCurrentUserLogin } from "../../utils/dateUtils";
+import LanguageSwitcher from '../common/LanguageSwitcher';
+import useI18n from '../../hooks/useI18n';
 
 const Navbar: React.FC = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const [currentDateTime, setCurrentDateTime] = useState(getCurrentFormattedDateTime());
+	const { t } = useI18n();
+	// const [currentDateTime, setCurrentDateTime] = useState(getCurrentFormattedDateTime());
 	const userLogin = getCurrentUserLogin();
 	const [searchWord, setSearchWord] = useState("");
-	const [unreadMessagesCount, setUnreadMessagesCount] = useState(2); // Example count, replace with actual logic
-	const [showMobileMenu, setShowMobileMenu] = useState(false);
+	const unreadMessagesCount = 2; // Example count, replace with actual logic
 
 	// Example theme toggle - integrate with your actual theme system
 	const [isDarkMode, setIsDarkMode] = useState(false);
 	const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
-	// Example language toggle - integrate with your actual i18n system
-	const [language, setLanguage] = useState("EN");
-	const changeLanguage = (lang: string) => setLanguage(lang);
-
 	// Get the current section name from the URL
 	const getCurrentSectionName = () => {
 		const path = location.pathname;
 
-		if (path === '/dashboard') return 'Overview';
+		if (path === '/dashboard') return t('pages:dashboard.overview');
 
-		// Extract the section name from the path and capitalize the first letter
+		// Extract the section name from the path and translate it
 		const section = path.split('/').pop() || '';
-		return section.charAt(0).toUpperCase() + section.slice(1);
+		return t(`pages:dashboard.${section}`, { defaultValue: section.charAt(0).toUpperCase() + section.slice(1) });
 	};
 
 	// Determine if the page should have search functionality
@@ -39,15 +37,6 @@ const Navbar: React.FC = () => {
 		return path.includes('/books') || path.includes('/users');
 	};
 
-	// Update time every second
-	useEffect(() => {
-		const timer = setInterval(() => {
-			setCurrentDateTime(getCurrentFormattedDateTime());
-		}, 1000);
-
-		return () => clearInterval(timer);
-	}, []);
-
 	// Should show back button?
 	const shouldShowBackButton = () => {
 		return location.pathname !== '/dashboard';
@@ -55,16 +44,6 @@ const Navbar: React.FC = () => {
 
 	const goBack = () => {
 		navigate(-1);
-	};
-
-	// Translations - simplified version
-	const translations = {
-		search_placeholder: language === "FR" ? "Rechercher..." : "Search...",
-		change_language: language === "FR" ? "Changer de langue" : "Change language",
-		messages: language === "FR" ? "Messages" : "Messages",
-		profile: language === "FR" ? "Profil" : "Profile",
-		light_mode: language === "FR" ? "Mode clair" : "Light mode",
-		dark_mode: language === "FR" ? "Mode sombre" : "Dark mode",
 	};
 
 	return (
@@ -76,117 +55,65 @@ const Navbar: React.FC = () => {
 						<button
 							onClick={goBack}
 							className="mr-3 p-2 rounded-full hover:bg-secondary-100 transition-colors"
-							title="Go back"
+							title={t('components:navbar.back')}
 						>
 							<IoIosArrowBack className="text-primary-800 text-xl" />
 						</button>
 					)}
-					<h1 className="text-xl font-semibold text-primary">
+					<h1 className="text-xl font-semibold text-gray-800">
 						{getCurrentSectionName()}
 					</h1>
 				</div>
 
 				{/* Center section with search */}
 				{shouldShowSearch() && (
-					<div className="mx-4 flex-grow max-w-xl hidden sm:flex relative">
-						<div className="w-full relative rounded-md shadow-sm">
-							<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-								<BiSearch className="h-5 w-5 text-gray-400" />
-							</div>
+					<div className="flex-grow max-w-lg mx-4 hidden md:block">
+						<div className="relative">
 							<input
 								type="text"
 								value={searchWord}
 								onChange={(e) => setSearchWord(e.target.value)}
-								className="focus:ring-primary focus:border-primary block w-full pl-10 sm:text-sm border-gray-300 rounded-md py-2 bg-secondary-50"
-								placeholder={translations.search_placeholder}
+								placeholder={t('components:navbar.search')}
+								className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
 							/>
+							<BiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg" />
 						</div>
 					</div>
 				)}
 
-				{/* Right section with actions */}
-				<div className="flex items-center space-x-1">
-					{/* Mobile menu toggle */}
-					<button
-						className="sm:hidden p-2 rounded-md hover:bg-secondary-100"
-						onClick={() => setShowMobileMenu(!showMobileMenu)}
-					>
-						<div className="w-5 h-5 flex flex-col justify-between">
-							<span className="h-0.5 w-full bg-primary-800 rounded-full"></span>
-							<span className="h-0.5 w-full bg-primary-800 rounded-full"></span>
-							<span className="h-0.5 w-full bg-primary-800 rounded-full"></span>
-						</div>
-					</button>
+				{/* Right section with user controls */}
+				<div className="flex items-center space-x-2">
+					<LanguageSwitcher />
 
-					{/* Messages button */}
 					<button
-						className="p-2 rounded-md hover:bg-secondary-100 relative"
-						title={translations.messages}
+						className="relative p-2 rounded-full hover:bg-secondary-100 transition-colors"
+						title={t('components:navbar.messages')}
 					>
 						<BiMessageDetail className="text-primary-800 text-xl" />
 						{unreadMessagesCount > 0 && (
-							<span className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4 bg-primary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+							<span className="absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">
                 {unreadMessagesCount}
               </span>
 						)}
 					</button>
 
-					{/* Language toggle */}
-					<button
-						onClick={() => changeLanguage(language === "FR" ? "EN" : "FR")}
-						className="p-2 rounded-md hover:bg-secondary-100 flex items-center"
-						title={translations.change_language}
-					>
-						<BiGlobe className="text-primary-800 text-xl" />
-						<span className="ml-1 text-sm font-medium text-primary-800 hidden md:inline">
-              {language}
-            </span>
-					</button>
-
-					{/* Theme toggle */}
 					<button
 						onClick={toggleTheme}
-						className="p-2 rounded-md hover:bg-secondary-100"
-						title={isDarkMode ? translations.light_mode : translations.dark_mode}
+						className="p-2 rounded-full hover:bg-secondary-100 transition-colors"
+						title={isDarkMode ? t('common:light_mode') : t('common:dark_mode')}
 					>
-						{isDarkMode ? (
-							<RiSunFill className="text-primary-800 text-xl" />
-						) : (
-							<RiMoonFill className="text-primary-800 text-xl" />
-						)}
+						{isDarkMode ? <RiSunFill className="text-primary-800 text-xl" /> : <RiMoonFill className="text-primary-800 text-xl" />}
 					</button>
 
-					{/* Profile button */}
 					<button
-						className="p-2 rounded-md hover:bg-secondary-100 flex items-center"
-						title={translations.profile}
+						className="flex items-center space-x-2 ml-2 p-1 rounded-full hover:bg-secondary-100 transition-colors"
+						title={t('components:navbar.profile')}
 					>
-						<BiUserCircle className="text-primary-800 text-xl" />
-						<span className="ml-1 text-sm font-medium text-primary-800 hidden md:inline">
-              {translations.profile}
-            </span>
+						<BiUserCircle className="text-primary-800 text-2xl" />
+						<span className="text-sm font-medium hidden md:inline">{userLogin}</span>
 					</button>
-
 				</div>
 			</div>
-
-			{/* Mobile search - only shows when menu is expanded */}
-			{showMobileMenu && shouldShowSearch() && (
-				<div className="sm:hidden px-4 pb-3">
-					<div className="relative rounded-md shadow-sm">
-						<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-							<BiSearch className="h-5 w-5 text-gray-400" />
-						</div>
-						<input
-							type="text"
-							value={searchWord}
-							onChange={(e) => setSearchWord(e.target.value)}
-							className="focus:ring-primary focus:border-primary block w-full pl-10 sm:text-sm border-gray-300 rounded-md py-2 bg-secondary-50"
-							placeholder={translations.search_placeholder}
-						/>
-					</div>
-				</div>
-			)}
 		</header>
 	);
 };

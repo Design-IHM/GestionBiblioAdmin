@@ -84,3 +84,75 @@
 .theme-transition {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(1deg);
+  }
+}
+
+@keyframes floatMedium {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(-1deg);
+  }
+}
+
+@keyframes floatFast {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(0.5deg);
+  }
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translateY(0px);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-8px);
+    opacity: 0.8;
+  }
+}
+
+.float-animation {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.float-animation-delayed {
+  animation: floatMedium 5s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.float-animation-slow {
+  animation: floatFast 6s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.float-animation-reverse {
+  animation: floatSlow 4.5s ease-in-out infinite reverse;
+  animation-delay: 0.5s;
+}
+
+.particle-float {
+  animation: particleFloat 3s ease-in-out infinite;
+}
+
+.particle-float-delayed {
+  animation: particleFloat 4s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.particle-float-slow {
+  animation: particleFloat 5s ease-in-out infinite;
+  animation-delay: 2.5s;
+}

@@ -1,0 +1,74 @@
+{
+  "navbar": {
+    "search": "Rechercher...",
+    "language": "Langue",
+    "messages": "Messages",
+    "profile": "Profil",
+    "theme": "Thème",
+    "back": "Retour"
+  },
+  "footer": {
+    "organization_name": "Bibliothèque du Campus",
+    "powered_by": "Propulsé par BornBeforeDesign",
+    "copyright": "- Administration de la Bibliothèque du Campus. Tous droits réservés."
+  },
+  "landing": {
+    "hero": {
+      "title": "Bienvenue à",
+      "description": "Votre application web de gestion de votre bibliothèque de votre campus.",
+      "manage_documents": "Depuis cette plateforme, vous, chers membres de la cellule documentation, avez la possibilité de gérer les documents et les réservations de façon automatique, en toute simplicité et tranquillité.",
+      "cta_button": "Connectez vous"
+    },
+    "services": {
+      "title": "Nos Services",
+      "description": "Nous offrons une gamme de services pour améliorer votre expérience de gestion d'une bibliothèque.",
+      "service1": {
+        "title": "Gestion des livres",
+        "description": "Organisez efficacement les livres, suivez les emprunts et retours, et classez-les par genres et sections."
+      },
+      "service2": {
+        "title": "Gestion des mémoires",
+        "description": "Centralisez les mémoires académiques, les thèses et les documents de recherche avec des métadonnées détaillées."
+      },
+      "service3": {
+        "title": "Gestion des profils utilisateurs",
+        "description": "Permettez aux utilisateurs de gérer leurs informations et consulter leur historique."
+      },
+      "service4": {
+        "title": "Gestion administrative",
+        "description": "Accédez aux outils d'administration, configurez les paramètres du système et donnez une assistance dédiée."
+      }
+    },
+    "statistics": {
+      "stat_1": {
+        "value": "5,000+",
+        "label": "Livres Gérés"
+      },
+      "stat_2": {
+        "value": "1,200+",
+        "label": "Utilisateurs Actifs"
+      },
+      "stat_3": {
+        "value": "15+",
+        "label": "Catégories de Sujets"
+      },
+      "stat_4": {
+        "value": "24/7",
+        "label": "Disponibilité du Système"
+      }
+    }
+  },
+  "books": {
+    "add": "Ajouter un livre",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "title": "Titre",
+    "author": "Auteur",
+    "isbn": "ISBN",
+    "year": "Année",
+    "category": "Catégorie",
+    "status": "Statut",
+    "available": "Disponible",
+    "borrowed": "Emprunté"
+  }
+}

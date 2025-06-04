@@ -1,84 +1,57 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
-// Default language
-const DEFAULT_LANGUAGE = 'fr';
-
-interface Translations {
-	[key: string]: any;
-}
-
-const cache: Record<string, Translations> = {};
-
+/**
+ * Custom hook for internationalization
+ */
 export const useI18n = () => {
-	const [language, setLanguage] = useState<string>(
-		localStorage.getItem('language') || DEFAULT_LANGUAGE
-	);
-	const [translations, setTranslations] = useState<Translations>({});
-	const [loading, setLoading] = useState<boolean>(true);
+	const { t, i18n } = useTranslation(['common', 'components', 'pages']);
 
-	// Fetch translations for the current language
-	useEffect(() => {
-		const fetchTranslations = async () => {
-			try {
-				setLoading(true);
+	/**
+	 * Change language
+	 * @param lang Language code ('fr' or 'en')
+	 */
+	const changeLanguage = (lang: string) => {
+		i18n.changeLanguage(lang);
+	};
 
-				// Check if translations are cached
-				if (cache[language]) {
-					setTranslations(cache[language]);
-					setLoading(false);
-					return;
-				}
+	/**
+	 * Toggle language between French and English
+	 */
+	const toggleLanguage = () => {
+		const newLang = i18n.language === 'fr' ? 'en' : 'fr';
+		changeLanguage(newLang);
+	};
 
-				// If not cached, fetch from public folder
-				const response = await fetch(`/locales/${language}/common.json`);
-				if (!response.ok) {
-					throw new Error(`Failed to load translations for ${language}`);
-				}
+	/**
+	 * Get current language
+	 */
+	const getCurrentLanguage = () => {
+		return i18n.language;
+	};
 
-				const data = await response.json();
+	/**
+	 * Check if language is English
+	 */
+	const isEnglish = () => {
+		return i18n.language === 'en';
+	};
 
-				// Cache the translations
-				cache[language] = data;
-
-				setTranslations(data);
-			} catch (error) {
-				console.error('Error loading translations:', error);
-
-				// Fallback to empty translations
-				setTranslations({});
-			} finally {
-				setLoading(false);
-			}
-		};
-
-		fetchTranslations();
-	}, [language]);
-
-	// Change language
-	const changeLanguage = useCallback((newLanguage: string) => {
-		localStorage.setItem('language', newLanguage);
-		setLanguage(newLanguage);
-	}, []);
-
-	// Get translation value by key (supports nested keys like "books.title")
-	const t = useCallback((key: string, defaultValue?: string): string => {
-		if (loading) return defaultValue || key;
-
-		const keys = key.split('.');
-		let value = translations;
-
-		for (const k of keys) {
-			value = value?.[k];
-			if (value === undefined) break;
-		}
-
-		return value !== undefined ? value : (defaultValue || key);
-	}, [translations, loading]);
+	/**
+	 * Check if language is French
+	 */
+	const isFrench = () => {
+		return i18n.language === 'fr';
+	};
 
 	return {
 		t,
+		i18n,
 		changeLanguage,
-		language,
-		loading
+		toggleLanguage,
+		getCurrentLanguage,
+		isEnglish,
+		isFrench
 	};
 };
+
+export default useI18n;

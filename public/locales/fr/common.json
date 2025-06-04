@@ -1,55 +1,14 @@
 {
-  "app": {
-    "title": "Système de Gestion de Bibliothèque du Campus",
-    "subtitle": "Système de Gestion des Livres"
-  },
-  "navigation": {
-    "overview": "Aperçu",
-    "books": "Livres",
-    "users": "Utilisateurs",
-    "loans": "Prêts",
-    "settings": "Paramètres"
-  },
-  "books": {
-    "title": "Gestion des Livres",
-    "add": "Ajouter un Livre",
-    "edit": "Modifier un Livre",
-    "delete": "Supprimer un Livre",
-    "catalogue": "Parcourir le Catalogue",
-    "fields": {
-      "title": "Titre",
-      "author": "Auteur",
-      "department": "Département",
-      "shelf": "Étagère",
-      "room": "Salle",
-      "copies": "Exemplaires",
-      "description": "Description",
-      "category": "Catégorie"
-    },
-    "departments": {
-      "computerScience": "Génie Informatique",
-      "civil": "Génie Civil",
-      "telecommunications": "Génie Télécommunications",
-      "electrical": "Génie Électrique",
-      "mechanical": "Génie Mécanique",
-      "msp": "Département MSP"
-    }
-  },
-  "users": {
-    "title": "Gestion des Utilisateurs",
-    "add": "Ajouter un Utilisateur",
-    "edit": "Modifier un Utilisateur"
-  },
-  "login": {
-    "title": "Connexion Admin",
-    "username": "Nom d'utilisateur",
-    "password": "Mot de passe",
-    "submit": "Se connecter"
-  },
-  "common": {
-    "save": "Enregistrer",
-    "cancel": "Annuler",
-    "delete": "Supprimer",
-    "edit": "Modifier"
-  }
+  "app_name": "BIBLIO ENSPY",
+  "app_subtitle": "Système de Gestion des Livres",
+  "login": "Connexion",
+  "current_date": "{{date}}",
+  "language": "Langue",
+  "switch_to_english": "Switch to English",
+  "search_placeholder": "Rechercher...",
+  "messages": "Messages",
+  "profile": "Profil",
+  "light_mode": "Mode clair",
+  "dark_mode": "Mode sombre",
+  "logout": "Déconnexion"
 }

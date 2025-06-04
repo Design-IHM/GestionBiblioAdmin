@@ -1,0 +1,15 @@
+{
+  "landing": {
+    "hero_title": "Campus Library Management System",
+    "hero_description": "Streamline your campus library operations with our comprehensive administration platform. Manage books, track loans, and provide an exceptional experience for students and teachers."
+  },
+  "dashboard": {
+    "overview": "Overview",
+    "books": "Books",
+    "users": "Users",
+    "loans": "Loans",
+    "returns": "Returns",
+    "settings": "Settings",
+    "theme": "Theme"
+  }
+}
