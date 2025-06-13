@@ -7,6 +7,20 @@
     "theme": "Thème",
     "back": "Retour"
   },
+  "sidebar": {
+    "main": "Accueil",
+    "overview": "Aperçu",
+    "users": "Utilisateurs",
+    "loans": "Emprunts",
+    "returns": "Retours",
+    "settings": "Paramètres",
+    "theme": "Thème",
+    "documents": "Documents",
+    "book_management": "Gestion des livres",
+    "memory_management": "Gestion de la mémoire",
+    "logout": "Déconnexion",
+    "more": "Plus"
+  },
   "footer": {
     "organization_name": "Bibliothèque du Campus",
     "powered_by": "Propulsé par BornBeforeDesign",
