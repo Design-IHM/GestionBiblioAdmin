@@ -15,6 +15,7 @@ const MobileBottomSidebar: React.FC = () => {
 		{ id: 'books', label: t('components:sidebar.book_management'), icon: 'book-open', route: '/dashboard/books' },
 		{ id: 'users', label: t('components:sidebar.users'), icon: 'users', route: '/dashboard/users' },
 		{ id: 'loans', label: t('components:sidebar.loans'), icon: 'clipboard-list', route: '/dashboard/loans' }
+        
 	];
 
 	// Items secondaires (dans le menu "Plus")
@@ -22,7 +23,7 @@ const MobileBottomSidebar: React.FC = () => {
 		{ id: 'memories', label: t('components:sidebar.memory_management'), icon: 'academic-cap', route: '/dashboard/memories' },
 		{ id: 'returns', label: t('components:sidebar.returns'), icon: 'clipboard-check', route: '/dashboard/returns' },
 		{ id: 'settings', label: t('components:sidebar.settings'), icon: 'cog', route: '/dashboard/settings' },
-		{ id: 'theme', label: t('components:sidebar.theme'), icon: 'adjustments', route: '/dashboard/theme' }
+		
 	];
 
 	const handleLogout = () => {
@@ -78,12 +79,7 @@ const MobileBottomSidebar: React.FC = () => {
 						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
 					</svg>
 				);
-			case 'adjustments':
-				return (
-					<svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
-					</svg>
-				);
+			
 			default:
 				return null;
 		}
