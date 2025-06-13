@@ -81,7 +81,7 @@ const Sidebar: React.FC = () => {
 	};
 
 	return (
-		<div className="bg-secondary w-64 shadow-md fixed h-full flex flex-col">
+		<div className="bg-secondary-100 w-64 shadow-md fixed h-full flex flex-col">
 			<div className="p-6 border-b border-secondary-300 flex justify-between items-center">
 				<div className="flex items-center space-x-3">
 					{renderLogo()}
