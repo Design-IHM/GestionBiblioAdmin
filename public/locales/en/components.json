@@ -7,6 +7,20 @@
     "theme": "Theme",
     "back": "Back"
   },
+  "sidebar": {
+    "main": "Main",
+    "overview": "Overview", 
+    "users": "Users",
+    "loans": "Loans", 
+    "returns": "Returns",
+    "settings": "Settings",
+    "theme": "Theme",
+    "documents": "Documents",
+    "book_management": "Book Management",
+    "memory_management": "Memory Management", 
+    "logout": "Logout",
+    "more":"More"
+  },
   "footer": {
     "organization_name": "Campus Library",
     "powered_by": "Powered by BornBeforeDesign",

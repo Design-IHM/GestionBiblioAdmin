@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BiSearch, BiUserCircle, BiMessageDetail } from 'react-icons/bi';
-import { RiSunFill, RiMoonFill } from 'react-icons/ri';
 import { IoIosArrowBack } from 'react-icons/io';
 import { getCurrentUserLogin } from "../../utils/dateUtils";
 import LanguageSwitcher from '../common/LanguageSwitcher';
@@ -17,8 +16,8 @@ const Navbar: React.FC = () => {
 	const unreadMessagesCount = 2; // Example count, replace with actual logic
 
 	// Example theme toggle - integrate with your actual theme system
-	const [isDarkMode, setIsDarkMode] = useState(false);
-	const toggleTheme = () => setIsDarkMode(!isDarkMode);
+	//const [isDarkMode, setIsDarkMode] = useState(false);
+	//const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
 	// Get the current section name from the URL
 	const getCurrentSectionName = () => {
@@ -97,13 +96,7 @@ const Navbar: React.FC = () => {
 						)}
 					</button>
 
-					<button
-						onClick={toggleTheme}
-						className="p-2 rounded-full hover:bg-secondary-100 transition-colors"
-						title={isDarkMode ? t('common:light_mode') : t('common:dark_mode')}
-					>
-						{isDarkMode ? <RiSunFill className="text-primary-800 text-xl" /> : <RiMoonFill className="text-primary-800 text-xl" />}
-					</button>
+					
 
 					<button
 						className="flex items-center space-x-2 ml-2 p-1 rounded-full hover:bg-secondary-100 transition-colors"
