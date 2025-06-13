@@ -9,8 +9,8 @@ import Users from './pages/Users.tsx';
 import Loans from './pages/Loans.tsx';
 import Returns from './pages/Returns.tsx';
 import OrgConfiguration from "./components/theme/OrgConfiguration.tsx";
-import ThemePreview from "./components/theme/ThemePreview.tsx";
 import UnderDevelopment from './pages/UnderDevelopment.tsx';
+import DefaultLayout from "./components/layout/DefaultLayout.tsx";
 
 
 const routes = createBrowserRouter([
@@ -28,7 +28,65 @@ const routes = createBrowserRouter([
 			},
 			{
 				path: "books",
-				element: <Books />,
+				element: <DefaultLayout />,
+				children: [
+					{
+						index: true, // Default dashboard page
+						element: <Books />,
+					},
+					{
+						path: ":departement", // Route for viewing a specific book
+						element: <DefaultLayout />,
+						children: [
+							{
+								index: true, // Default dashboard page
+								element: <UnderDevelopment sectionName="Departement Books"/>,
+							},
+							{
+								path: ":bookId", // Route for viewing a specific book
+								element: <UnderDevelopment sectionName="Books Detail"/>
+							}
+						]
+					}
+				]
+			},
+			{
+				path: "thesis",
+				element: <DefaultLayout />,
+				children: [
+					{
+						index: true, // Default dashboard page
+						element: <UnderDevelopment sectionName="Thesis"/>,
+					},
+					{
+						path: ":departement", // Route for viewing a specific book
+						element: <DefaultLayout />,
+						children: [
+							{
+								index: true, // Default dashboard page
+								element: <UnderDevelopment sectionName="Departement Thesis"/>,
+							},
+							{
+								path: ":thesisId", // Route for viewing a specific book
+								element: <UnderDevelopment sectionName="Thesis Detail"/>
+							}
+						]
+					}
+				]
+			},
+			{
+				path: "addDocuments",
+				element: <DefaultLayout />,
+				children: [
+					{
+						index: true, // Default dashboard page
+						element: <UnderDevelopment sectionName="Add Book"/>,
+					},
+					{
+						path: ":thesis", // Route for viewing a specific book
+						element: <UnderDevelopment sectionName="Add Thesis"/>
+					}
+				]
 			},
 			{
 				path: "users",
@@ -47,8 +105,12 @@ const routes = createBrowserRouter([
 				element: <OrgConfiguration />,
 			},
 			{
-				path: "theme",
-				element: <ThemePreview />,
+				path: "archives",
+				element: <UnderDevelopment sectionName="Archives" />,
+			},
+			{
+				path: "profile",
+				element: <UnderDevelopment sectionName="Profile" />,
 			},
 			{
 				path: "*",
