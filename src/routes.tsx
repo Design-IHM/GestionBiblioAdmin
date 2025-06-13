@@ -88,6 +88,21 @@ const routes = createBrowserRouter([
 					}
 				]
 			},
+
+			{
+				path: "messages",
+				element: <DefaultLayout />,
+				children: [
+					{
+						index: true, // Default dashboard page
+						element: <UnderDevelopment sectionName="Chat"/>,
+					},
+					{
+						path: ":messageId", // Route for viewing a specific book
+						element: <UnderDevelopment sectionName="Specific Chat"/>
+					}
+				]
+			},
 			{
 				path: "users",
 				element: <Users />,
