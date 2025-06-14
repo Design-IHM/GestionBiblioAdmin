@@ -3,11 +3,14 @@ import routes from './routes';
 import { ConfigProvider } from './components/theme/ConfigProvider.tsx';
 import {DEFAULT_ORGANIZATION} from "./config/firebase.ts";
 import './utils/i18n';
+import {SearchProvider} from "./context/SearchContext.tsx";
 
 function App() {
   return (
     <ConfigProvider orgName={DEFAULT_ORGANIZATION}>
-      <RouterProvider router={routes} />
+      <SearchProvider>
+        <RouterProvider router={routes} />
+      </SearchProvider>
     </ConfigProvider>
   );
 }

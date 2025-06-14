@@ -1,10 +1,11 @@
 import { GiBookPile } from "react-icons/gi";
-import {DEFAULT_ORGANIZATION} from "../../config/firebase.ts";
 import useI18n from "../../hooks/useI18n.ts";
+import {useConfig} from "../theme/ConfigProvider.tsx";
 
 
 
 function Footer() {
+	const { config } = useConfig();
 	const { t } = useI18n();
 	const currentYear = new Date().getFullYear();
 
@@ -15,12 +16,12 @@ function Footer() {
 					<div className="flex items-center space-x-3 mb-4 md:mb-0">
 						<GiBookPile className="w-8 h-8 text-white" />
 						<div>
-							<h1 className="text-lg font-bold text-white">{DEFAULT_ORGANIZATION || t('common:app_name')}</h1>
+							<h1 className="text-lg font-bold text-white">{config.Name || t('common:app_name')}</h1>
 							<p className="text-xs text-white/70">{t('components:footer.powered_by')}</p>
 						</div>
 					</div>
 					<div className="text-white/70 text-sm">
-						&copy; {DEFAULT_ORGANIZATION || t('common:app_name')} {currentYear} {t('components:footer.copyright')}.
+						&copy; {config.Name || t('common:app_name')} {currentYear} {t('components:footer.copyright')}.
 					</div>
 				</div>
 			</div>

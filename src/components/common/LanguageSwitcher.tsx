@@ -11,7 +11,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
 	                                                           variant = 'navbar',
 	                                                           className = ''
                                                            }) => {
-	const { t, toggleLanguage, isEnglish, isFrench } = useI18n();
+	const { t, toggleLanguage, isEnglish } = useI18n();
 
 	if (variant === 'navbar') {
 		return (

@@ -152,5 +152,33 @@
       "total": "Total Archives",
       "last": "Dernière archive"
     }
+  "departments": {
+    "admin_title": "Administration des Départements",
+    "add_button": "Ajouter un Département",
+    "no_departments": "Aucun département n'a encore été créé.",
+    "create_first": "Créez votre premier département",
+    "create_title": "Créer un Nouveau Département",
+    "name_label": "Nom du Département",
+    "name_placeholder": "Ex: Génie Informatique, Littérature...",
+    "name_tip": "Saisissez un nom court et descriptif.",
+    "image_label": "Image du Département",
+    "select_image": "Télécharger une image",
+    "change_image": "Changer l'image",
+    "image_format": "Recommandé : JPG, PNG (max 5Mo)",
+    "preview": "Aperçu de l'image",
+    "cancel_button": "Annuler",
+    "save_button": "Enregistrer le Département",
+    "success": "Département ajouté avec succès !",
+    "error": "Erreur :",
+    "fill_all_fields": "Veuillez remplir tous les champs obligatoires."
+  },
+  "catalogue": {
+    "sort_name_asc": "Nom A-Z",
+    "sort_name_desc": "Nom Z-A",
+    "sort_stock_asc": "Stock Croissant",
+    "sort_stock_desc": "Stock Décroissant",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "page": "Page"
   }
 }
