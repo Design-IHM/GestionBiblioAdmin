@@ -1,3 +1,5 @@
+import type { Timestamp } from "firebase/firestore";
+
 // types/reservations.ts
 export interface UserReservation {
   email: string;
@@ -12,13 +14,14 @@ export interface UserReservation {
 export interface ReservationSlot {
   slotNumber: number;
   status: 'reserv' | 'emprunt' | 'ras';
-  document?: {
+  document: {
     name: string;
     category: string;
     imageUrl: string;
     exemplaires: number;
     collection: string;
-    reservationDate: string;
+     reservationDate: string;
+
   };
 }
 

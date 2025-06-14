@@ -1,37 +1,31 @@
-// components/archives/ArchiveTable.tsx
-import type { ArchiveItem } from '../../types/archives';
-import EmptyState from '../common/EmptyState';
+
+import { FaArchive } from 'react-icons/fa';
 import { ArchiveTableHeader } from './ArchiveTableHeader';
 import { ArchiveTableRow } from './ArchiveTableRow';
-
-
-
-interface ArchiveTableProps {
-  items: ArchiveItem[];
-  translations: {
-    client_info: string;
-    document_name: string;
-    return_date: string;
-    status: string;
-    returned: string;
-  };
-  currentPage: number;
-  itemsPerPage: number;
-  className?: string;
-}
+import type { ArchiveTableProps } from '../../types/archives';
+import EmptyState from '../common/EmptyState';
 
 export const ArchiveTable = ({
   items,
   translations,
   currentPage,
   itemsPerPage,
-  className = ''
+  className = '',
+  onRefresh
 }: ArchiveTableProps) => {
   if (items.length === 0) {
-    return <EmptyState 
-      title={translations.no_data || "No archives found"} 
-      description={translations.no_data_desc || "No archives available"} 
-    />;
+    return (
+      <EmptyState
+        icon={<FaArchive className="text-gray-400" size={48} />}
+        title={translations.no_data_title}
+        description={translations.no_data_message}
+        action={onRefresh ? {
+          label: translations.refresh || 'Refresh',
+          onClick: onRefresh,
+          variant: 'primary'
+        } : undefined}
+      />
+    );
   }
 
   return (
@@ -41,10 +35,10 @@ export const ArchiveTable = ({
         <tbody>
           {items.map((item, index) => (
             <ArchiveTableRow
-              key={`${item.nomEtudiant}-${item.heure}`}
+              key={`${item.id || index}-${item.heure}`}
               item={item}
               index={items.length - ((currentPage - 1) * itemsPerPage + index)}
-              translations={{ returned: translations.returned }}
+              returnedText={translations.returned}
             />
           ))}
         </tbody>

@@ -1,70 +1,61 @@
-// services/reservationService.ts
 import { collection, doc, updateDoc, query, where, getDocs, getDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
-
 import { fetchMaximumSimultaneousLoans } from './configService';
 import type { ProcessedUserReservation, ReservationSlot, UserReservation } from '../types/reservations';
 
 export class ReservationService {
-  private userCollection = collection(db, 'BiblioUser');
+  private readonly userCollection = collection(db, 'BiblioUser');
 
-
-  // Nouvelle méthode pour convertir les Timestamp en string ISO
-  private convertFirestoreData(data: any): any {
-    if (data === null || data === undefined) return data;
-    
-    if (data instanceof Timestamp) {
-      return data.toDate().toISOString();
-    }
-
-    if (Array.isArray(data)) {
-      return data.map(item => this.convertFirestoreData(item));
-    }
-
-    if (typeof data === 'object') {
-      return Object.fromEntries(
-        Object.entries(data).map(([key, value]) => 
-          [key, this.convertFirestoreData(value)]
-        )
-      );
-    }
-
-    return data;
+  /**
+   * Convertit une date de n'importe quel format en string ISO
+   * Gère Timestamp Firebase, Date JS, string ISO et objet {seconds, nanoseconds}
+   */
+  private ensureStringDate(date: Timestamp | string | Date | { seconds: number; nanoseconds: number } | null | undefined): string {
+  if (!date) return new Date().toISOString();
+  
+  // Si c'est déjà une string, vérifier qu'elle est valide
+  if (typeof date === 'string') {
+    const parsed = new Date(date);
+    return isNaN(parsed.getTime()) ? new Date().toISOString() : date;
   }
+  
+  if (date instanceof Timestamp) return date.toDate().toISOString();
+  if (date instanceof Date) return date.toISOString();
+  
+  if (typeof date === 'object' && 'seconds' in date) {
+    return new Timestamp(date.seconds, date.nanoseconds).toDate().toISOString();
+  }
+  
+  console.warn('Format de date non reconnu:', date);
+  return new Date().toISOString();
+}
 
-  // Récupérer le nombre maximum d'emprunts
   async getMaxLoans(): Promise<number> {
     return await fetchMaximumSimultaneousLoans();
   }
 
-  // Traiter les données utilisateur pour extraire les slots de réservation
   processUserReservationData(userData: UserReservation, maxLoans: number): ProcessedUserReservation {
     const reservationSlots: ReservationSlot[] = [];
 
-    // Parcourir tous les slots possibles selon maxLoans
     for (let i = 1; i <= maxLoans; i++) {
-      const etatKey = `etat${i}`;
-      const tabKey = `tabEtat${i}`;
-      
-      const status = userData[etatKey] as 'reserv' | 'emprunt' | 'ras';
-      const tabData = userData[tabKey] as [string, string, string, number, string, string];
+      const status = userData[`etat${i}`] as 'reserv' | 'emprunt' | 'ras';
+      const tabData = userData[`tabEtat${i}`] as [string, string, string, number, string, string];
 
-      if (status === 'reserv' && tabData && Array.isArray(tabData) && tabData[0]) {
+      if (status === 'reserv' && tabData?.[0]) {
         reservationSlots.push({
           slotNumber: i,
-          status: 'reserv',
+          status,
           document: {
             name: tabData[0],
             category: tabData[1],
             imageUrl: tabData[2],
             exemplaires: tabData[3],
             collection: tabData[4],
-            reservationDate: tabData[5]
+            reservationDate: this.ensureStringDate(tabData[5])
           }
         });
       }
     }
-    
 
     return {
       email: userData.email,
@@ -77,7 +68,6 @@ export class ReservationService {
     };
   }
 
-  // Récupérer toutes les réservations actives
   async getActiveReservations(): Promise<ProcessedUserReservation[]> {
     try {
       const maxLoans = await this.getMaxLoans();
@@ -87,18 +77,12 @@ export class ReservationService {
       snapshot.forEach((docSnap) => {
         const userData = { ...docSnap.data(), email: docSnap.id } as UserReservation;
         
-        // Vérifier s'il y a des réservations actives dans n'importe quel slot
-        let hasActiveReservations = false;
-        for (let i = 1; i <= maxLoans; i++) {
-          if (userData[`etat${i}`] === 'reserv') {
-            hasActiveReservations = true;
-            break;
-          }
-        }
+        // Vérifie s'il y a des réservations actives
+        const hasActiveReservations = Array.from({ length: maxLoans }, (_, i) => i + 1)
+          .some(i => userData[`etat${i}`] === 'reserv');
         
         if (hasActiveReservations) {
-          const processedUser = this.processUserReservationData(userData, maxLoans);
-          users.push(processedUser);
+          users.push(this.processUserReservationData(userData, maxLoans));
         }
       });
       
@@ -109,46 +93,35 @@ export class ReservationService {
     }
   }
 
-  // Valider une réservation (la transformer en emprunt)
   async validateReservation(
     userEmail: string,
     slot: number,
-    documentData: [string, string, string, number, string, string],
-    userName: string
+    documentData: [string, string, string, number, string, string]
   ): Promise<void> {
     try {
-      const documentName = documentData[0];
-      const collectionName = documentData[4] || 'BiblioInformatique';
+      const [documentName, , , , collectionName = 'BiblioInformatique'] = documentData;
       const currentDate = new Date().toISOString();
 
-      // Décrémenter le nombre d'exemplaires du livre
-      const docCollection = collection(db, collectionName);
-      const docQuery = query(docCollection, where('name', '==', documentName));
+      // Décrémenter les exemplaires
+      const docQuery = query(
+        collection(db, collectionName), 
+        where('name', '==', documentName)
+      );
       const docSnapshot = await getDocs(docQuery);
 
       if (!docSnapshot.empty) {
         const docRef = docSnapshot.docs[0].ref;
         const currentExemplaire = docSnapshot.docs[0].data().exemplaire || 0;
-        
         await updateDoc(docRef, {
-          exemplaire: Math.max(0, currentExemplaire - 1) // Empêcher les valeurs négatives
+          exemplaire: Math.max(0, currentExemplaire - 1)
         });
       }
 
-      // Mettre à jour l'état de l'utilisateur (réservation → emprunt)
-      const userRef = doc(this.userCollection, userEmail);
-      const updateData: any = {};
-      updateData[`etat${slot}`] = 'emprunt';
-      updateData[`tabEtat${slot}`] = [
-        documentData[0], // nom
-        documentData[1], // catégorie
-        documentData[2], // image
-        documentData[3], // exemplaires
-        documentData[4], // collection
-        currentDate      // date d'emprunt
-      ];
-
-      await updateDoc(userRef, updateData);
+      // Mettre à jour l'état utilisateur
+      await updateDoc(doc(this.userCollection, userEmail), {
+        [`etat${slot}`]: 'emprunt',
+        [`tabEtat${slot}`]: [...documentData.slice(0, 5), currentDate]
+      });
 
     } catch (error) {
       console.error('Erreur lors de la validation de la réservation:', error);
@@ -156,51 +129,53 @@ export class ReservationService {
     }
   }
 
-  // Valider une réservation pour un utilisateur traité
-  async validateReservationForProcessedUser(user: ProcessedUserReservation, slot: number): Promise<void> {
+  async validateReservationForProcessedUser(
+    user: ProcessedUserReservation, 
+    slot: number
+  ): Promise<void> {
     const slotData = user.reservationSlots.find(s => s.slotNumber === slot);
     
-    if (!slotData || !slotData.document) {
+    if (!slotData?.document) {
       throw new Error(`Aucune réservation trouvée dans le slot ${slot}`);
     }
 
-    const documentData: [string, string, string, number, string, string] = [
-      slotData.document.name,
-      slotData.document.category,
-      slotData.document.imageUrl,
-      slotData.document.exemplaires,
-      slotData.document.collection,
-      slotData.document.reservationDate
-    ];
-
-    return this.validateReservation(user.email, slot, documentData, user.name);
+    const { name, category, imageUrl, exemplaires, collection } = slotData.document;
+    return this.validateReservation(
+      user.email, 
+      slot,
+      [name, category, imageUrl, exemplaires, collection, '']
+    );
   }
 
-  // Obtenir les statistiques des réservations
-  async getReservationStatistics(): Promise<{
-    totalActiveReservations: number;
-    totalUsers: number;
-    averageReservationsPerUser: number;
-    maxLoansAllowed: number;
-  }> {
+  async getReservationStatistics() {
     try {
-      const maxLoans = await this.getMaxLoans();
-      const users = await this.getActiveReservations();
+      const [maxLoans, users] = await Promise.all([
+        this.getMaxLoans(),
+        this.getActiveReservations()
+      ]);
       
-      const totalActiveReservations = users.reduce((total, user) => total + user.totalActiveReservations, 0);
+      const totalActiveReservations = users.reduce(
+        (total, user) => total + user.totalActiveReservations, 0
+      );
 
       return {
         totalActiveReservations,
         totalUsers: users.length,
-        averageReservationsPerUser: users.length > 0 ? totalActiveReservations / users.length : 0,
+        averageReservationsPerUser: users.length > 0 
+          ? totalActiveReservations / users.length 
+          : 0,
         maxLoansAllowed: maxLoans
       };
     } catch (error) {
-      console.error('Erreur lors du calcul des statistiques de réservations:', error);
-      return { totalActiveReservations: 0, totalUsers: 0, averageReservationsPerUser: 0, maxLoansAllowed: 3 };
+      console.error('Erreur lors du calcul des statistiques:', error);
+      return { 
+        totalActiveReservations: 0, 
+        totalUsers: 0, 
+        averageReservationsPerUser: 0, 
+        maxLoansAllowed: 3 
+      };
     }
   }
 }
 
-// Instance singleton
 export const reservationService = new ReservationService();

@@ -18,7 +18,7 @@ const Sidebar: React.FC = () => {
 		{ id: 'users', label: t('components:sidebar.users'), icon: 'users' },
 		{ id: 'loans', label: t('components:sidebar.loans'), icon: 'clipboard-list' },
 		{ id: 'reservations', label: t('components:sidebar.reservations'), icon: 'clipboard-check' },
-		{ id: 'archive', label: t('components:sidebar.archives'), icon: 'archive' },
+		{ id: 'archives', label: t('components:sidebar.archives'), icon: 'archive' },
 		{ id: 'settings', label: t('components:sidebar.settings'), icon: 'cog' },
 	];
 

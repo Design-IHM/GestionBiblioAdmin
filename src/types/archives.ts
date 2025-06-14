@@ -1,15 +1,18 @@
-// types/archives.ts
 import { Timestamp } from 'firebase/firestore';
 
 export interface ArchiveItem {
   nomEtudiant: string;
   nomDoc: string;
-  heure: Timestamp | string; // Accepte Timestamp ou string formatée
+  heure: string; // Toujours en string ISO
   id?: string;
 }
 
 export interface ArchivesData {
-  tableauArchives: ArchiveItem[];
+  tableauArchives: Array<{
+    nomEtudiant: string;
+    nomDoc: string;
+    heure: Timestamp | string;
+  }>;
 }
 
 export interface ArchiveStats {
@@ -27,6 +30,7 @@ export interface ArchiveTableProps {
     returned: string;
     no_data_title: string;
     no_data_message: string;
+    refresh?: string;
   };
   currentPage: number;
   itemsPerPage: number;

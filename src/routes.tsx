@@ -12,6 +12,8 @@ import OrgConfiguration from "./components/theme/OrgConfiguration.tsx";
 import UnderDevelopment from './pages/UnderDevelopment.tsx';
 import DefaultLayout from "./components/layout/DefaultLayout.tsx";
 import Reservations from './pages/Returns.tsx';
+import Archives from './pages/Archives.tsx';
+
 import Departements from "./pages/Departements.tsx";
 import Catalogue from "./pages/Catalogue.tsx";
 import BookDetails from "./pages/BookDetails.tsx";
@@ -56,7 +58,7 @@ const routes = createBrowserRouter([
 								element: <AddBook/>
 							}
 						]
-					},
+					}
 				]
 			},
 			{
@@ -116,7 +118,7 @@ const routes = createBrowserRouter([
 			},
 			{
 				path: "archives",
-				element: <UnderDevelopment sectionName="Archives" />,
+				element: <Archives/>,
 			},
 			{
 				path: "profile",
