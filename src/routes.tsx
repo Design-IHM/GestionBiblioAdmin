@@ -7,14 +7,16 @@ import Overview from './pages/Overview.tsx';
 import Books from './pages/Books.tsx';
 import Users from './pages/Users.tsx';
 import Loans from './pages/Loans.tsx';
-import Returns from './pages/Returns.tsx';
+
 import OrgConfiguration from "./components/theme/OrgConfiguration.tsx";
 import UnderDevelopment from './pages/UnderDevelopment.tsx';
 import DefaultLayout from "./components/layout/DefaultLayout.tsx";
+import Reservations from './pages/Returns.tsx';
 import Departements from "./pages/Departements.tsx";
 import Catalogue from "./pages/Catalogue.tsx";
 import BookDetails from "./pages/BookDetails.tsx";
 import AddBook from "./pages/AddBook.tsx";
+
 
 
 const routes = createBrowserRouter([
@@ -121,8 +123,8 @@ const routes = createBrowserRouter([
 				element: <Loans />,
 			},
 			{
-				path: "returns",
-				element: <Returns />,
+				path: "reservations",
+				element: <Reservations />,
 			},
 			{
 				path: "settings",

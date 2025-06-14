@@ -55,6 +55,64 @@ export const fetchOrgConfiguration = async (orgName: string): Promise<OrgSetting
 };
 
 /**
+ * Fetches the maximum simultaneous loans allowed from Firebase configuration
+ * @returns Promise containing the maximum number of simultaneous loans
+ */
+export const fetchMaximumSimultaneousLoans = async (): Promise<number> => {
+	try {
+		console.log('Fetching MaximumSimultaneousLoans from Configuration/OrgSettings');
+
+		const orgSettingsRef = doc(db, 'Configuration', 'OrgSettings');
+		const orgSettingsSnap = await getDoc(orgSettingsRef);
+
+		if (orgSettingsSnap.exists()) {
+			const data = orgSettingsSnap.data();
+			const maxLoans = data.MaximumSimultaneousLoans;
+			
+			console.log('MaximumSimultaneousLoans found:', maxLoans);
+			
+			// Validate that it's a valid number
+			if (typeof maxLoans === 'number' && maxLoans > 0) {
+				return maxLoans;
+			} else {
+				console.warn('Invalid MaximumSimultaneousLoans value, using default');
+				return defaultOrgSettings.MaximumSimultaneousLoans || 3;
+			}
+		} else {
+			console.log('OrgSettings document not found, using default MaximumSimultaneousLoans');
+			return defaultOrgSettings.MaximumSimultaneousLoans || 3;
+		}
+	} catch (error) {
+		console.error('Error fetching MaximumSimultaneousLoans:', error);
+		return defaultOrgSettings.MaximumSimultaneousLoans || 3;
+	}
+};
+
+/**
+ * Fetches both organization configuration and maximum simultaneous loans
+ * @param orgName - The name of the organization to fetch configuration for
+ * @returns Promise containing organization settings with updated MaximumSimultaneousLoans
+ */
+export const fetchCompleteOrgConfiguration = async (orgName: string): Promise<OrgSettings> => {
+	try {
+		// Fetch the base organization configuration
+		const orgConfig = await fetchOrgConfiguration(orgName);
+		
+		// Fetch the specific MaximumSimultaneousLoans value
+		const maxLoans = await fetchMaximumSimultaneousLoans();
+		
+		// Merge the results
+		return {
+			...orgConfig,
+			MaximumSimultaneousLoans: maxLoans
+		};
+	} catch (error) {
+		console.error('Error fetching complete organization configuration:', error);
+		return defaultOrgSettings;
+	}
+};
+
+/**
  * Merges the provided configuration with default values
  * to ensure all required fields are present
  */
