@@ -139,17 +139,24 @@
   ,
   "archives": {
     "title": "Archives",
-    "client_info": "User Information",
-    "document_name": "Document Name", 
-    "return_date": "Return Date",
-    "status": "Status",
-    "returned": "Returned",
-    "no_data_title": "No archives available",
-    "no_data_message": "Archives will appear here automatically",
-    "refresh": "Refresh",
+    "loading": "Loading archives...",
+    "search_placeholder": "Search archives...",
+    "documents_count": "{count} document | {count} documents",
     "sort": {
       "recent": "Recent first",
       "old": "Oldest first"
+    },
+    "table": {
+      "client_info": "User Information",
+      "document_name": "Document Name",
+      "return_date": "Return Date",
+      "status": "Status",
+      "returned": "Returned"
+    },
+    "empty_state": {
+      "title": "No archives available",
+      "message": "Archives will appear here automatically",
+      "refresh": "Refresh"
     },
     "stats": {
       "total": "Total Archives",

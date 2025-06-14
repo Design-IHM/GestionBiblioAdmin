@@ -134,22 +134,29 @@
     "no_returns": "Aucun retour aujourd'hui",
     "no_returns_message": "Les retours de documents apparaîtront ici",
     "loading": "Chargement des retours...",
-    "archives": {
+  "archives": {
     "title": "Archives",
-    "client_info": "Information utilisateur",
-    "document_name": "Nom du document",
-    "return_date": "Date de remise", 
-    "status": "Statut",
-    "returned": "Remis",
-    "no_data_title": "Aucune archive disponible",
-    "no_data_message": "Les archives apparaîtront ici automatiquement",
-    "refresh": "Actualiser",
+    "loading": "Chargement des archives...",
+    "search_placeholder": "Rechercher...",
+    "documents_count": "{count} document | {count} documents",
     "sort": {
-      "recent": "Récentes d'abord",
-      "old": "Anciennes d'abord"
+      "recent": "Récents d'abord",
+      "old": "Anciens d'abord"
+    },
+    "table": {
+      "client_info": "Information client",
+      "document_name": "Nom du document",
+      "return_date": "Date de retour",
+      "status": "Statut",
+      "returned": "Retourné"
+    },
+    "empty_state": {
+      "title": "Aucune archive disponible",
+      "message": "Les archives apparaîtront ici automatiquement",
+      "refresh": "Rafraîchir"
     },
     "stats": {
-      "total": "Total Archives",
+      "total": "Total des archives",
       "last": "Dernière archive"
     }
   }

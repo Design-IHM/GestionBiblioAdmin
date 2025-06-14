@@ -1,9 +1,11 @@
-// components/reservations/ReservationItem.tsx
 import React from 'react';
 import { FaBook, FaCalendarAlt, FaCheckCircle, FaClock } from 'react-icons/fa';
 import type { ReservationItemProps } from '../../types';
 import useI18n from '../../hooks/useI18n';
-import { Timestamp } from 'firebase/firestore';
+import { FormattedDate } from '../common/FormattedDate';
+import { reservationService } from '../../services/reservationService';
+import { getCurrentFormattedDateTime } from '../../utils/dateUtils';
+import { formatReservationDate } from '../../utils/ReservationDateUtils';
 
 const ReservationItem: React.FC<ReservationItemProps> = ({
   reservation,
@@ -11,32 +13,7 @@ const ReservationItem: React.FC<ReservationItemProps> = ({
   onValidate
 }) => {
   const { t } = useI18n();
-
-  // Nouvelle fonction pour gérer les dates Firestore
-  const formatFirestoreDate = (date: any): string => {
-    try {
-      // Si c'est un Timestamp Firestore
-      if (date && typeof date === 'object' && 'seconds' in date && 'nanoseconds' in date) {
-        return new Timestamp(date.seconds, date.nanoseconds)
-          .toDate()
-          .toISOString()
-          .slice(0, 16)
-          .replace('T', ' ');
-      }
-      // Si c'est déjà une string ISO
-      if (typeof date === 'string') {
-        return date.slice(0, 16).replace('T', ' ');
-      }
-      return 'N/A';
-    } catch (error) {
-      console.error('Error formatting date:', error);
-      return 'N/A';
-    }
-  };
-
-  if (!reservation.document) {
-    return null;
-  }
+ 
 
   return (
     <div className="flex items-start space-x-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200 hover:bg-yellow-100 transition-colors">
@@ -73,7 +50,7 @@ const ReservationItem: React.FC<ReservationItemProps> = ({
             <FaCalendarAlt className="mr-1" size={10} />
             <span>
               {t('components:reservations.reserved_on')}:{' '}
-              {formatFirestoreDate(reservation.document.reservationDate)}
+               {formatReservationDate(reservation.document.reservationDate)}
             </span>
           </div>
 
