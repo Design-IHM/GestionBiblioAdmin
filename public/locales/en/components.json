@@ -85,5 +85,35 @@
     "status": "Status",
     "available": "Available",
     "borrowed": "Borrowed"
+  },
+
+  "departments": {
+    "admin_title": "Department Administration",
+    "add_button": "Add Department",
+    "no_departments": "No departments have been created yet.",
+    "create_first": "Create your first department",
+    "create_title": "Create a New Department",
+    "name_label": "Department Name",
+    "name_placeholder": "e.g., Computer Science, Literature...",
+    "name_tip": "Enter a short and descriptive name.",
+    "image_label": "Department Image",
+    "select_image": "Upload an image",
+    "change_image": "Change image",
+    "image_format": "Recommended: JPG, PNG (max 5MB)",
+    "preview": "Image Preview",
+    "cancel_button": "Cancel",
+    "save_button": "Save Department",
+    "success": "Department added successfully!",
+    "error": "Error:",
+    "fill_all_fields": "Please fill in all required fields."
+  },
+  "catalogue": {
+    "sort_name_asc": "Name A-Z",
+    "sort_name_desc": "Name Z-A",
+    "sort_stock_asc": "Stock Ascending",
+    "sort_stock_desc": "Stock Descending",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page"
   }
 }

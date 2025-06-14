@@ -11,6 +11,10 @@ import Returns from './pages/Returns.tsx';
 import OrgConfiguration from "./components/theme/OrgConfiguration.tsx";
 import UnderDevelopment from './pages/UnderDevelopment.tsx';
 import DefaultLayout from "./components/layout/DefaultLayout.tsx";
+import Departements from "./pages/Departements.tsx";
+import Catalogue from "./pages/Catalogue.tsx";
+import BookDetails from "./pages/BookDetails.tsx";
+import AddBook from "./pages/AddBook.tsx";
 
 
 const routes = createBrowserRouter([
@@ -32,22 +36,26 @@ const routes = createBrowserRouter([
 				children: [
 					{
 						index: true, // Default dashboard page
-						element: <Books />,
+						element: <Departements/>,
 					},
 					{
-						path: ":departement", // Route for viewing a specific book
+						path: ":departmentName", // Route for viewing a specific book
 						element: <DefaultLayout />,
 						children: [
 							{
 								index: true, // Default dashboard page
-								element: <UnderDevelopment sectionName="Departement Books"/>,
+								element: <Catalogue />
 							},
 							{
 								path: ":bookId", // Route for viewing a specific book
-								element: <UnderDevelopment sectionName="Books Detail"/>
+								element: <BookDetails/>
+							},
+							{
+								path: "add", // Route for viewing a specific book
+								element: <AddBook/>
 							}
 						]
-					}
+					},
 				]
 			},
 			{
@@ -56,7 +64,8 @@ const routes = createBrowserRouter([
 				children: [
 					{
 						index: true, // Default dashboard page
-						element: <UnderDevelopment sectionName="Thesis"/>,
+						// element: <UnderDevelopment sectionName="Thesis"/>,
+						element: <Books />
 					},
 					{
 						path: ":departement", // Route for viewing a specific book
