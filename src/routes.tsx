@@ -4,7 +4,6 @@ import Dashboard from "./components/layout/Dashboard.tsx";
 
 // Dashboard Components
 import Overview from './pages/Overview.tsx';
-import Books from './pages/Books.tsx';
 import Users from './pages/Users.tsx';
 import Loans from './pages/Loans.tsx';
 
@@ -18,6 +17,10 @@ import Departements from "./pages/Departements.tsx";
 import Catalogue from "./pages/Catalogue.tsx";
 import BookDetails from "./pages/BookDetails.tsx";
 import AddBook from "./pages/AddBook.tsx";
+import ThesisCatalogue from "./pages/ThesisCatalogue.tsx";
+import ThesisDepartment from "./pages/ThesisDepartment.tsx";
+import AddThesis from "./pages/AddThesis.tsx";
+import ThesisDetails from "./pages/ThesisDetails.tsx";
 
 
 const routes = createBrowserRouter([
@@ -67,20 +70,23 @@ const routes = createBrowserRouter([
 				children: [
 					{
 						index: true, // Default dashboard page
-						// element: <UnderDevelopment sectionName="Thesis"/>,
-						element: <Books />
+						element: <ThesisDepartment/>
 					},
 					{
-						path: ":departement", // Route for viewing a specific book
+						path: ":departmentName", // Route for viewing a specific book
 						element: <DefaultLayout />,
 						children: [
 							{
 								index: true, // Default dashboard page
-								element: <UnderDevelopment sectionName="Departement Thesis"/>,
+								element: <ThesisCatalogue />
 							},
 							{
 								path: ":thesisId", // Route for viewing a specific book
-								element: <UnderDevelopment sectionName="Thesis Detail"/>
+								element: <ThesisDetails/>
+							},
+							{
+								path: "add", // Route for viewing a specific book
+								element: <AddThesis/>
 							}
 						]
 					}

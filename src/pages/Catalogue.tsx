@@ -1,6 +1,6 @@
 // src/pages/Catalogue.tsx
 import React from 'react';
-import { useCatalogue } from '../hooks/useCatalogue';
+import { useCatalogue } from '../hooks/useCatalogue.ts';
 import BookCard from '../components/catalogue/BookCard';
 import Spinner from '../components/common/Spinner';
 import CatalogueFilters from "../components/catalogue/CatalogueFilters.tsx";

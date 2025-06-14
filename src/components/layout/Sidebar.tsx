@@ -24,7 +24,7 @@ const Sidebar: React.FC = () => {
 
 	const bookManagementItems = [
 		{ id: 'books', label: t('components:sidebar.book_management'), icon: 'book-open' },
-		{ id: 'memories', label: t('components:sidebar.memory_management'), icon: 'academic-cap' }
+		{ id: 'thesis', label: t('components:sidebar.memory_management'), icon: 'academic-cap' }
 	];
 
 	// Vérifier si l'un des éléments du menu de gestion des livres est actif
@@ -115,7 +115,7 @@ const Sidebar: React.FC = () => {
 	};
 
 	return (
-		<div className="bg-secondary w-64 shadow-md fixed h-full flex-col hidden md:flex">
+		<div className="bg-secondary-100 w-64 shadow-md fixed h-full flex-col hidden md:flex">
 			<div className="p-6 border-b border-secondary-300 flex justify-between items-center">
 				<div className="flex items-center space-x-3">
 					{renderLogo()}

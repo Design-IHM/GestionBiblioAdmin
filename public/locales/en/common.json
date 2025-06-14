@@ -10,5 +10,9 @@
   "profile": "Profile",
   "light_mode": "Light mode",
   "dark_mode": "Dark mode",
-  "logout": "Logout"
+  "logout": "Logout",
+  "delete": "Delete",
+  "edit_book": "Edit Book",
+  "save": "Save",
+  "cancel": "Cancel"
 }

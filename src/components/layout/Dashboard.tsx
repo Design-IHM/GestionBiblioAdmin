@@ -20,7 +20,7 @@ const Dashboard: React.FC = () => {
 				<Navbar />
 				
 				{/* Page Content */}
-				<main className="p-6">
+				<main className="p-4">
 					<Outlet />
 				</main>
 			</div>

@@ -16,8 +16,8 @@
     "settings": "Paramètres",
     "theme": "Thème",
     "documents": "Documents",
-    "book_management": "Gestion des livres",
-    "memory_management": "Gestion de la mémoire",
+    "book_management": "Livres",
+    "memory_management": "Mémoire",
     "logout": "Déconnexion",
     "more": "Plus",
     "reservations": "Réservations",
@@ -40,15 +40,15 @@
       "title": "Nos Services",
       "description": "Nous offrons une gamme de services pour améliorer votre expérience de gestion d'une bibliothèque.",
       "service1": {
-        "title": "Gestion des livres",
+        "title": "Livres",
         "description": "Organisez efficacement les livres, suivez les emprunts et retours, et classez-les par genres et sections."
       },
       "service2": {
-        "title": "Gestion des mémoires",
+        "title": "mémoires",
         "description": "Centralisez les mémoires académiques, les thèses et les documents de recherche avec des métadonnées détaillées."
       },
       "service3": {
-        "title": "Gestion des profils utilisateurs",
+        "title": "thesisprofils utilisateurs",
         "description": "Permettez aux utilisateurs de gérer leurs informations et consulter leur historique."
       },
       "service4": {

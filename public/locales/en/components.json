@@ -16,8 +16,8 @@
     "settings": "Settings",
     "theme": "Theme",
     "documents": "Documents",
-    "book_management": "Book Management",
-    "memory_management": "Memory Management", 
+    "book_management": "Book",
+    "memory_management": "Memory",
     "logout": "Logout",
     "more":"More",
     "reservations": "Reservations",
@@ -41,7 +41,7 @@
         "title": "Our Services",
         "description": "We offer a range of services to enhance your library management experience.",
         "service1": {
-          "title": "Book Management",
+          "title": "Book",
           "description": "Efficiently organize books, track borrow and return statuses, and classify them by genre and section."
         },
         "service2": {
