@@ -19,7 +19,10 @@
     "book_management": "Gestion des livres",
     "memory_management": "Gestion de la mémoire",
     "logout": "Déconnexion",
-    "more": "Plus"
+    "more": "Plus",
+    "reservations": "Réservations",
+    "archives": "Archives"
+
   },
   "footer": {
     "organization_name": "Bibliothèque du Campus",
@@ -84,5 +87,70 @@
     "status": "Statut",
     "available": "Disponible",
     "borrowed": "Emprunté"
+  },
+  "loans": {
+    "title": "Emprunts en cours",
+    "email": "Email",
+    "level": "Niveau", 
+    "borrowed_documents": "Documents empruntés",
+    "borrowed_on": "Emprunté le",
+    "collection": "Collection",
+    "processing": "Traitement...",
+    "validate_return": "Valider le retour",
+    "document": "Document",
+    "returned_successfully": "a été remis avec succès",
+    "return_error": "Erreur lors du retour",
+    "no_loans": "Aucun emprunt en cours",
+    "no_loans_message": "Lorsque des étudiants emprunteront des documents, ils apparaîtront ici",
+    "no_active_loans": "Aucun document emprunté",
+    "new_loan": "Nouvel emprunt",
+    "loading": "Chargement des emprunts..."
+  },
+    "reservations": {
+    "title": "Liste des réservations",
+    "id": "Matricule",
+    "level": "Niveau",
+    "pending": "En attente",
+    "reserved_documents": "Documents réservés",
+    "reserved_on": "Réservé le",
+    "collection": "Collection",
+    "processing": "Traitement...",
+    "validate_loan": "Valider Emprunt",
+    "document": "Document",
+    "borrowed_successfully": "a été emprunté avec succès",
+    "validation_error": "Erreur lors de la validation",
+    "no_reservations": "Aucune réservation en cours",
+    "no_reservations_message": "Lorsque des utilisateurs réserveront des documents, ils apparaîtront ici",
+    "no_active_reservations": "Aucune réservation active",
+    "awaiting_validation": "En attente de validation",
+    "validation_info": "Cliquez sur 'Valider Emprunt' pour transformer une réservation en emprunt actif",
+    "loading": "Chargement des réservations..."
+  },
+  "title": "Retours de documents",
+    "return_date": "Date de retour",
+    "overdue": "En retard",
+    "on_time": "À temps",
+    "fine": "Amende",
+    "no_returns": "Aucun retour aujourd'hui",
+    "no_returns_message": "Les retours de documents apparaîtront ici",
+    "loading": "Chargement des retours...",
+    "archives": {
+    "title": "Archives",
+    "client_info": "Information utilisateur",
+    "document_name": "Nom du document",
+    "return_date": "Date de remise", 
+    "status": "Statut",
+    "returned": "Remis",
+    "no_data_title": "Aucune archive disponible",
+    "no_data_message": "Les archives apparaîtront ici automatiquement",
+    "refresh": "Actualiser",
+    "sort": {
+      "recent": "Récentes d'abord",
+      "old": "Anciennes d'abord"
+    },
+    "stats": {
+      "total": "Total Archives",
+      "last": "Dernière archive"
+    }
   }
 }

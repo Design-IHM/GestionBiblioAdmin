@@ -1,0 +1,129 @@
+// components/reservations/ReservationItem.tsx
+import React from 'react';
+import { FaBook, FaCalendarAlt, FaCheckCircle, FaClock } from 'react-icons/fa';
+import type { ReservationItemProps } from '../../types';
+import useI18n from '../../hooks/useI18n';
+import { Timestamp } from 'firebase/firestore';
+
+const ReservationItem: React.FC<ReservationItemProps> = ({
+  reservation,
+  isProcessing,
+  onValidate
+}) => {
+  const { t } = useI18n();
+
+  // Nouvelle fonction pour gérer les dates Firestore
+  const formatFirestoreDate = (date: any): string => {
+    try {
+      // Si c'est un Timestamp Firestore
+      if (date && typeof date === 'object' && 'seconds' in date && 'nanoseconds' in date) {
+        return new Timestamp(date.seconds, date.nanoseconds)
+          .toDate()
+          .toISOString()
+          .slice(0, 16)
+          .replace('T', ' ');
+      }
+      // Si c'est déjà une string ISO
+      if (typeof date === 'string') {
+        return date.slice(0, 16).replace('T', ' ');
+      }
+      return 'N/A';
+    } catch (error) {
+      console.error('Error formatting date:', error);
+      return 'N/A';
+    }
+  };
+
+  if (!reservation.document) {
+    return null;
+  }
+
+  return (
+    <div className="flex items-start space-x-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200 hover:bg-yellow-100 transition-colors">
+      {/* Document Image */}
+      <div className="flex-shrink-0">
+        {reservation.document.imageUrl ? (
+          <img
+            src={reservation.document.imageUrl}
+            alt={reservation.document.name}
+            className="w-16 h-20 object-cover rounded border shadow-sm"
+          />
+        ) : (
+          <div className="w-16 h-20 bg-gray-200 rounded border flex items-center justify-center">
+            <FaBook className="text-gray-400 text-lg" />
+          </div>
+        )}
+      </div>
+
+      {/* Document Info */}
+      <div className="flex-1 min-w-0">
+        <div className="space-y-2">
+          {/* Title and Category */}
+          <div>
+            <h5 className="font-semibold text-gray-900 text-sm truncate">
+              {reservation.document.name}
+            </h5>
+            <p className="text-xs text-gray-500 italic">
+              {reservation.document.category}
+            </p>
+          </div>
+
+          {/* Reservation Date */}
+          <div className="flex items-center text-xs text-gray-600">
+            <FaCalendarAlt className="mr-1" size={10} />
+            <span>
+              {t('components:reservations.reserved_on')}:{' '}
+              {formatFirestoreDate(reservation.document.reservationDate)}
+            </span>
+          </div>
+
+          {/* Collection Info */}
+          {reservation.document.collection && (
+            <div className="text-xs text-gray-500">
+              <span className="font-medium">{t('components:reservations.collection')}:</span>{' '}
+              {reservation.document.collection}
+            </div>
+          )}
+
+          {/* Status */}
+          <div className="flex items-center">
+            <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+              <div className="w-2 h-2 bg-yellow-400 rounded-full mr-1 animate-pulse"></div>
+              {t('components:reservations.awaiting_validation')}
+            </span>
+          </div>
+        </div>
+
+        {/* Validate Button */}
+        <div className="mt-3">
+          <button
+            onClick={onValidate}
+            disabled={isProcessing}
+            className={`
+              flex items-center justify-center space-x-2 w-full px-3 py-2 rounded-md text-sm font-medium transition-colors
+              ${
+                isProcessing
+                  ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                  : 'bg-green-600 text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-1'
+              }
+            `}
+          >
+            {isProcessing ? (
+              <>
+                <FaClock className="animate-spin" size={14} />
+                <span>{t('components:reservations.processing')}</span>
+              </>
+            ) : (
+              <>
+                <FaCheckCircle size={14} />
+                <span>{t('components:reservations.validate_loan')}</span>
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ReservationItem;
