@@ -1,11 +1,12 @@
 import {HeroImage} from "../common/HeroImage.tsx";
 import {useNavigate} from "react-router-dom";
 import useI18n from "../../hooks/useI18n.ts";
-import {DEFAULT_ORGANIZATION} from "../../config/firebase.ts";
+import {useConfig} from "../theme/ConfigProvider.tsx";
 
 function Hero() {
 
 	const navigate = useNavigate();
+	const { config } = useConfig();
 	const { t } = useI18n();
 
 	const handleEnterSystem = () => {
@@ -19,7 +20,7 @@ function Hero() {
 					<div className="space-y-8">
 						<h1 className="text-4xl md:text-5xl font-bold text-gray-800">
 							{t('components:landing.hero.title')}{" "}
-							<span className="text-primary">{DEFAULT_ORGANIZATION ||  t('common:app_name') }</span>
+							<span className="text-primary">{config.Name ||  t('common:app_name') }</span>
 						</h1>
 
 						<p className="text-lg text-gray-600 leading-relaxed">
