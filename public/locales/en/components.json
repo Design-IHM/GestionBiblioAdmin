@@ -16,10 +16,14 @@
     "settings": "Settings",
     "theme": "Theme",
     "documents": "Documents",
-    "book_management": "Book Management",
-    "memory_management": "Memory Management", 
+    "book_management": "Book",
+    "memory_management": "Thesis",
     "logout": "Logout",
-    "more":"More"
+    "more":"More",
+    "reservations": "Reservations",
+    "archives": "Archives"
+
+    
   },
   "footer": {
     "organization_name": "Campus Library",
@@ -37,7 +41,7 @@
         "title": "Our Services",
         "description": "We offer a range of services to enhance your library management experience.",
         "service1": {
-          "title": "Book Management",
+          "title": "Book",
           "description": "Efficiently organize books, track borrow and return statuses, and classify them by genre and section."
         },
         "service2": {
@@ -85,6 +89,79 @@
     "status": "Status",
     "available": "Available",
     "borrowed": "Borrowed"
+  },
+  "loans": {
+  "title": "Current Loans",
+  "email": "Email",
+  "level": "Level",
+  "borrowed_documents": "Borrowed Documents",
+  "borrowed_on": "Borrowed on",
+  "collection": "Collection",
+  "processing": "Processing...",
+  "validate_return": "Validate Return",
+  "document": "Document",
+  "returned_successfully": "has been successfully returned",
+  "return_error": "Error during return",
+  "no_loans": "No current loans",
+  "no_loans_message": "When students borrow documents, they will appear here",
+  "no_active_loans": "No borrowed documents",
+  "new_loan": "New Loan",
+  "loading": "Loading loans..."
+},
+"reservations": {
+    "title": "Reservations List",
+    "id": "ID",
+    "level": "Level",
+    "pending": "Pending",
+    "reserved_documents": "Reserved Documents",
+    "reserved_on": "Reserved on",
+    "collection": "Collection",
+    "processing": "Processing...",
+    "validate_loan": "Validate Loan",
+    "document": "Document",
+    "borrowed_successfully": "has been successfully borrowed",
+    "validation_error": "Error during validation",
+    "no_reservations": "No current reservations",
+    "no_reservations_message": "When users reserve documents, they will appear here",
+    "no_active_reservations": "No active reservations",
+    "awaiting_validation": "Awaiting validation",
+    "validation_info": "Click 'Validate Loan' to transform a reservation into an active loan",
+    "loading": "Loading reservations..."
+  },
+    "title": "Document Returns",
+    "return_date": "Return Date",
+    "overdue": "Overdue",
+    "on_time": "On Time",
+    "fine": "Fine",
+    "no_returns": "No returns today",
+    "no_returns_message": "Document returns will appear here",
+    "loading": "Loading returns..."
+  ,
+  "archives": {
+    "title": "Archives",
+    "loading": "Loading archives...",
+    "search_placeholder": "Search archives...",
+    "documents_count": "{count} document | {count} documents",
+    "sort": {
+      "recent": "Recent first",
+      "old": "Oldest first"
+    },
+    "table": {
+      "client_info": "User Information",
+      "document_name": "Document Name",
+      "return_date": "Return Date",
+      "status": "Status",
+      "returned": "Returned"
+    },
+    "empty_state": {
+      "title": "No archives available",
+      "message": "Archives will appear here automatically",
+      "refresh": "Refresh"
+    },
+    "stats": {
+      "total": "Total Archives",
+      "last": "Last Archive"
+    }
   },
 
   "departments": {

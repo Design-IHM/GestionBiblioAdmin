@@ -16,10 +16,13 @@
     "settings": "Paramètres",
     "theme": "Thème",
     "documents": "Documents",
-    "book_management": "Gestion des livres",
-    "memory_management": "Gestion de la mémoire",
+    "book_management": "Livres",
+    "memory_management": "Mémoire",
     "logout": "Déconnexion",
-    "more": "Plus"
+    "more": "Plus",
+    "reservations": "Réservations",
+    "archives": "Archives"
+
   },
   "footer": {
     "organization_name": "Bibliothèque du Campus",
@@ -37,15 +40,15 @@
       "title": "Nos Services",
       "description": "Nous offrons une gamme de services pour améliorer votre expérience de gestion d'une bibliothèque.",
       "service1": {
-        "title": "Gestion des livres",
+        "title": "Livres",
         "description": "Organisez efficacement les livres, suivez les emprunts et retours, et classez-les par genres et sections."
       },
       "service2": {
-        "title": "Gestion des mémoires",
+        "title": "mémoires",
         "description": "Centralisez les mémoires académiques, les thèses et les documents de recherche avec des métadonnées détaillées."
       },
       "service3": {
-        "title": "Gestion des profils utilisateurs",
+        "title": "thesisprofils utilisateurs",
         "description": "Permettez aux utilisateurs de gérer leurs informations et consulter leur historique."
       },
       "service4": {
@@ -84,6 +87,78 @@
     "status": "Statut",
     "available": "Disponible",
     "borrowed": "Emprunté"
+  },
+  "loans": {
+    "title": "Emprunts en cours",
+    "email": "Email",
+    "level": "Niveau", 
+    "borrowed_documents": "Documents empruntés",
+    "borrowed_on": "Emprunté le",
+    "collection": "Collection",
+    "processing": "Traitement...",
+    "validate_return": "Valider le retour",
+    "document": "Document",
+    "returned_successfully": "a été remis avec succès",
+    "return_error": "Erreur lors du retour",
+    "no_loans": "Aucun emprunt en cours",
+    "no_loans_message": "Lorsque des étudiants emprunteront des documents, ils apparaîtront ici",
+    "no_active_loans": "Aucun document emprunté",
+    "new_loan": "Nouvel emprunt",
+    "loading": "Chargement des emprunts..."
+  },
+    "reservations": {
+    "title": "Liste des réservations",
+    "id": "Matricule",
+    "level": "Niveau",
+    "pending": "En attente",
+    "reserved_documents": "Documents réservés",
+    "reserved_on": "Réservé le",
+    "collection": "Collection",
+    "processing": "Traitement...",
+    "validate_loan": "Valider Emprunt",
+    "document": "Document",
+    "borrowed_successfully": "a été emprunté avec succès",
+    "validation_error": "Erreur lors de la validation",
+    "no_reservations": "Aucune réservation en cours",
+    "no_reservations_message": "Lorsque des utilisateurs réserveront des documents, ils apparaîtront ici",
+    "no_active_reservations": "Aucune réservation active",
+    "awaiting_validation": "En attente de validation",
+    "validation_info": "Cliquez sur 'Valider Emprunt' pour transformer une réservation en emprunt actif",
+    "loading": "Chargement des réservations..."
+  },
+  "title": "Retours de documents",
+    "return_date": "Date de retour",
+    "overdue": "En retard",
+    "on_time": "À temps",
+    "fine": "Amende",
+    "no_returns": "Aucun retour aujourd'hui",
+    "no_returns_message": "Les retours de documents apparaîtront ici",
+    "loading": "Chargement des retours...",
+  "archives": {
+    "title": "Archives",
+    "loading": "Chargement des archives...",
+    "search_placeholder": "Rechercher...",
+    "documents_count": "{count} document | {count} documents",
+    "sort": {
+      "recent": "Récents d'abord",
+      "old": "Anciens d'abord"
+    },
+    "table": {
+      "client_info": "Information client",
+      "document_name": "Nom du document",
+      "return_date": "Date de retour",
+      "status": "Statut",
+      "returned": "Retourné"
+    },
+    "empty_state": {
+      "title": "Aucune archive disponible",
+      "message": "Les archives apparaîtront ici automatiquement",
+      "refresh": "Rafraîchir"
+    },
+    "stats": {
+      "total": "Total des archives",
+      "last": "Dernière archive"
+    }
   },
   "departments": {
     "admin_title": "Administration des Départements",

@@ -10,5 +10,9 @@
   "profile": "Profil",
   "light_mode": "Mode clair",
   "dark_mode": "Mode sombre",
-  "logout": "Déconnexion"
+  "logout": "Déconnexion",
+  "delete": "Supprimer",
+  "edit_book": "Modifier le Livre",
+  "save": "Enregistrer",
+  "cancel": "Annuler"
 }

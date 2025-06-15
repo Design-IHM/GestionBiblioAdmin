@@ -1,9 +1,9 @@
 // src/pages/Catalogue.tsx
 import React from 'react';
-import { useCatalogue } from '../hooks/useCatalogue';
+import { useCatalogue } from '../hooks/useCatalogue.ts';
 import BookCard from '../components/catalogue/BookCard';
 import Spinner from '../components/common/Spinner';
-import { Pagination } from '../components/common/Pagination';
+
 import CatalogueFilters from "../components/catalogue/CatalogueFilters.tsx";
 import { Button } from '../components/common/Button';
 import {FiPlus} from "react-icons/fi";
@@ -18,10 +18,10 @@ const Catalogue: React.FC = () => {
 		isLoading,
 		error,
 		departmentName,
-		currentPage,
-		totalPages,
+		// currentPage,
+		// totalPages,
 		setSortOption,
-		setCurrentPage,
+		// setCurrentPage,
 	} = useCatalogue();
 
 	if (isLoading) return <Spinner />;
@@ -54,11 +54,7 @@ const Catalogue: React.FC = () => {
 							<BookCard key={book.id} book={book} />
 						))}
 					</div>
-					<Pagination
-						currentPage={currentPage}
-						totalPages={totalPages}
-						onPageChange={setCurrentPage}
-					/>
+
 				</>
 			) : (
 				<div className="text-center py-10 bg-secondary-100 rounded-lg">

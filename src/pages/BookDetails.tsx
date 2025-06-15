@@ -22,7 +22,8 @@ const BookDetails: React.FC = () => {
 			removeBook().catch(
 				err => alert(t('pages:book_details.delete_failed')
 					+ `: ${err.message}`
-			));
+
+				));
 		}
 	};
 

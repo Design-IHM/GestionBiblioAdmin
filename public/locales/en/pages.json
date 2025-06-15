@@ -8,7 +8,6 @@
     "settings": "Settings",
     "theme": "Theme"
   },
-
   "book_details": {
     "details_title": "Book Details",
     "by_author": "by {{author}}",
@@ -59,6 +58,6 @@
 
     "browsing": "{{department}} Viewing",
     "no_books_found": "No Books found in this Department."
-  }
 
+  }
 }

@@ -20,6 +20,7 @@
     letter-spacing: -0.01em; /* Slightly tighter letter spacing */
   }
 }
+
 /* Add this to your main CSS file */
 .theme-applied {
   /* This empty class is used to force a style refresh when theme changes */
@@ -73,6 +74,7 @@
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 /* Loading spinner */
 @keyframes spin {
   to {
@@ -89,6 +91,37 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pan {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+  opacity: 0; /* Commence invisible pour l'animation */
+  animation-fill-mode: forwards; /* Garde l'état final de l'animation */
+}
+
+.animated-gradient {
+  background-size: 200% 200%;
+  animation: pan 15s ease infinite;
+}
 
 @keyframes floatSlow {
   0%, 100% {

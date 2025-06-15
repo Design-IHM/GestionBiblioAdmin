@@ -1,6 +1,6 @@
 // src/components/books/AddCommentForm.tsx
 import React, { useState } from 'react';
-import { Button } from '../common/Button';
+import { Button } from '../common/Button.tsx';
 import useI18n from '../../hooks/useI18n';
 import { FaStar } from 'react-icons/fa';
 

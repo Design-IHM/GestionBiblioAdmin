@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 
-// Hooks and Components
-import { useDepartments } from '../hooks/useDepartements.ts';
+import { useDepartments } from '../hooks/useDepartement.ts';
 import useI18n from '../hooks/useI18n';
-import DepartmentCard from '../components/departements/DepartementCard.tsx';
+import DepartmentCard from '../components/departements/DepartmentCard.tsx';
 import { AddDepartmentModal } from '../components/departements/AddDepartmentModal.tsx';
 import { Button } from '../components/common/Button';
 import Spinner from '../components/common/Spinner';

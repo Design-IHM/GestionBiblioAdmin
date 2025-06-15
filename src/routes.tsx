@@ -1,20 +1,35 @@
-import { createBrowserRouter } from 'react-router-dom';
+// src/routes.tsx
+import {createBrowserRouter, Navigate} from 'react-router-dom';
 import Landing from './pages/Landing.tsx';
 import Dashboard from "./components/layout/Dashboard.tsx";
+import ProtectedRoute from "./components/auth/ProtectedRoute.tsx";
+import AuthLayout from "./components/layout/AuthLayout.tsx";
 
-// Dashboard Components
+// Pages
 import Overview from './pages/Overview.tsx';
-import Books from './pages/Books.tsx';
 import Users from './pages/Users.tsx';
 import Loans from './pages/Loans.tsx';
-import Returns from './pages/Returns.tsx';
 import OrgConfiguration from "./components/theme/OrgConfiguration.tsx";
 import UnderDevelopment from './pages/UnderDevelopment.tsx';
 import DefaultLayout from "./components/layout/DefaultLayout.tsx";
+import Reservations from './pages/Returns.tsx';
+import Archives from './pages/Archives.tsx';
 import Departements from "./pages/Departements.tsx";
 import Catalogue from "./pages/Catalogue.tsx";
 import BookDetails from "./pages/BookDetails.tsx";
 import AddBook from "./pages/AddBook.tsx";
+import ThesisCatalogue from "./pages/ThesisCatalogue.tsx";
+import ThesisDepartment from "./pages/ThesisDepartment.tsx";
+import AddThesis from "./pages/AddThesis.tsx";
+import ThesisDetails from "./pages/ThesisDetails.tsx";
+import { Chat } from "./pages/Chat.tsx";
+
+// Pages d'authentification
+import Login from "./pages/Login.tsx";
+import Register from "./pages/Register.tsx";
+import ForgotPassword from "./pages/ForgotPassword.tsx";
+import VerifyEmailInfoPage from "./pages/VerifyEmailInfo.tsx";
+
 
 
 const routes = createBrowserRouter([
@@ -23,128 +38,89 @@ const routes = createBrowserRouter([
 		element: <Landing />,
 	},
 	{
-		path: "/dashboard",
-		element: <Dashboard />,
+		path: "/authentication",
+		element: <AuthLayout />,
 		children: [
 			{
-				index: true, // Default dashboard page
-				element: <Overview />,
+				index: true, // URL: /authentication
+				element: <Login />,
 			},
 			{
-				path: "books",
-				element: <DefaultLayout />,
+				path: "register", // URL: /authentication/register
+				element: <Register />
+			},
+			{
+				path: "forgot-password", // URL: /authentication/forgot-password
+				element: <ForgotPassword />
+			},
+			{
+				path: "verify-email", // La page qui dit à l'utilisateur de vérifier ses emails
+				element: <VerifyEmailInfoPage />
+			},
+		]
+	},
+	{
+		path: "/dashboard",
+		element: <ProtectedRoute/>,
+		children: [
+			{
+				element: <Dashboard/>,
 				children: [
+					{ index: true, element: <Overview/>, },
 					{
-						index: true, // Default dashboard page
-						element: <Departements/>,
-					},
-					{
-						path: ":departmentName", // Route for viewing a specific book
-						element: <DefaultLayout />,
+						path: "books",
+						element: <DefaultLayout/>,
 						children: [
+							{ index: true, element: <Departements/>, },
 							{
-								index: true, // Default dashboard page
-								element: <Catalogue />
-							},
-							{
-								path: ":bookId", // Route for viewing a specific book
-								element: <BookDetails/>
-							},
-							{
-								path: "add", // Route for viewing a specific book
-								element: <AddBook/>
-							}
-						]
-					},
-				]
-			},
-			{
-				path: "thesis",
-				element: <DefaultLayout />,
-				children: [
-					{
-						index: true, // Default dashboard page
-						// element: <UnderDevelopment sectionName="Thesis"/>,
-						element: <Books />
-					},
-					{
-						path: ":departement", // Route for viewing a specific book
-						element: <DefaultLayout />,
-						children: [
-							{
-								index: true, // Default dashboard page
-								element: <UnderDevelopment sectionName="Departement Thesis"/>,
-							},
-							{
-								path: ":thesisId", // Route for viewing a specific book
-								element: <UnderDevelopment sectionName="Thesis Detail"/>
-							}
-						]
-					}
-				]
-			},
-			{
-				path: "addDocuments",
-				element: <DefaultLayout />,
-				children: [
-					{
-						index: true, // Default dashboard page
-						element: <UnderDevelopment sectionName="Add Book"/>,
-					},
-					{
-						path: ":thesis", // Route for viewing a specific book
-						element: <UnderDevelopment sectionName="Add Thesis"/>
-					}
-				]
-			},
 
-			{
-				path: "messages",
-				element: <DefaultLayout />,
-				children: [
-					{
-						index: true, // Default dashboard page
-						element: <UnderDevelopment sectionName="Chat"/>,
+								path: ":departmentName",
+								element: <DefaultLayout/>,
+								children: [
+									{ index: true, element: <Catalogue/> },
+									{ path: ":bookId", element: <BookDetails/> },
+									{ path: "add", element: <AddBook/> }
+								]
+							}
+						]
 					},
 					{
-						path: ":messageId", // Route for viewing a specific book
-						element: <UnderDevelopment sectionName="Specific Chat"/>
-					}
+						path: "thesis",
+						element: <DefaultLayout/>,
+						children: [
+							{ index: true, element: <ThesisDepartment/> },
+							{
+								path: ":departmentName",
+								element: <DefaultLayout/>,
+								children: [
+									{ index: true, element: <ThesisCatalogue/> },
+									{ path: ":thesisId", element: <ThesisDetails/> },
+									{ path: "add", element: <AddThesis/> }
+								]
+							}
+						]
+					},
+					{
+						path: "messages",
+						element: <Chat/>, // Chat est maintenant la page principale
+						children: [
+							{ path: ":conversationId", element: <Chat/> }
+						]
+					},
+					{ path: "users", element: <Users/>, },
+					{ path: "loans", element: <Loans/>, },
+					{ path: "reservations", element: <Reservations/>, },
+					{ path: "settings", element: <OrgConfiguration/>, },
+					{ path: "archives", element: <Archives/>, },
+					{ path: "profile", element: <UnderDevelopment sectionName="Profile"/>, },
+					{ path: "*", element: <UnderDevelopment sectionName="Requested"/>, }
 				]
-			},
-			{
-				path: "users",
-				element: <Users />,
-			},
-			{
-				path: "loans",
-				element: <Loans />,
-			},
-			{
-				path: "returns",
-				element: <Returns />,
-			},
-			{
-				path: "settings",
-				element: <OrgConfiguration />,
-			},
-			{
-				path: "archives",
-				element: <UnderDevelopment sectionName="Archives" />,
-			},
-			{
-				path: "profile",
-				element: <UnderDevelopment sectionName="Profile" />,
-			},
-			{
-				path: "*",
-				element: <UnderDevelopment sectionName="Requested" />,
 			}
 		]
 	},
 	{
 		path: "*",
-		element: <Landing />,
+		element: <Navigate to="/" replace />
 	},
 ]);
 
