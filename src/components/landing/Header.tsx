@@ -12,7 +12,7 @@ function Header() {
 	const { t } = useI18n();
 
 	const handleEnterSystem = () => {
-		navigate('/dashboard');
+		navigate('/authentication', );
 	};
 	return (
 		<header className="bg-primary shadow-md">
