@@ -11,6 +11,7 @@
   "light_mode": "Light mode",
   "dark_mode": "Dark mode",
   "logout": "Logout",
+<<<<<<< HEAD
   "pagination": {
     "previous": "Previous",
     "next": "Next",
@@ -18,4 +19,10 @@
     "page": "Page",
     "of": "of"
   }
+=======
+  "delete": "Delete",
+  "edit_book": "Edit Book",
+  "save": "Save",
+  "cancel": "Cancel"
+>>>>>>> 16df8847243401b5c2ee089c8fb89cbab0a8fdb0
 }

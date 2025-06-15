@@ -16,8 +16,8 @@
     "settings": "Paramètres",
     "theme": "Thème",
     "documents": "Documents",
-    "book_management": "Gestion des livres",
-    "memory_management": "Gestion de la mémoire",
+    "book_management": "Livres",
+    "memory_management": "Mémoire",
     "logout": "Déconnexion",
     "more": "Plus",
     "reservations": "Réservations",
@@ -40,15 +40,15 @@
       "title": "Nos Services",
       "description": "Nous offrons une gamme de services pour améliorer votre expérience de gestion d'une bibliothèque.",
       "service1": {
-        "title": "Gestion des livres",
+        "title": "Livres",
         "description": "Organisez efficacement les livres, suivez les emprunts et retours, et classez-les par genres et sections."
       },
       "service2": {
-        "title": "Gestion des mémoires",
+        "title": "mémoires",
         "description": "Centralisez les mémoires académiques, les thèses et les documents de recherche avec des métadonnées détaillées."
       },
       "service3": {
-        "title": "Gestion des profils utilisateurs",
+        "title": "thesisprofils utilisateurs",
         "description": "Permettez aux utilisateurs de gérer leurs informations et consulter leur historique."
       },
       "service4": {
@@ -160,6 +160,7 @@
       "last": "Dernière archive"
     }
   },
+<<<<<<< HEAD
    "dashboard": {
     "help_message": "Pour plus de détails sur chaque carte, survolez-la avec votre curseur.",
     "loading": "Chargement du tableau de bord...",
@@ -211,4 +212,35 @@
   
   
 
+=======
+  "departments": {
+    "admin_title": "Administration des Départements",
+    "add_button": "Ajouter un Département",
+    "no_departments": "Aucun département n'a encore été créé.",
+    "create_first": "Créez votre premier département",
+    "create_title": "Créer un Nouveau Département",
+    "name_label": "Nom du Département",
+    "name_placeholder": "Ex: Génie Informatique, Littérature...",
+    "name_tip": "Saisissez un nom court et descriptif.",
+    "image_label": "Image du Département",
+    "select_image": "Télécharger une image",
+    "change_image": "Changer l'image",
+    "image_format": "Recommandé : JPG, PNG (max 5Mo)",
+    "preview": "Aperçu de l'image",
+    "cancel_button": "Annuler",
+    "save_button": "Enregistrer le Département",
+    "success": "Département ajouté avec succès !",
+    "error": "Erreur :",
+    "fill_all_fields": "Veuillez remplir tous les champs obligatoires."
+  },
+  "catalogue": {
+    "sort_name_asc": "Nom A-Z",
+    "sort_name_desc": "Nom Z-A",
+    "sort_stock_asc": "Stock Croissant",
+    "sort_stock_desc": "Stock Décroissant",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "page": "Page"
+  }
+>>>>>>> 16df8847243401b5c2ee089c8fb89cbab0a8fdb0
 }

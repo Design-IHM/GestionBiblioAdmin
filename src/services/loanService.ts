@@ -133,7 +133,11 @@ export class LoanService {
     try {
       const documentName = documentData[0];
       const exemplaires = documentData[3] || 0;
+<<<<<<< HEAD
       const collectionName ='BiblioBooks';
+=======
+      const collectionName = documentData[4] || 'BiblioBooks';
+>>>>>>> 16df8847243401b5c2ee089c8fb89cbab0a8fdb0
 
       // Trouver le document dans la collection appropriée
       const docCollection = collection(db, collectionName);

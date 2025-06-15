@@ -20,7 +20,7 @@ const MobileBottomSidebar: React.FC = () => {
 
 	// Items secondaires (dans le menu "Plus")
 	const moreItems = [
-		{ id: 'memories', label: t('components:sidebar.memory_management'), icon: 'academic-cap', route: '/dashboard/memories' },
+		{ id: 'thesis', label: t('components:sidebar.memory_management'), icon: 'academic-cap', route: '/dashboard/thesis' },
 		{ id: 'returns', label: t('components:sidebar.returns'), icon: 'clipboard-check', route: '/dashboard/returns' },
 		{ id: 'settings', label: t('components:sidebar.settings'), icon: 'cog', route: '/dashboard/settings' },
 		

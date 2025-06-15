@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useConfig } from "../theme/ConfigProvider.tsx";
 import { GiBookPile } from "react-icons/gi";
 import { BiLogOut } from "react-icons/bi";
@@ -10,6 +10,7 @@ const Sidebar: React.FC = () => {
 	const { config } = useConfig();
 	const navigate = useNavigate();
 	const { t } = useI18n();
+	const location = useLocation();
 	const [isBookManagementOpen, setIsBookManagementOpen] = useState(false);
 
 	const sidebarItems = [
@@ -19,13 +20,28 @@ const Sidebar: React.FC = () => {
 		{ id: 'reservations', label: t('components:sidebar.reservations'), icon: 'clipboard-check' },
 		{ id: 'archives', label: t('components:sidebar.archives'), icon: 'archive' },
 		{ id: 'settings', label: t('components:sidebar.settings'), icon: 'cog' },
+<<<<<<< HEAD
 		
+=======
+>>>>>>> 16df8847243401b5c2ee089c8fb89cbab0a8fdb0
 	];
 
 	const bookManagementItems = [
 		{ id: 'books', label: t('components:sidebar.book_management'), icon: 'book-open' },
-		{ id: 'memories', label: t('components:sidebar.memory_management'), icon: 'academic-cap' }
+		{ id: 'thesis', label: t('components:sidebar.memory_management'), icon: 'academic-cap' }
 	];
+
+	// Vérifier si l'un des éléments du menu de gestion des livres est actif
+	const isBookManagementActive = bookManagementItems.some(
+		item => location.pathname.includes(`/dashboard/${item.id}`)
+	);
+
+	// Ouvrir automatiquement le dropdown si un de ses éléments est actif
+	useEffect(() => {
+		if (isBookManagementActive && !isBookManagementOpen) {
+			setIsBookManagementOpen(true);
+		}
+	}, [location.pathname, isBookManagementActive]);
 
 	const handleLogout = () => {
 		navigate('/');
@@ -84,12 +100,6 @@ const Sidebar: React.FC = () => {
 						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
 					</svg>
 				);
-			case 'adjustments':
-				return (
-					<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-					</svg>
-				);
 			case 'library':
 				return (
 					<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -109,7 +119,7 @@ const Sidebar: React.FC = () => {
 	};
 
 	return (
-		<div className="bg-secondary w-64 shadow-md fixed h-full flex-col hidden md:flex">
+		<div className="bg-secondary-100 w-64 shadow-md fixed h-full flex-col hidden md:flex">
 			<div className="p-6 border-b border-secondary-300 flex justify-between items-center">
 				<div className="flex items-center space-x-3">
 					{renderLogo()}
@@ -137,7 +147,11 @@ const Sidebar: React.FC = () => {
 						<li>
 							<button
 								onClick={toggleBookManagement}
-								className="flex items-center justify-between w-full px-4 py-2 rounded-md transition-colors hover:bg-secondary-300 text-primary-800"
+								className={`flex items-center justify-between w-full px-4 py-2 rounded-md transition-colors ${
+									isBookManagementActive 
+										? 'bg-primary text-white' 
+										: 'hover:bg-secondary-300 text-primary-800'
+								}`}
 							>
 								<div className="flex items-center">
 									<span className="mr-3">{renderIcon('library')}</span>

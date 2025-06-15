@@ -1,61 +1,76 @@
+// src/components/layout/Navbar.tsx
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BiSearch, BiUserCircle, BiMessageDetail } from 'react-icons/bi';
+import { RiSunFill, RiMoonFill } from 'react-icons/ri';
 import { IoIosArrowBack } from 'react-icons/io';
-import { getCurrentUserLogin } from "../../utils/dateUtils";
 import LanguageSwitcher from '../common/LanguageSwitcher';
 import useI18n from '../../hooks/useI18n';
+import { useSearchContext } from '../../context/SearchContext';
+import { getCurrentUserLogin } from '../../utils/dateUtils'; // Assuming you have this utility
 
 const Navbar: React.FC = () => {
+	const { searchWord, setSearchWord, onSearch } = useSearchContext();
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { t } = useI18n();
-	// const [currentDateTime, setCurrentDateTime] = useState(getCurrentFormattedDateTime());
 	const userLogin = getCurrentUserLogin();
-	const [searchWord, setSearchWord] = useState("");
-	const unreadMessagesCount = 2; // Example count, replace with actual logic
+	const [isDarkMode, setIsDarkMode] = useState(false); // Example state
+	const unreadMessagesCount = 2; // Example count
 
-	// Example theme toggle - integrate with your actual theme system
-	//const [isDarkMode, setIsDarkMode] = useState(false);
-	//const toggleTheme = () => setIsDarkMode(!isDarkMode);
+	const shouldShowSearch = onSearch !== null;
 
-	// Get the current section name from the URL
+	const toggleTheme = () => setIsDarkMode(!isDarkMode);
+
+	/**
+	 * Intelligently determines the title to display in the navbar based on the current URL.
+	 * It handles static routes and dynamic routes with parameters.
+	 */
 	const getCurrentSectionName = () => {
-		const path = location.pathname;
+		// 1. Get the path and split it into clean segments.
+		// e.g., "/dashboard/books/Genie%20Informatique" -> ['dashboard', 'books', 'Genie%20Informatique']
+		const pathSegments = location.pathname.split('/').filter(Boolean);
 
-		if (path === '/dashboard') return t('pages:dashboard.overview');
+		if (pathSegments.length === 0) return t('pages:dashboard.overview');
 
-		// Extract the section name from the path and translate it
-		const section = path.split('/').pop() || '';
-		return t(`pages:dashboard.${section}`, { defaultValue: section.charAt(0).toUpperCase() + section.slice(1) });
+		// 2. Check if we are inside the dashboard section.
+		if (pathSegments[0] === 'dashboard') {
+			if (pathSegments.length === 1) {
+				return t('pages:dashboard.overview'); // Base /dashboard route
+			}
+
+			const mainSection = pathSegments[1]; // e.g., 'books'
+			const dynamicParam = pathSegments[2]; // e.g., 'Genie%20Informatique'
+
+			// 3. If a dynamic parameter exists, decode it for display.
+			if (dynamicParam) {
+				// This is the key change: decode the URL-encoded string.
+				const decodedParam = decodeURIComponent(dynamicParam);
+				const sectionTitle = t(`pages:dashboard.${mainSection}`, { defaultValue: mainSection });
+
+				// Return a combined title, e.g., "Books: Genie Informatique"
+				return `${sectionTitle}: ${decodedParam}`;
+			}
+
+			// 4. For static dashboard sections like /dashboard/users.
+			return t(`pages:dashboard.${mainSection}`, { defaultValue: mainSection.charAt(0).toUpperCase() + mainSection.slice(1) });
+		}
+
+		// 5. Fallback for any other top-level routes.
+		return pathSegments[0].charAt(0).toUpperCase() + pathSegments[0].slice(1);
 	};
 
-	// Determine if the page should have search functionality
-	const shouldShowSearch = () => {
-		const path = location.pathname;
-		return path.includes('/books') || path.includes('/users');
-	};
-
-	// Should show back button?
-	const shouldShowBackButton = () => {
-		return location.pathname !== '/dashboard';
-	};
-
-	const goBack = () => {
-		navigate(-1);
-	};
+	// const shouldShowSearch = () => location.pathname.includes('/books') || location.pathname.includes('/users');
+	const shouldShowBackButton = () => location.pathname !== '/dashboard';
+	const goBack = () => navigate(-1);
 
 	return (
 		<header className="bg-white shadow-sm sticky top-0 z-10">
 			<div className="px-6 py-3 flex items-center justify-between flex-wrap">
-				{/* Left section with back button and title */}
+				{/* Left section */}
 				<div className="flex items-center">
 					{shouldShowBackButton() && (
-						<button
-							onClick={goBack}
-							className="mr-3 p-2 rounded-full hover:bg-secondary-100 transition-colors"
-							title={t('components:navbar.back')}
-						>
+						<button onClick={goBack} className="mr-3 p-2 rounded-full hover:bg-secondary-100" title={t('components:navbar.back')}>
 							<IoIosArrowBack className="text-primary-800 text-xl" />
 						</button>
 					)}
@@ -64,30 +79,26 @@ const Navbar: React.FC = () => {
 					</h1>
 				</div>
 
-				{/* Center section with search */}
-				{shouldShowSearch() && (
-					<div className="flex-grow max-w-lg mx-4 hidden md:block">
+				{/* Center section with a smarter search bar */}
+				<div className="flex-grow max-w-lg mx-4 hidden md:block">
+					{shouldShowSearch && (
 						<div className="relative">
 							<input
 								type="text"
 								value={searchWord}
 								onChange={(e) => setSearchWord(e.target.value)}
-								placeholder={t('components:navbar.search')}
-								className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+								placeholder={t('common:search_placeholder')}
+								className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
 							/>
-							<BiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg" />
+							<BiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
 						</div>
-					</div>
-				)}
+					)}
+				</div>
 
-				{/* Right section with user controls */}
+				{/* Right section */}
 				<div className="flex items-center space-x-2">
 					<LanguageSwitcher />
-
-					<button
-						className="relative p-2 rounded-full hover:bg-secondary-100 transition-colors"
-						title={t('components:navbar.messages')}
-					>
+					<button className="relative p-2 rounded-full hover:bg-secondary-100" title={t('components:navbar.messages')}>
 						<BiMessageDetail className="text-primary-800 text-xl" />
 						{unreadMessagesCount > 0 && (
 							<span className="absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">
@@ -95,13 +106,10 @@ const Navbar: React.FC = () => {
               </span>
 						)}
 					</button>
-
-					
-
-					<button
-						className="flex items-center space-x-2 ml-2 p-1 rounded-full hover:bg-secondary-100 transition-colors"
-						title={t('components:navbar.profile')}
-					>
+					<button onClick={toggleTheme} className="p-2 rounded-full hover:bg-secondary-100" title={isDarkMode ? t('common:light_mode') : t('common:dark_mode')}>
+						{isDarkMode ? <RiSunFill className="text-primary-800 text-xl" /> : <RiMoonFill className="text-primary-800 text-xl" />}
+					</button>
+					<button className="flex items-center space-x-2 ml-2 p-1 rounded-full hover:bg-secondary-100" title={t('components:navbar.profile')}>
 						<BiUserCircle className="text-primary-800 text-2xl" />
 						<span className="text-sm font-medium hidden md:inline">{userLogin}</span>
 					</button>

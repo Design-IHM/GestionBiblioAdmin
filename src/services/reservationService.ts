@@ -99,7 +99,7 @@ export class ReservationService {
     documentData: [string, string, string, number, string, string]
   ): Promise<void> {
     try {
-      const [documentName, , , , collectionName = 'BiblioInformatique'] = documentData;
+      const [documentName, , , , collectionName = 'BiblioBooks'] = documentData;
       const currentDate = new Date().toISOString();
 
       // Décrémenter les exemplaires
