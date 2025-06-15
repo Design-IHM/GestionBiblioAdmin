@@ -159,5 +159,56 @@
       "total": "Total des archives",
       "last": "Dernière archive"
     }
-  }
+  },
+   "dashboard": {
+    "help_message": "Pour plus de détails sur chaque carte, survolez-la avec votre curseur.",
+    "loading": "Chargement du tableau de bord...",
+    "total_books": "Total des titres uniques",
+    "total_theses": "Total Mémoires",
+    "registered_students": "Étudiants Inscrits",
+    "borrowed_documents": "Documents Empruntés",
+    "people_borrowed": "Personnes ayant emprunté",
+    "suspended_students": "Étudiants Suspendus",
+    "total_reservations": "Total Réservations",
+    "monthly_borrows": "Emprunts Mensuels",
+    "borrows_by_department": "Emprunts par Département",
+    "books_by_category": "Livres par Département",
+    "theses_by_department": "Mémoires par Département",
+    "total_inventory": "Inventaire total des exemplaires",
+    "available_for_reservation": "Exemplaires disponibles pour réservation",
+    "reserved_not_picked": "Réservés mais non retirés",
+    "physically_present": "Exemplaires physiquement présents",
+    "reservation_to_borrow": "Taux réservations → emprunts",
+    "top_borrowed": "Top 5 des livres les plus empruntés",
+    "low_stock": "Livres en stock faible (moins de 20%)",
+    "current_week": "Emprunts de la semaine courante",
+    "recently_returned": "Livres récemment retournés",
+    "no_data_available": "Aucune donnée disponible",
+    "desc_unique_titles": "Nombre total de titres distincts dans la bibliothèque, sans compter les exemplaires multiples.",
+    "desc_total_inventory": "Nombre total d'exemplaires acquis par la bibliothèque (somme de tous les exemplaires initiaux).",
+    "desc_available": "Nombre d'exemplaires actuellement disponibles pour réservation ou emprunt.",
+    "desc_borrowed": "Nombre de documents actuellement empruntés par les utilisateurs.",
+    "desc_reserved": "Nombre de documents réservés mais pas encore retirés par les utilisateurs.",
+    "desc_physically_present": "Nombre d'exemplaires physiquement présents dans la bibliothèque (inventaire total moins emprunts).",
+    "desc_people_borrowed": "Nombre d'utilisateurs ayant actuellement au moins un document emprunté.",
+    "desc_reservation_ratio": "Pourcentage des réservations qui sont converties en emprunts."
+  },
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Voir",
+    "close": "Fermer",
+    "confirm": "Confirmer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "actions": "Actions",
+    "error": "Erreur",
+    "success": "Succès",
+    "warning": "Avertissement",
+    "info": "Information"
+  
+  
+
 }

@@ -10,5 +10,12 @@
   "profile": "Profil",
   "light_mode": "Mode clair",
   "dark_mode": "Mode sombre",
-  "logout": "Déconnexion"
+  "logout": "Déconnexion",
+  "pagination": {
+  "previous": "Précédent",
+  "next": "Suivant",
+  "go_to_page": "Aller à la page",
+  "page": "Page",
+  "of": "sur"
+}
 }

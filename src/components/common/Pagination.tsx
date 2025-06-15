@@ -96,7 +96,7 @@ const Pagination: React.FC<PaginationProps> = ({
             : 'bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed'
           }
         `}
-        title={t('common:pagination.previous')}
+        title={t('components:pagination.previous')}
       >
         <FaArrowLeft size={currentSize.icon} />
         <span className="hidden sm:inline">{t('common:pagination.previous')}</span>

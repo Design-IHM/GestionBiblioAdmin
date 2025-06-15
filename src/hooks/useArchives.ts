@@ -51,11 +51,14 @@ export const useArchives = () => {
   const filteredArchives = useCallback(() => {
     if (!searchQuery) return archives;
     
-    return archives.filter(item =>
-      item.nomDoc.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.heure.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.nomEtudiant.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    return archives.filter(item => {
+  const query = searchQuery.toLowerCase();
+  return (
+    (item.nomDoc && item.nomDoc.toLowerCase().includes(query)) ||
+    (item.heure && item.heure.toLowerCase().includes(query)) ||
+    (item.nomEtudiant && item.nomEtudiant.toLowerCase().includes(query))
+  );
+});
   }, [archives, searchQuery]);
 
   // Trier les archives

@@ -162,6 +162,56 @@
       "total": "Total Archives",
       "last": "Last Archive"
     }
-  }
+  },
+   "dashboard": {
+    "help_message": "For more details on each card, hover over it with your cursor.",
+    "loading": "Loading dashboard...",
+    "total_books": "Total Unique Titles",
+    "total_theses": "Total Theses",
+    "registered_students": "Registered Students",
+    "borrowed_documents": "Borrowed Documents",
+    "people_borrowed": "People who Borrowed",
+    "suspended_students": "Suspended Students",
+    "total_reservations": "Total Reservations",
+    "monthly_borrows": "Monthly Borrows",
+    "borrows_by_department": "Borrows by Department",
+    "books_by_category": "Books by Department",
+    "theses_by_department": "Theses by Department",
+    "total_inventory": "Total Inventory of Copies",
+    "available_for_reservation": "Copies Available for Reservation",
+    "reserved_not_picked": "Reserved but Not Picked Up",
+    "physically_present": "Physically Present Copies",
+    "reservation_to_borrow": "Reservation to Borrow Rate",
+    "top_borrowed": "Top 5 Most Borrowed Books",
+    "low_stock": "Low Stock Books (less than 20%)",
+    "current_week": "Current Week Borrows",
+    "recently_returned": "Recently Returned Books",
+    "no_data_available": "No data available",
+    "desc_unique_titles": "Total number of distinct titles in the library, not counting multiple copies.",
+    "desc_total_inventory": "Total number of copies acquired by the library (sum of all initial copies).",
+    "desc_available": "Number of copies currently available for reservation or borrowing.",
+    "desc_borrowed": "Number of documents currently borrowed by users.",
+    "desc_reserved": "Number of documents reserved but not yet picked up by users.",
+    "desc_physically_present": "Number of copies physically present in the library (total inventory minus borrowed items).",
+    "desc_people_borrowed": "Number of users who currently have at least one document borrowed.",
+    "desc_reservation_ratio": "Percentage of reservations that are converted to borrowings."
+  },
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "close": "Close",
+    "confirm": "Confirm",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "actions": "Actions",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Information"
+  
+
 
 }
