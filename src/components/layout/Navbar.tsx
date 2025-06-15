@@ -7,7 +7,8 @@ import { IoIosArrowBack } from 'react-icons/io';
 import LanguageSwitcher from '../common/LanguageSwitcher';
 import useI18n from '../../hooks/useI18n';
 import { useSearchContext } from '../../context/SearchContext';
-import { getCurrentUserLogin } from '../../utils/dateUtils'; // Assuming you have this utility
+import { getCurrentUserLogin } from '../../utils/dateUtils';
+import { useUnreadCount } from '../../hooks/useUnreadCount';
 
 const Navbar: React.FC = () => {
 	const { searchWord, setSearchWord, onSearch } = useSearchContext();
@@ -16,12 +17,15 @@ const Navbar: React.FC = () => {
 	const { t } = useI18n();
 	const userLogin = getCurrentUserLogin();
 	const [isDarkMode, setIsDarkMode] = useState(false); // Example state
-	const unreadMessagesCount = 2; // Example count
+	const unreadMessagesCount = useUnreadCount(); // Example count
 
 	const shouldShowSearch = onSearch !== null;
 
 	const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
+	const handleMessagesClick = () => {
+		navigate('/dashboard/messages');
+	};
 	/**
 	 * Intelligently determines the title to display in the navbar based on the current URL.
 	 * It handles static routes and dynamic routes with parameters.
@@ -98,10 +102,18 @@ const Navbar: React.FC = () => {
 				{/* Right section */}
 				<div className="flex items-center space-x-2">
 					<LanguageSwitcher />
-					<button className="relative p-2 rounded-full hover:bg-secondary-100" title={t('components:navbar.messages')}>
+					{/*<button className="relative p-2 rounded-full hover:bg-secondary-100" title={t('components:navbar.messages')}>*/}
+					{/*	<BiMessageDetail className="text-primary-800 text-xl" />*/}
+					{/*	{unreadMessagesCount > 0 && (*/}
+					{/*		<span className="absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">*/}
+          {/*      {unreadMessagesCount}*/}
+          {/*    </span>*/}
+					{/*	)}*/}
+					{/*</button>*/}
+					<button onClick={handleMessagesClick} className="relative p-2 rounded-full hover:bg-secondary-100" title={t('components:navbar.messages')}>
 						<BiMessageDetail className="text-primary-800 text-xl" />
 						{unreadMessagesCount > 0 && (
-							<span className="absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">
+							<span className="absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center animate-pulse">
                 {unreadMessagesCount}
               </span>
 						)}
