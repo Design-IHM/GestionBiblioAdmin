@@ -1,49 +1,29 @@
 // src/pages/Chat.tsx
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { useConversations } from '../hooks/useConversations';
-import { ConversationItem } from '../components/chat/ConversationItem';
+import { ConversationList } from '../components/chat/ConversationList';
 import { ChatWindow } from '../components/chat/ChatWindow';
-import Spinner from '../components/common/Spinner';
-import { FiMessageSquare } from 'react-icons/fi';
+import useI18n from '../hooks/useI18n';
 
 export const Chat: React.FC = () => {
-	const { conversationId } = useParams<{ conversationId: string }>();
 	const { conversations, loading } = useConversations();
+	const { t } = useI18n();
 
 	return (
-		<div className="flex h-[calc(100vh-120px)] border border-secondary-200 rounded-lg shadow-lg overflow-hidden">
-			<aside className="w-full md:w-1/3 border-r border-secondary-200 flex-col hidden md:flex">
+		<div className="flex h-[calc(100vh-100px)] border border-secondary-200 rounded-lg shadow-lg overflow-hidden">
+			{/* Volet gauche : Liste des conversations */}
+			<aside className="w-full md:w-1/3 border-r border-secondary-200 flex flex-col bg-secondary-50">
 				<header className="p-4 border-b border-secondary-200">
-					<h1 className="font-bold text-xl">Messages</h1>
+					<h1 className="font-bold text-xl text-gray-800">{t('components.navbar.messages', {defaultValue: "Messages"})}</h1>
 				</header>
 				<div className="flex-1 overflow-y-auto p-2">
-					{loading ? (
-						<Spinner />
-					) : (
-						<nav>
-							<ul>
-								{conversations.map(convo => (
-									<li key={convo.id}>
-										<ConversationItem conversation={convo} />
-									</li>
-								))}
-							</ul>
-						</nav>
-					)}
+					<ConversationList conversations={conversations} loading={loading} />
 				</div>
 			</aside>
 
+			{/* Volet droit : Fenêtre de chat */}
 			<main className="w-full md:w-2/3 flex flex-col">
-				{conversationId ? (
-					<ChatWindow />
-				) : (
-					<div className="flex-1 flex-col items-center justify-center text-center text-gray-500 bg-secondary-50 hidden md:flex">
-						<FiMessageSquare className="w-16 h-16 mb-4 text-secondary-400" />
-						<h2 className="text-xl font-semibold">Select a conversation</h2>
-						<p>Choose a conversation from the list to start chatting.</p>
-					</div>
-				)}
+				<ChatWindow />
 			</main>
 		</div>
 	);

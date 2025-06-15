@@ -21,8 +21,16 @@ const Login: React.FC = () => {
 		setError('');
 		setIsLoading(true);
 		try {
-			await login(email, password);
-			navigate('/dashboard');
+			// 1. Attendre les données de l'admin après la connexion
+			const adminData = await login(email, password);
+
+			// 2. Rediriger vers le dashboard en passant un message dans l'état
+			navigate('/dashboard', {
+				state: {
+					notification: `Bienvenue, ${adminData.name} !`
+				},
+				replace: true // Remplace la page de login dans l'historique
+			});
 		} catch (err: any) {
 			setError(err.message || 'Une erreur est survenue.');
 		} finally {
@@ -38,6 +46,7 @@ const Login: React.FC = () => {
 			</div>
 
 			<form onSubmit={handleSubmit} className="space-y-6">
+				{/* ... le reste du formulaire est identique ... */}
 				<div className="relative">
 					<FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-secondary-400" />
 					<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required className="w-full pl-10 pr-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary" />

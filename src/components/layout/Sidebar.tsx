@@ -128,10 +128,12 @@ const Sidebar: React.FC = () => {
 	return (
 		<div className="bg-secondary-100 w-64 shadow-md fixed h-full flex-col hidden md:flex">
 			<div className="p-6 border-b border-secondary-300 flex justify-between items-center">
-				<div className="flex items-center space-x-3">
-					{renderLogo()}
-					<h1 className="text-lg font-bold text-primary">{config.Name}</h1>
-				</div>
+				<NavLink to="/" className="flex items-center space-x-3">
+					<div className="flex items-center space-x-3">
+						{renderLogo()}
+						<h1 className="text-lg font-bold text-primary">{config.Name}</h1>
+					</div>
+				</NavLink>
 			</div>
 
 			<nav className="mt-6 flex-grow">

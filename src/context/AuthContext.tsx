@@ -1,8 +1,8 @@
 // src/context/AuthContext.tsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
-import * as authService from '../services/authService';
-import type { AdminData } from '../services/authService';
+import * as authService from '../services/authService.ts';
+import type { AdminData } from '../services/authService.ts';
 import Spinner from '../components/common/Spinner';
 
 interface AuthContextType {
@@ -25,8 +25,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 				setAdmin(JSON.parse(storedAdmin));
 			}
 		} catch (error) {
-			console.error("Erreur parsing localStorage:", error);
 			localStorage.removeItem('biblioAdmin');
+			console.log(error);
 		} finally {
 			setLoading(false);
 		}
