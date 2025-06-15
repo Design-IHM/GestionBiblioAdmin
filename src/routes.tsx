@@ -31,6 +31,7 @@ import ForgotPassword from "./pages/ForgotPassword.tsx";
 import VerifyEmailInfoPage from "./pages/VerifyEmailInfo.tsx";
 
 
+
 const routes = createBrowserRouter([
 	{
 		path: "/",
@@ -72,6 +73,7 @@ const routes = createBrowserRouter([
 						children: [
 							{ index: true, element: <Departements/>, },
 							{
+
 								path: ":departmentName",
 								element: <DefaultLayout/>,
 								children: [

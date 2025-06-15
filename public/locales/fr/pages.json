@@ -1,8 +1,4 @@
 {
-  "landing": {
-    "hero_title": "Système de Gestion de Bibliothèque de Campus",
-    "hero_description": "Rationalisez les opérations de votre bibliothèque de campus avec notre plateforme d'administration complète. Gérez les livres, suivez les prêts et offrez une expérience exceptionnelle aux étudiants et aux enseignants."
-  },
   "dashboard": {
     "overview": "Aperçu",
     "books": "Livres",

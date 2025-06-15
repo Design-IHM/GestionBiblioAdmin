@@ -17,11 +17,13 @@ const Navbar: React.FC = () => {
 	const { t } = useI18n();
 	const userLogin = getCurrentUserLogin();
 	const [isDarkMode, setIsDarkMode] = useState(false); // Example state
+
 	const unreadMessagesCount = useUnreadCount(); // Example count
 
 	const shouldShowSearch = onSearch !== null;
 
 	const toggleTheme = () => setIsDarkMode(!isDarkMode);
+
 
 	const handleMessagesClick = () => {
 		navigate('/dashboard/messages');
@@ -50,7 +52,6 @@ const Navbar: React.FC = () => {
 			if (dynamicParam) {
 				// This is the key change: decode the URL-encoded string.
 				const decodedParam = decodeURIComponent(dynamicParam);
-				const sectionTitle = t(`pages:dashboard.${mainSection}`, { defaultValue: mainSection });
 
 				// Return a combined title, e.g., "Books: Genie Informatique"
 				return `${sectionTitle}: ${decodedParam}`;
@@ -59,6 +60,7 @@ const Navbar: React.FC = () => {
 			// 4. For static dashboard sections like /dashboard/users.
 			return t(`pages:dashboard.${mainSection}`, { defaultValue: mainSection.charAt(0).toUpperCase() + mainSection.slice(1) });
 		}
+
 
 		// 5. Fallback for any other top-level routes.
 		return pathSegments[0].charAt(0).toUpperCase() + pathSegments[0].slice(1);
@@ -102,15 +104,9 @@ const Navbar: React.FC = () => {
 				{/* Right section */}
 				<div className="flex items-center space-x-2">
 					<LanguageSwitcher />
-					{/*<button className="relative p-2 rounded-full hover:bg-secondary-100" title={t('components:navbar.messages')}>*/}
-					{/*	<BiMessageDetail className="text-primary-800 text-xl" />*/}
-					{/*	{unreadMessagesCount > 0 && (*/}
-					{/*		<span className="absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">*/}
-          {/*      {unreadMessagesCount}*/}
-          {/*    </span>*/}
-					{/*	)}*/}
-					{/*</button>*/}
+
 					<button onClick={handleMessagesClick} className="relative p-2 rounded-full hover:bg-secondary-100" title={t('components:navbar.messages')}>
+
 						<BiMessageDetail className="text-primary-800 text-xl" />
 						{unreadMessagesCount > 0 && (
 							<span className="absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center animate-pulse">

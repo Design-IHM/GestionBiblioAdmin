@@ -1,26 +1,44 @@
-import { createContext, useContext } from 'react';
-import type { ReactNode } from 'react';
-import { useI18n } from '../hooks/useI18n';
+// Dans src/context/I18nContext.tsx
+import React, { createContext, useState, useEffect } from 'react';
+import type {  ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
+import type { I18nContextType } from '../types/i18n';
 
-interface I18nContextType {
-	t: (key: string, defaultValue?: string) => string;
-	changeLanguage: (lang: string) => void;
-	language: string;
-	loading: boolean;
+export const I18nContext = createContext<I18nContextType | undefined>(undefined);
+
+interface I18nProviderProps {
+	children: ReactNode;
 }
 
-const I18nContext = createContext<I18nContextType | undefined>(undefined);
+export const I18nProvider: React.FC<I18nProviderProps> = ({ children }) => {
+	const { t, i18n } = useTranslation(['common', 'components', 'pages']);
+	const [loading, setLoading] = useState(true);
 
-export const I18nProvider = ({ children }: { children: ReactNode }) => {
-	const i18n = useI18n();
+	useEffect(() => {
+		// Simuler le chargement initial des traductions
+		setLoading(false);
+	}, []);
 
-	return <I18nContext.Provider value={i18n}>{children}</I18nContext.Provider>;
-};
+	const toggleLanguage = () => {
+		const newLanguage = i18n.language === 'en' ? 'fr' : 'en';
+		i18n.changeLanguage(newLanguage);
+	};
 
-export const useTranslation = () => {
-	const context = useContext(I18nContext);
-	if (!context) {
-		throw new Error('useTranslation must be used within an I18nProvider');
-	}
-	return context;
+	const getCurrentLanguage = () => i18n.language;
+	const isEnglish = () => getCurrentLanguage().startsWith('en');
+	const isFrench = () => getCurrentLanguage().startsWith('fr');
+
+	const contextValue: I18nContextType = {
+		t,
+		i18n,
+		language: getCurrentLanguage(),
+		loading,
+		changeLanguage: i18n.changeLanguage,
+		toggleLanguage,
+		getCurrentLanguage,
+		isEnglish,
+		isFrench
+	};
+
+	return <I18nContext.Provider value={contextValue}>{children}</I18nContext.Provider>;
 };
