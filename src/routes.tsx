@@ -28,10 +28,6 @@ import { Chat } from "./pages/Chat.tsx";
 // Pages d'authentification
 import Login from "./pages/Login.tsx";
 import Register from "./pages/Register.tsx";
-import ForgotPassword from "./pages/ForgotPassword.tsx";
-import VerifyEmailInfoPage from "./pages/VerifyEmailInfo.tsx";
-
-
 
 const routes = createBrowserRouter([
 	{
@@ -49,15 +45,7 @@ const routes = createBrowserRouter([
 			{
 				path: "register", // URL: /authentication/register
 				element: <Register />
-			},
-			{
-				path: "forgot-password", // URL: /authentication/forgot-password
-				element: <ForgotPassword />
-			},
-			{
-				path: "verify-email", // La page qui dit à l'utilisateur de vérifier ses emails
-				element: <VerifyEmailInfoPage />
-			},
+			}
 		]
 	},
 	{

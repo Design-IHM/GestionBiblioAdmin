@@ -35,7 +35,7 @@
       "title": "Welcome to",
       "description": "Your web application for managing of your school's library.",
       "manage_documents": "From this platform, you, dear members of the documentation unit, have the ability to manage documents and reservations automatically, with ease and peace of mind.",
-      "cta_button": "Login Now"
+      "cta_button": "Start Now"
     },
     "services": {
         "title": "Our Services",
@@ -163,7 +163,6 @@
       "last": "Last Archive"
     }
   },
-<<<<<<< HEAD
    "dashboard": {
     "help_message": "For more details on each card, hover over it with your cursor.",
     "loading": "Loading dashboard...",
@@ -196,7 +195,6 @@
     "desc_physically_present": "Number of copies physically present in the library (total inventory minus borrowed items).",
     "desc_people_borrowed": "Number of users who currently have at least one document borrowed.",
     "desc_reservation_ratio": "Percentage of reservations that are converted to borrowings."
-=======
 
   "departments": {
     "admin_title": "Department Administration",
@@ -217,7 +215,6 @@
     "success": "Department added successfully!",
     "error": "Error:",
     "fill_all_fields": "Please fill in all required fields."
->>>>>>> 29569db95da3bd391ae44fd723821a2717ae3535
   },
     "save": "Save",
     "cancel": "Cancel",
