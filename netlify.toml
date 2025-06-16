@@ -1,0 +1,11 @@
+# Configuration pour construire votre application React
+[build]
+  command = "npm run build"
+  publish = "dist" # Le dossier où se trouve votre site après la construction
+  functions = "netlify/functions" # Le dossier où nous mettrons nos fonctions serverless
+
+# Règle de redirection pour que les routes de React Router fonctionnent
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

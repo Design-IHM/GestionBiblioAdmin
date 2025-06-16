@@ -5,6 +5,7 @@ import { GiBookPile } from "react-icons/gi";
 import { BiLogOut } from "react-icons/bi";
 import { FiChevronDown, FiChevronRight } from "react-icons/fi";
 import useI18n from '../../hooks/useI18n';
+import { useAuth } from '../../context/AuthContext.tsx';
 
 const Sidebar: React.FC = () => {
 	const { config } = useConfig();
@@ -12,6 +13,7 @@ const Sidebar: React.FC = () => {
 	const { t } = useI18n();
 	const location = useLocation();
 	const [isBookManagementOpen, setIsBookManagementOpen] = useState(false);
+	const { logout } = useAuth();
 
 	const sidebarItems = [
 		{ id: 'overview', label: t('components:sidebar.overview'), icon: 'chart-pie' },
@@ -40,9 +42,6 @@ const Sidebar: React.FC = () => {
 		}
 	}, [location.pathname, isBookManagementActive]);
 
-	const handleLogout = () => {
-		navigate('/');
-	};
 
 	const toggleBookManagement = () => {
 		setIsBookManagementOpen(!isBookManagementOpen);
@@ -112,6 +111,18 @@ const Sidebar: React.FC = () => {
 
 			default:
 				return null;
+		}
+	};
+
+	const handleLogout = async () => {
+		try {
+			await logout();
+			// Pas besoin de naviguer manuellement, le ProtectedRoute s'en chargera.
+			// La ligne suivante est optionnelle mais peut assurer une redirection immédiate.
+			navigate('/');
+		} catch (error) {
+			console.error("Erreur lors de la déconnexion :", error);
+			// Vous pourriez afficher une notification d'erreur ici si nécessaire
 		}
 	};
 
@@ -189,7 +200,7 @@ const Sidebar: React.FC = () => {
 
 			<div className="mt-auto p-6 border-t border-secondary-300">
 				<button
-					onClick={handleLogout}
+					onClick={handleLogout} // Utiliser notre nouvelle fonction ici
 					className="flex items-center w-full px-4 py-2 rounded-md transition-colors text-red-600 hover:bg-red-100 hover:text-red-800"
 				>
 					<span className="mr-3"><BiLogOut className="w-5 h-5" /></span>

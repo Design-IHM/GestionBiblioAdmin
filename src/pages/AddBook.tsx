@@ -70,7 +70,9 @@ const AddBook: React.FC = () => {
 					<div className="space-y-4 p-4 bg-white rounded-md shadow-sm">
 						<h3 className="font-semibold text-lg border-b pb-2">{t('pages:book_details.section_info')}</h3>
 						<input name="name" value={formData.name} onChange={handleChange} placeholder={t('pages:book_details.title')} className="form-input" required />
+
 						<input name="auteur" value={formData.auteur} onChange={handleChange} placeholder={t('pages:book_details.author')} className="form-input" />
+
 						<input name="edition" value={formData.edition} onChange={handleChange} placeholder={t('pages:book_details.edition')} className="form-input" />
 						<textarea name="desc" value={formData.desc} onChange={handleChange} placeholder={t('pages:book_details.description')} className="form-input w-full" rows={5} required></textarea>
 					</div>

@@ -3,6 +3,7 @@ import React from 'react';
 import { useCatalogue } from '../hooks/useCatalogue.ts';
 import BookCard from '../components/catalogue/BookCard';
 import Spinner from '../components/common/Spinner';
+
 import CatalogueFilters from "../components/catalogue/CatalogueFilters.tsx";
 import { Button } from '../components/common/Button';
 import {FiPlus} from "react-icons/fi";

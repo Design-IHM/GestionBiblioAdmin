@@ -58,4 +58,6 @@
 
     "browsing": "{{department}} Viewing",
     "no_books_found": "No Books found in this Department."
+
+  }
 }
