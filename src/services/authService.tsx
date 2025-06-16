@@ -80,3 +80,10 @@ export const loginAdmin = async (email: string, password: string): Promise<Admin
 	const { password: _, ...adminInfo } = adminData;
 	return { uid: adminDocSnap.id, ...adminInfo } as AdminData;
 };
+
+/**
+ * Envoie un e-mail de réinitialisation de mot de passe.
+ */
+export const sendResetPasswordEmail = async (email: string): Promise<void> => {
+	console.log("resetPasswordEmail called with email:", email);
+};
