@@ -8,10 +8,9 @@ import {
 	serverTimestamp,
 	doc,
 	updateDoc,
-	where,
 	Timestamp,
 	arrayUnion,
-	getDocs
+	getDoc
 } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import type { Conversation, Message } from '../types/chat';
@@ -43,16 +42,26 @@ export const getConversationsListener = (callback: (conversations: Conversation[
 			})
 			.filter(tempConvo => tempConvo.messages && tempConvo.messages.length > 0) // Filter here
 			.map(filteredConvo => { // Now map to the final Conversation type
-				const { docId, userData, lastMessage } = filteredConvo;
-				// At this point, lastMessage is guaranteed to exist due to the filter
+				const { docId, userData, messages, lastMessage } = filteredConvo;
+				// lastMessage is guaranteed to exist due to the filter
+				// messages is the full array of messages for this user from the preliminary map
+
+				// Define the type for messages within this function for clarity, expecting 'lu'
+				type MessageWithLu = { texte: string; heure: Timestamp; recue: 'R' | 'E'; lu?: boolean };
+
+				const hasUnreadFromUser = (messages as MessageWithLu[]).some((msg: MessageWithLu) =>
+					msg.recue === 'E' && (msg.lu === false || msg.lu === undefined)
+				);
+
 				return {
 					id: docId,
 					userName: userData.name,
 					userImage: userData.image || '',
-					lastMessageText: lastMessage!.texte,
-					lastMessageTimestamp: lastMessage!.heure,
-					unreadByAdmin: lastMessage!.recue === 'E',
+					lastMessageText: lastMessage!.texte, // lastMessage is from the preliminary map
+					lastMessageTimestamp: lastMessage!.heure, // lastMessage is from the preliminary map
+					unreadByAdmin: hasUnreadFromUser,
 					participants: [docId, 'admin'],
+					adminLastReadTimestamp: userData.adminLastReadTimestamp, // Add this line
 				};
 			})
 			.sort((a, b) => { // Sort after final mapping
@@ -61,6 +70,27 @@ export const getConversationsListener = (callback: (conversations: Conversation[
 			});
 		callback(conversations);
 	});
+};
+
+// Fetches a single user document
+export const getUserDoc = async (userId: string): Promise<any | null> => { // Consider defining a UserData type for the return
+	if (!userId) {
+		console.log("getUserDoc: userId is not provided.");
+		return null;
+	}
+	const userDocRef = doc(db, 'BiblioUser', userId);
+	try {
+		const docSnap = await getDoc(userDocRef);
+		if (docSnap.exists()) {
+			return docSnap.data();
+		} else {
+			console.log("No such user document for ID:", userId);
+			return null;
+		}
+	} catch (error) {
+		console.error("Error fetching user document:", userId, error);
+		return null;
+	}
 };
 
 /**
@@ -141,23 +171,47 @@ export const sendMessage = async (userId: string, text: string, senderType: 'adm
  * @param userId - L'ID de l'utilisateur (qui est l'ID de la conversation).
  */
 export const markConversationAsRead = async (userId: string) => {
-	const messagesRecueQuery = query(
-		collection(db, 'MessagesRecue'),
-		where('email', '==', userId),
-		where('lue', '==', false)
-	);
+	const userDocRef = doc(db, 'BiblioUser', userId);
+	try {
+		const docSnap = await getDoc(userDocRef);
 
-	const querySnapshot = await getDocs(messagesRecueQuery); // Need to import getDocs
-	querySnapshot.forEach(async (docSnapshot) => {
-		await updateDoc(doc(db, 'MessagesRecue', docSnapshot.id), {
-			lue: true,
-		});
-	});
-	// Depending on the exact definition of "read" for the admin,
-	// this might be sufficient. If unreadByAdmin in Conversation
-	// type needs to be updated, that would require re-fetching and updating
-	// the specific conversation in the main listener, or a more complex state management.
-	// For now, focusing on MessagesRecue as per instructions.
+		if (docSnap.exists()) {
+			const userData = docSnap.data();
+			const updates: { [key: string]: any } = {};
+
+			// Always update the adminLastReadTimestamp
+			updates.adminLastReadTimestamp = serverTimestamp();
+
+			const messages = userData.messages || [];
+			let messagesArrayNeedsUpdate = false;
+
+			// Define type for messages if not already available globally with 'lu'
+			type MessageWithLu = { texte: string; heure: Timestamp; recue: 'R' | 'E'; lu?: boolean };
+
+			const updatedMessages = messages.map((msg: MessageWithLu) => {
+				if (msg.recue === 'E' && (msg.lu === false || msg.lu === undefined)) {
+					messagesArrayNeedsUpdate = true;
+					return { ...msg, lu: true };
+				}
+				return msg;
+			});
+
+			if (messagesArrayNeedsUpdate) {
+				updates.messages = updatedMessages;
+			}
+
+			// Since adminLastReadTimestamp is always added, updates object will not be empty.
+			// No need to check Object.keys(updates).length > 0 if we always intend to update at least the timestamp.
+			await updateDoc(userDocRef, updates);
+			console.log(`Updated read status for user: ${userId}. Fields updated:`, Object.keys(updates).join(', '));
+
+		} else {
+			console.log(`No document found for user: ${userId} to mark conversation as read.`);
+		}
+	} catch (error) {
+		console.error("Error in markConversationAsRead for user:", userId, error);
+	}
+	// The logic for updating 'MessagesRecue' collection has been removed from this function.
 };
 
 /**
@@ -168,17 +222,23 @@ export const markConversationAsRead = async (userId: string) => {
 export const getUnreadConversationsCountListener = (callback: (count: number) => void) => {
 	// biblioUserCollectionRef is collection(db, 'BiblioUser')
 	return onSnapshot(biblioUserCollectionRef, (querySnapshot) => {
-		let unreadCount = 0;
+		let unreadConversationsCount = 0;
 		querySnapshot.forEach((docSnapshot) => {
 			const userData = docSnapshot.data();
 			const messages = userData.messages || [];
+
+			// Define the type for messages within this function for clarity, expecting 'lu'
+			type MessageWithLu = { texte: string; heure: Timestamp; recue: 'R' | 'E'; lu?: boolean };
+
 			if (messages.length > 0) {
-				const lastMessage = messages[messages.length - 1];
-				if (lastMessage.recue === 'E') { // Message emitted by user, thus unread by admin
-					unreadCount++;
+				const hasUnreadFromUser = (messages as MessageWithLu[]).some((msg: MessageWithLu) =>
+					msg.recue === 'E' && (msg.lu === false || msg.lu === undefined)
+				);
+				if (hasUnreadFromUser) {
+					unreadConversationsCount++;
 				}
 			}
 		});
-		callback(unreadCount);
+		callback(unreadConversationsCount);
 	});
 };

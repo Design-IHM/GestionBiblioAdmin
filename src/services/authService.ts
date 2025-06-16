@@ -9,6 +9,7 @@ export interface AdminData {
 	password?: string;
 	name: string;
 	role: string;
+	gender: string;
 	createdAt: Date;
 	isVerified: boolean; // Nous gardons ce champ pour une utilisation future
 }
@@ -17,7 +18,7 @@ export interface AdminData {
  * Crée un nouvel admin dans la collection BiblioAdmin.
  * Le compte est vérifié par défaut.
  */
-export const registerAdmin = async (name: string, email: string, password: string): Promise<void> => {
+export const registerAdmin = async (name: string, email: string, password: string, gender: string): Promise<void> => {
 	const q = query(collection(db, 'BiblioAdmin'), where('email', '==', email));
 	const querySnapshot = await getDocs(q);
 	if (!querySnapshot.empty) {
@@ -30,8 +31,10 @@ export const registerAdmin = async (name: string, email: string, password: strin
 	await setDoc(adminDocRef, {
 		name,
 		email,
+		gender,
 		password: hashedPassword,
 		role: 'bibliothecaire',
+		imageUrl: "", // L'image peut être ajoutée plus tard
 		createdAt: new Date(),
 		isVerified: true, // L'utilisateur est vérifié par défaut
 	});

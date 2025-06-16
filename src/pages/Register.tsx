@@ -9,6 +9,7 @@ const Register: React.FC = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [gender, setGender] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState('');
@@ -33,7 +34,7 @@ const Register: React.FC = () => {
 		setIsLoading(true);
 
 		try {
-			await authService.registerAdmin(name, email, password);
+			await authService.registerAdmin(name, email, password, gender);
 			setSuccess("Compte créé avec succès ! Redirection vers la page de connexion...");
 			setTimeout(() => navigate('/authentication'), 2000);
 		} catch (err: any) {
@@ -68,6 +69,20 @@ const Register: React.FC = () => {
 				<div className="relative">
 					<FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-secondary-400" />
 					<input type={showPassword ? 'text' : 'password'} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirmer le mot de passe" required className="w-full pl-10 pr-10 py-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary" />
+				</div>
+
+				<div className="relative">
+					<FiUser className="absolute left-3 top-1/2 -translate-y-1/2 text-secondary-400 pointer-events-none" />
+					<select
+						value={gender}
+						onChange={(e) => setGender(e.target.value)}
+						required
+						className="w-full pl-10 pr-4 py-3 bg-gray-700 text-secondary-400 border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary appearance-none"
+					>
+						<option value="" disabled>Genre</option>
+						<option value="Male">Masculin</option>
+						<option value="Female">Féminin</option>
+					</select>
 				</div>
 
 				{error && <div className="text-center text-red-400 bg-red-900 bg-opacity-50 p-2 rounded-lg">{error}</div>}
