@@ -1,6 +1,6 @@
 // pages/Reservations.tsx
 import React from 'react';
-import { FaBook, FaClock, FaCheckCircle } from 'react-icons/fa';
+import { FaClock, FaCheckCircle } from 'react-icons/fa';
 import { useReservations } from '../hooks/useReservations';
 import { usePagination } from '../hooks/useLoans';
 import useI18n from '../hooks/useI18n';

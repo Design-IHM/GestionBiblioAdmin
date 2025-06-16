@@ -1,13 +1,11 @@
 // src/components/layout/Navbar.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BiSearch, BiUserCircle, BiMessageDetail } from 'react-icons/bi';
-import { RiSunFill, RiMoonFill } from 'react-icons/ri';
 import { IoIosArrowBack } from 'react-icons/io';
 import LanguageSwitcher from '../common/LanguageSwitcher';
 import useI18n from '../../hooks/useI18n';
 import { useSearchContext } from '../../context/SearchContext';
-import { getCurrentUserLogin } from '../../utils/dateUtils';
 import { useUnreadCount } from '../../hooks/useUnreadCount';
 
 const Navbar: React.FC = () => {
@@ -15,15 +13,10 @@ const Navbar: React.FC = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { t } = useI18n();
-	const userLogin = getCurrentUserLogin();
-	const [isDarkMode, setIsDarkMode] = useState(false); // Example state
 
 	const unreadMessagesCount = useUnreadCount(); // Example count
 
 	const shouldShowSearch = onSearch !== null;
-
-	const toggleTheme = () => setIsDarkMode(!isDarkMode);
-
 
 	const handleMessagesClick = () => {
 		navigate('/dashboard/messages');

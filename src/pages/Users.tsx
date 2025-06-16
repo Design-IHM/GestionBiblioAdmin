@@ -5,7 +5,6 @@ import StudentsTable from '../components/students/StudentsTable';
 import StudentsFiltersComponent from '../components/students/StudentsFilters';
 import StudentsPagination from '../components/students/StudentsPagination'; 
 import LoadingSpinner from '../components/common/LoadingSpinner';
-import { useConfig } from '../components/theme/ConfigProvider';
 
 // Hooks
 import { useStudents } from '../hooks/useStudents';
@@ -13,7 +12,6 @@ import useI18n from '../hooks/useI18n';
 
 const Users: React.FC = () => {
   const { t } = useI18n();
-const { config } = useConfig();
   
   const {
     // Data

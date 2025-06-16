@@ -33,3 +33,14 @@ export interface Book {
 	commentaire?: Comment[];
 
 }
+
+/**
+ * Defines the structure for a department.
+ */
+export interface Department {
+	id: string;    // Firestore document ID
+	nom: string;   // Name of the department (e.g., "Genie Informatique")
+	image: string; // URL of the department's image
+	// Add any other fields that might be part of a department document, if known.
+	// For now, these are the core fields based on usage in components like DepartementCard.
+}

@@ -207,7 +207,7 @@ const NewMessageModal: React.FC<NewMessageModalProps> = ({ isOpen, onClose, onMe
 								className="btn btn-primary flex items-center"
 								disabled={!messageText.trim() || isSending}
 							>
-								{isSending ? <Spinner size="sm" color="text-white" /> : <FiSend className="mr-2" />}
+								{isSending ? <Spinner/> : <FiSend className="mr-2" />}
 								Send
 							</button>
 						</div>

@@ -6,20 +6,31 @@ import { Button } from '../components/common/Button';
 import useI18n from '../hooks/useI18n';
 import { FiSave, FiXCircle, FiUpload, FiFileText } from 'react-icons/fi';
 
+interface ThesisFormData {
+	title: string;
+	author: string;
+	supervisor: string;
+	department: string; // Assuming initialDepartment is string
+	year: number;
+	abstract: string;
+	keywords: string[]; // Clearly typed here
+	matricule: string;
+	etagere: string;
+}
+
 const AddThesis: React.FC = () => {
 	const { t } = useI18n();
 	const navigate = useNavigate();
 	const { handleAddThesis, isSubmitting, error, initialDepartment } = useAddThesis();
 
-	const [formData, setFormData] = useState({
+	const [formData, setFormData] = useState<ThesisFormData>({
 		title: '',
 		author: '',
 		supervisor: '',
-		department: initialDepartment,
+		department: initialDepartment, // initialDepartment comes from useAddThesis hook
 		year: new Date().getFullYear(),
 		abstract: '',
-		keywords: [],
-		// Add new fields
+		keywords: [], // Now correctly typed due to ThesisFormData
 		matricule: '',
 		etagere: '',
 	});

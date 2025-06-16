@@ -26,7 +26,7 @@ const mapDocToThesis = (doc: any): Thesis => {
 		department: data.département || '',
 		year: data.annee || 0,
 		abstract: data.abstract || '',
-		keywords: typeof data.keywords === 'string' ? data.keywords.split(',').map(k => k.trim()) : [],
+		keywords: typeof data.keywords === 'string' ? data.keywords.split(',').map((k: string) => k.trim()) : [],
 		coverImageUrl: data.image || '',
 		pdfUrl: data.pdfUrl || '',
 		createdAt: data.createdAt || Timestamp.now(),

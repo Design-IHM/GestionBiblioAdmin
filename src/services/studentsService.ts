@@ -18,8 +18,7 @@ import type {
   Student, 
   StudentsFilters, 
   StudentsStats, 
-  StudentSearchFilters, 
-  PaginationData,
+  StudentSearchFilters,
   StudentBulkAction
 } from '../types/students';
 

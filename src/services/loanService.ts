@@ -1,7 +1,7 @@
 // services/loanService.ts
 import { collection, doc, updateDoc, query, where, getDocs, arrayUnion, getDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import type { UserLoan, DocumentLoan, ProcessedUserLoan, UserLoanSlot } from '../types';
+import type { UserLoan, ProcessedUserLoan, UserLoanSlot } from '../types';
 import { fetchMaximumSimultaneousLoans } from './configService';
 
 export class LoanService {

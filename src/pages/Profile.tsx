@@ -14,21 +14,19 @@ import SecuritySettings from '../components/profile/SecuritySettings';
 // Hooks
 import { useProfile } from '../hooks/useProfile';
 import useI18n from '../hooks/useI18n';
-import { useConfig } from '../components/theme/ConfigProvider';
 
 // Types
 import type { ProfileFormData, UserProfile, ProfileStats } from '../types/profile';
 
 const Profile: React.FC = () => {
   const { t } = useI18n();
-  const { config } = useConfig();
   const navigate = useNavigate();
 
   const userId = localStorage.getItem('user_id');
 
   // États par défaut pour utilisateur non connecté
   const [isEditing, setIsEditing] = useState(false);
-  const [isImageUploading, setIsImageUploading] = useState(false);
+  const isImageUploading = false;
   const [notification, setNotification] = useState({
     visible: false,
     type: 'success' as 'success' | 'error',

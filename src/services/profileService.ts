@@ -1,7 +1,7 @@
 // services/profileService.ts
 import { doc, getDoc, updateDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import type { UserProfile, ProfileFormData, ProfileStats, ActivityLog } from '../types/profile';
+import type { UserProfile, ProfileFormData, ProfileStats } from '../types/profile';
 
 export class ProfileService {
   private adminCollection = 'BiblioAdmin';
@@ -102,7 +102,7 @@ export class ProfileService {
       const fullPublicId = folder ? `${folder}/${publicId}` : publicId;
 
       // Préparer la signature pour l'API de suppression (optionnel)
-      const timestamp = Math.round(new Date().getTime() / 1000);
+      // const timestamp = Math.round(new Date().getTime() / 1000);
       
       // Note: Pour la suppression via API, vous devriez utiliser votre backend
       // car l'API secret ne doit pas être exposée côté client
@@ -228,41 +228,41 @@ export class ProfileService {
   }
 
   // Récupérer les logs d'activité récents
-  async getRecentActivity(userId: string, limit: number = 10): Promise<ActivityLog[]> {
-    try {
-      // À implémenter selon votre système de logs
-      // Pour l'instant, retourner un tableau vide
-      return [];
-    } catch (error) {
-      console.error('Erreur lors de la récupération de l\'activité:', error);
-      return [];
-    }
-  }
-
-  // Valider le mot de passe (pour les changements)
-  async validateCurrentPassword(userId: string, password: string): Promise<boolean> {
-    try {
-      // Cette méthode dépend de votre système d'authentification
-      // Firebase Auth ou votre propre système
-      // Pour l'instant, retourner true
-      return true;
-    } catch (error) {
-      console.error('Erreur lors de la validation du mot de passe:', error);
-      return false;
-    }
-  }
-
-  // Changer le mot de passe
-  async changePassword(userId: string, newPassword: string): Promise<void> {
-    try {
-      // À implémenter selon votre système d'authentification
-      // Firebase Auth ou votre propre système
-      console.log('Changement de mot de passe pour:', userId);
-    } catch (error) {
-      console.error('Erreur lors du changement de mot de passe:', error);
-      throw new Error('Impossible de changer le mot de passe');
-    }
-  }
+  // async getRecentActivity(userId: string, limit: number = 10): Promise<ActivityLog[]> {
+  //   try {
+  //     // À implémenter selon votre système de logs
+  //     // Pour l'instant, retourner un tableau vide
+  //     return [];
+  //   } catch (error) {
+  //     console.error('Erreur lors de la récupération de l\'activité:', error);
+  //     return [];
+  //   }
+  // }
+  //
+  // // Valider le mot de passe (pour les changements)
+  // async validateCurrentPassword(userId: string, password: string): Promise<boolean> {
+  //   try {
+  //     // Cette méthode dépend de votre système d'authentification
+  //     // Firebase Auth ou votre propre système
+  //     // Pour l'instant, retourner true
+  //     return true;
+  //   } catch (error) {
+  //     console.error('Erreur lors de la validation du mot de passe:', error);
+  //     return false;
+  //   }
+  // }
+  //
+  // // Changer le mot de passe
+  // async changePassword(userId: string, newPassword: string): Promise<void> {
+  //   try {
+  //     // À implémenter selon votre système d'authentification
+  //     // Firebase Auth ou votre propre système
+  //     console.log('Changement de mot de passe pour:', userId);
+  //   } catch (error) {
+  //     console.error('Erreur lors du changement de mot de passe:', error);
+  //     throw new Error('Impossible de changer le mot de passe');
+  //   }
+  // }
 
   // Valider le format d'image
   validateImageFile(file: File): { isValid: boolean; error?: string } {

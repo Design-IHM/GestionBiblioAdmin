@@ -214,7 +214,7 @@ const Overview: React.FC = () => {
                   label={({ name, value }) => `${name}: ${value}`}
                 >
                   {empruntsPieData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell key={`cell-${index}-${entry}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
                 <Tooltip />

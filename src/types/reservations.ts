@@ -1,5 +1,3 @@
-import type { Timestamp } from "firebase/firestore";
-
 // types/reservations.ts
 export interface UserReservation {
   email: string;

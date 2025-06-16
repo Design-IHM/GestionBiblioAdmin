@@ -1,6 +1,6 @@
 // components/profile/ProfileAvatar.tsx
 import React, { useRef, useState } from 'react';
-import { Camera, Upload, X } from 'lucide-react';
+import { Camera, Upload } from 'lucide-react';
 import useI18n from '../../hooks/useI18n';
 
 interface ProfileAvatarProps {

@@ -1,6 +1,6 @@
 // components/profile/SecuritySettings.tsx
 import React, { useState } from 'react';
-import { Shield, Key, Trash2, AlertTriangle, Eye, EyeOff } from 'lucide-react';
+import { Shield, Key, Trash2, AlertTriangle, Eye } from 'lucide-react';
 import useI18n from '../../hooks/useI18n';
 
 interface SecuritySettingsProps {

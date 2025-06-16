@@ -1,4 +1,4 @@
-import { collection, doc, updateDoc, query, where, getDocs, getDoc, Timestamp } from 'firebase/firestore';
+import { collection, doc, updateDoc, query, where, getDocs, Timestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { fetchMaximumSimultaneousLoans } from './configService';
 import type { ProcessedUserReservation, ReservationSlot, UserReservation } from '../types/reservations';
@@ -10,7 +10,7 @@ export class ReservationService {
    * Convertit une date de n'importe quel format en string ISO
    * Gère Timestamp Firebase, Date JS, string ISO et objet {seconds, nanoseconds}
    */
-  private ensureStringDate(date: Timestamp | string | Date | { seconds: number; nanoseconds: number } | null | undefined): string {
+  public ensureStringDate(date: Timestamp | string | Date | { seconds: number; nanoseconds: number } | null | undefined): string {
   if (!date) return new Date().toISOString();
   
   // Si c'est déjà une string, vérifier qu'elle est valide

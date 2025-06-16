@@ -4,31 +4,31 @@ import { db } from '../config/firebase';
 import type { DashboardStats, TopBorrowedBook, LowStockBook, WeeklyBorrow, RecentlyReturnedBook } from '../types/dashboard';
 
 export class DashboardService {
-  private getInitialStats(): DashboardStats {
-    return {
-      totalBooks: 0,
-      totalTheses: 0,
-      booksByCathegorie: {},
-      thesesByDepartment: {},
-      totalStudents: 0,
-      suspendedStudents: 0,
-      totalReservations: 0,
-      borrowedDocuments: 0,
-      returnedDocuments: 0,
-      monthlyBorrows: [],
-      departmentBorrowStats: [],
-      totalEmprunts: 0,
-      empruntsByDepartment: {},
-      totalBookExemplaires: 0,
-      availableExemplaires: 0,
-      reservedNotPickedUp: 0,
-      topBorrowedBooks: [],
-      lowStockBooks: [],
-      currentWeekBorrows: [],
-      recentlyReturnedBooks: [],
-      reservationToBorrowRatio: 0
-    };
-  }
+  // private getInitialStats(): DashboardStats {
+  //   return {
+  //     totalBooks: 0,
+  //     totalTheses: 0,
+  //     booksByCathegorie: {},
+  //     thesesByDepartment: {},
+  //     totalStudents: 0,
+  //     suspendedStudents: 0,
+  //     totalReservations: 0,
+  //     borrowedDocuments: 0,
+  //     returnedDocuments: 0,
+  //     monthlyBorrows: [],
+  //     departmentBorrowStats: [],
+  //     totalEmprunts: 0,
+  //     empruntsByDepartment: {},
+  //     totalBookExemplaires: 0,
+  //     availableExemplaires: 0,
+  //     reservedNotPickedUp: 0,
+  //     topBorrowedBooks: [],
+  //     lowStockBooks: [],
+  //     currentWeekBorrows: [],
+  //     recentlyReturnedBooks: [],
+  //     reservationToBorrowRatio: 0
+  //   };
+  // }
 
   // Récupérer les statistiques des mémoires
   subscribeToMemoriesStats(callback: (stats: Partial<DashboardStats>) => void) {

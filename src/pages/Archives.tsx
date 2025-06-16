@@ -1,4 +1,4 @@
-import { Component, useState } from 'react';
+import { useState } from 'react';
 import { useI18n } from '../hooks/useI18n';
 import { useArchives } from '../hooks/useArchives';
 import { ArchiveTable } from '../components/archives/ArchiveTable';
@@ -10,9 +10,9 @@ import { ArchiveFilters } from '../components/archives/ArchivesFilters';
 
 const Archives = () => {
   const { t } = useI18n();
-  const { 
-    archives, 
-    stats, 
+  const {
+    // archives,
+    // stats,
     loading, 
     filteredArchives, 
     sortArchives,
