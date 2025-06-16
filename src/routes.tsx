@@ -101,7 +101,7 @@ const routes = createBrowserRouter([
 					{ path: "reservations", element: <Reservations/>, },
 					{ path: "settings", element: <OrgConfiguration/>, },
 					{ path: "archives", element: <Archives/>, },
-					{ path: "profile", element: <UnderDevelopment sectionName="Profile"/>, },
+					{ path: "profile", element: <Profile/>, },
 					{ path: "*", element: <UnderDevelopment sectionName="Requested"/>, }
 				]
 			},
