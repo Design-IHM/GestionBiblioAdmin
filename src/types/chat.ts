@@ -16,4 +16,5 @@ export interface Conversation {
 	lastMessageText: string;
 	lastMessageTimestamp: Timestamp;
 	unreadByAdmin: boolean;
+	adminLastReadTimestamp?: Timestamp; // Add this line
 }
