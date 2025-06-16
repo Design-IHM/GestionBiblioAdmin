@@ -2,9 +2,7 @@ import React from 'react';
 import { FaBook, FaCalendarAlt, FaCheckCircle, FaClock } from 'react-icons/fa';
 import type { ReservationItemProps } from '../../types';
 import useI18n from '../../hooks/useI18n';
-import { FormattedDate } from '../common/FormattedDate';
-import { reservationService } from '../../services/reservationService';
-import { getCurrentFormattedDateTime } from '../../utils/dateUtils';
+ 
 import { formatReservationDate } from '../../utils/ReservationDateUtils';
 
 const ReservationItem: React.FC<ReservationItemProps> = ({

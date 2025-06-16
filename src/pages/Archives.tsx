@@ -68,7 +68,12 @@ const Archives = () => {
         <Pagination
           currentPage={currentPage}
           totalPages={Math.ceil(sorted.length / itemsPerPage)}
-          onPageChange={setCurrentPage}
+          onGoToPage={setCurrentPage}
+          hasNextPage={currentPage < Math.ceil(sorted.length / itemsPerPage)}
+          hasPrevPage={currentPage > 1}
+          onNextPage={() => setCurrentPage(currentPage + 1)}
+          onPrevPage={() => setCurrentPage(currentPage - 1)}
+          showPageInfo
         />
       )}
     </div>

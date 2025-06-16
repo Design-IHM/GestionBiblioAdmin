@@ -22,15 +22,12 @@ import ThesisCatalogue from "./pages/ThesisCatalogue.tsx";
 import ThesisDepartment from "./pages/ThesisDepartment.tsx";
 import AddThesis from "./pages/AddThesis.tsx";
 import ThesisDetails from "./pages/ThesisDetails.tsx";
+import Profile from './pages/Profile.tsx';
 import { Chat } from "./pages/Chat.tsx";
 
 // Pages d'authentification
 import Login from "./pages/Login.tsx";
 import Register from "./pages/Register.tsx";
-import ForgotPassword from "./pages/ForgotPassword.tsx";
-import VerifyEmailInfoPage from "./pages/VerifyEmailInfo.tsx";
-
-
 
 const routes = createBrowserRouter([
 	{
@@ -48,15 +45,7 @@ const routes = createBrowserRouter([
 			{
 				path: "register", // URL: /authentication/register
 				element: <Register />
-			},
-			{
-				path: "forgot-password", // URL: /authentication/forgot-password
-				element: <ForgotPassword />
-			},
-			{
-				path: "verify-email", // La page qui dit à l'utilisateur de vérifier ses emails
-				element: <VerifyEmailInfoPage />
-			},
+			}
 		]
 	},
 	{
@@ -112,9 +101,37 @@ const routes = createBrowserRouter([
 					{ path: "reservations", element: <Reservations/>, },
 					{ path: "settings", element: <OrgConfiguration/>, },
 					{ path: "archives", element: <Archives/>, },
-					{ path: "profile", element: <UnderDevelopment sectionName="Profile"/>, },
+					{ path: "profile", element: <Profile/>, },
 					{ path: "*", element: <UnderDevelopment sectionName="Requested"/>, }
 				]
+			},
+			{
+				path: "users",
+				element: <Users />,
+			},
+			{
+				path: "loans",
+				element: <Loans />,
+			},
+			{
+				path: "reservations",
+				element: <Reservations />,
+			},
+			{
+				path: "settings",
+				element: <OrgConfiguration />,
+			},
+			{
+				path: "archives",
+				element: <Archives/>,
+			},
+			{
+				path: "profile",
+				element: <Profile/>,
+			},
+			{
+				path: "*",
+				element: <UnderDevelopment sectionName="Requested" />,
 			}
 		]
 	},

@@ -2,7 +2,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import type { Conversation } from '../../types/chat';
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow, isFuture, differenceInMinutes } from 'date-fns';
 import { FaUserCircle } from 'react-icons/fa';
 
 interface ConversationItemProps {
@@ -32,7 +32,19 @@ export const ConversationItem: React.FC<ConversationItemProps> = ({ conversation
 				<div className="flex justify-between items-center">
 					<p className="font-semibold text-gray-800 truncate">{conversation.userName}</p>
 					<p className="text-xs text-gray-500">
-						{conversation.lastMessageTimestamp && formatDistanceToNow(conversation.lastMessageTimestamp.toDate(), { addSuffix: true })}
+						{(() => {
+							if (!conversation.lastMessageTimestamp) return null;
+							const messageDate = conversation.lastMessageTimestamp.toDate();
+							const now = new Date();
+							if (isFuture(messageDate)) {
+								const diffMins = differenceInMinutes(messageDate, now);
+								if (diffMins >= 0 && diffMins < 5) { // If date is in future but within 5 minutes
+									return 'just now'; // Or a localized version
+								}
+							}
+							// For past dates or future dates beyond the threshold, use formatDistanceToNow
+							return formatDistanceToNow(messageDate, { addSuffix: true });
+						})()}
 					</p>
 				</div>
 				<p className="text-sm text-gray-600 truncate">{conversation.lastMessageText}</p>

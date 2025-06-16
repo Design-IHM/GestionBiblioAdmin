@@ -34,7 +34,7 @@
       "title": "Bienvenue à",
       "description": "Votre application web de gestion de votre bibliothèque de votre campus.",
       "manage_documents": "Depuis cette plateforme, vous, chers membres de la cellule documentation, avez la possibilité de gérer les documents et les réservations de façon automatique, en toute simplicité et tranquillité.",
-      "cta_button": "Connectez vous"
+      "cta_button": "Commencer Maintenant"
     },
     "services": {
       "title": "Nos Services",
@@ -160,33 +160,350 @@
       "last": "Dernière archive"
     }
   },
-  "departments": {
-    "admin_title": "Administration des Départements",
-    "add_button": "Ajouter un Département",
-    "no_departments": "Aucun département n'a encore été créé.",
-    "create_first": "Créez votre premier département",
-    "create_title": "Créer un Nouveau Département",
-    "name_label": "Nom du Département",
-    "name_placeholder": "Ex: Génie Informatique, Littérature...",
-    "name_tip": "Saisissez un nom court et descriptif.",
-    "image_label": "Image du Département",
-    "select_image": "Télécharger une image",
-    "change_image": "Changer l'image",
-    "image_format": "Recommandé : JPG, PNG (max 5Mo)",
-    "preview": "Aperçu de l'image",
-    "cancel_button": "Annuler",
-    "save_button": "Enregistrer le Département",
-    "success": "Département ajouté avec succès !",
-    "error": "Erreur :",
-    "fill_all_fields": "Veuillez remplir tous les champs obligatoires."
+   "dashboard": {
+    "help_message": "Pour plus de détails sur chaque carte, survolez-la avec votre curseur.",
+    "loading": "Chargement du tableau de bord...",
+    "total_books": "Total des titres uniques",
+    "total_theses": "Total Mémoires",
+    "registered_students": "Étudiants Inscrits",
+    "borrowed_documents": "Documents Empruntés",
+    "people_borrowed": "Personnes ayant emprunté",
+    "suspended_students": "Étudiants Suspendus",
+    "total_reservations": "Total Réservations",
+    "monthly_borrows": "Emprunts Mensuels",
+    "borrows_by_department": "Emprunts par Département",
+    "books_by_category": "Livres par Département",
+    "theses_by_department": "Mémoires par Département",
+    "total_inventory": "Inventaire total des exemplaires",
+    "available_for_reservation": "Exemplaires disponibles pour réservation",
+    "reserved_not_picked": "Réservés mais non retirés",
+    "physically_present": "Exemplaires physiquement présents",
+    "reservation_to_borrow": "Taux réservations → emprunts",
+    "top_borrowed": "Top 5 des livres les plus empruntés",
+    "low_stock": "Livres en stock faible (moins de 20%)",
+    "current_week": "Emprunts de la semaine courante",
+    "recently_returned": "Livres récemment retournés",
+    "no_data_available": "Aucune donnée disponible",
+    "desc_unique_titles": "Nombre total de titres distincts dans la bibliothèque, sans compter les exemplaires multiples.",
+    "desc_total_inventory": "Nombre total d'exemplaires acquis par la bibliothèque (somme de tous les exemplaires initiaux).",
+    "desc_available": "Nombre d'exemplaires actuellement disponibles pour réservation ou emprunt.",
+    "desc_borrowed": "Nombre de documents actuellement empruntés par les utilisateurs.",
+    "desc_reserved": "Nombre de documents réservés mais pas encore retirés par les utilisateurs.",
+    "desc_physically_present": "Nombre d'exemplaires physiquement présents dans la bibliothèque (inventaire total moins emprunts).",
+    "desc_people_borrowed": "Nombre d'utilisateurs ayant actuellement au moins un document emprunté.",
+    "desc_reservation_ratio": "Pourcentage des réservations qui sont converties en emprunts."
   },
-  "catalogue": {
-    "sort_name_asc": "Nom A-Z",
-    "sort_name_desc": "Nom Z-A",
-    "sort_stock_asc": "Stock Croissant",
-    "sort_stock_desc": "Stock Décroissant",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Voir",
+    "close": "Fermer",
+    "confirm": "Confirmer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "actions": "Actions",
+    "error": "Erreur",
+    "success": "Succès",
+    "warning": "Avertissement",
+    "info": "Information"
+  ,
+  "profile": {
+    "page_title": "Profil utilisateur",
+    "personal_info": "Informations personnelles",
+    "account_stats": "Statistiques du compte",
+ 
+    "quick_actions_section": "Actions rapides",
+    "account_details": "Détails du compte",
+    "profile_progress": "Progression du profil",
+    "recent_activities": "Activités récentes",
+    
+    "form_fields": {
+      "full_name": "Nom complet",
+      "email_address": "Adresse email",
+      "phone_number": "Numéro de téléphone",
+      "user_gender": "Genre",
+      "user_department": "Département",
+      "user_bio": "Biographie",
+      "avatar_image": "Image de profil"
+    },
+    
+    "input_placeholders": {
+      "enter_name": "Entrez votre nom complet",
+      "enter_email": "Entrez votre adresse email",
+      "enter_phone": "Entrez votre numéro de téléphone",
+      "enter_address": "Entrez votre adresse",
+      "enter_profession": "Entrez votre profession",
+      "enter_bio": "Parlez-nous de vous en quelques mots...",
+      "choose_gender": "Sélectionnez votre genre"
+    },
+    
+    "gender_options": {
+      "male_option": "Homme",
+      "female_option": "Femme",
+      "select_gender": "Choisissez une option"
+    },
+    
+    "action_buttons": {
+      "edit_profile": "Modifier le profil",
+      "save_modifications": "Enregistrer les modifications",
+      "cancel_edit": "Annuler les modifications",
+      "update_password": "Changer le mot de passe",
+      "remove_account": "Supprimer le compte",
+      "upload_image": "Télécharger une image",
+      "change_avatar": "Changer l'avatar"
+    },
+    
+    "statistics": {
+      "account_duration": "Ancienneté du compte",
+      "last_connection": "Dernière connexion",
+      "managed_documents": "Documents gérés",
+      "total_sessions": "Sessions totales",
+      "member_days": "Jours d'adhésion",
+      "days_since_login": "Jours depuis la connexion",
+      "document_count": "Nombre de documents",
+      "session_count": "Nombre de sessions",
+      "login_total": "Total des connexions",
+      "completion_percentage": "Pourcentage de complétude"
+    },
+    
+    "user_status": {
+      "account_active": "Compte actif",
+      "account_inactive": "Compte inactif",
+      "user_offline": "Utilisateur hors ligne",
+      "role_administrator": "Administrateur",
+      "role_user": "Utilisateur",
+      "no_name_user": "Utilisateur sans nom"
+    },
+    
+    "account_information": {
+      "registration_date": "Date d'inscription",
+      "last_profile_update": "Dernière mise à jour du profil",
+      "current_status": "Statut actuel",
+      "last_login_date": "Dernière date de connexion",
+      "info_unknown": "Information inconnue",
+      "never_updated": "Jamais mis à jour",
+      "data_unavailable": "Données non disponibles"
+    },
+    
+    "navigation_actions": {
+      "browse_books": "Parcourir les livres",
+      "check_loans": "Consulter les prêts",
+      "view_reservations": "Voir les réservations",
+      "go_to_dashboard": "Aller au tableau de bord"
+    },
+    
+    "form_validation": {
+      "name_is_required": "Le nom est obligatoire",
+      "name_too_short": "Le nom doit contenir au moins 2 caractères",
+      "email_is_required": "L'email est obligatoire",
+      "email_format_invalid": "Le format de l'email est invalide",
+      "phone_format_invalid": "Le format du téléphone est invalide",
+      "bio_exceeds_limit": "La biographie ne peut pas dépasser 500 caractères",
+      "birthdate_invalid": "La date de naissance est invalide",
+      "field_required": "Ce champ est obligatoire",
+      "minimum_characters": "Minimum {{min}} caractères requis",
+      "maximum_characters": "Maximum {{max}} caractères autorisés",
+      "invalid_input_format": "Format de saisie invalide"
+    },
+    
+    "user_messages": {
+      "profile_save_success": "Profil sauvegardé avec succès",
+      "image_upload_success": "Image téléchargée avec succès",
+      "currently_saving": "Sauvegarde en cours...",
+      "currently_uploading": "Téléchargement en cours...",
+      "login_required": "Vous devez être connecté pour effectuer cette action",
+      "profile_load_error": "Profil introuvable",
+      "no_activity_found": "Aucune activité récente trouvée",
+      "incomplete_fields": "Champs incomplets",
+      "chars_remaining": "caractères restants",
+      "character_count": "caractères",
+      "account_deletion_success": "Compte supprimé avec succès"
+    },
+    
+    "security_section": {
+      "security_title": "Sécurité du compte",
+      "password_field": "Mot de passe",
+      "password_last_change": "Dernière modification il y a 30 jours",
+      "password_update": "Mettre à jour le mot de passe",
+      "password_update_desc": "Modifiez votre mot de passe pour renforcer la sécurité",
+      "two_factor_authentication": "Authentification à deux facteurs",
+      "two_factor_desc": "Ajoutez une couche de sécurité supplémentaire",
+      "privacy_controls": "Contrôles de confidentialité",
+      "privacy_controls_desc": "Gérez la visibilité de vos informations",
+      "setup_feature": "Configurer",
+      "manage_feature": "Gérer",
+      "password_changed_on": "Mot de passe modifié le {{date}}",
+      "no_password_history": "Aucun historique de modification"
+    },
+    
+    "danger_section": {
+      "danger_zone_title": "Zone de danger",
+      "danger_zone_warning": "Ces actions sont définitives et irréversibles",
+      "account_deletion": "Suppression du compte",
+      "account_deletion_desc": "Supprime définitivement votre compte et toutes vos données",
+      "deletion_warning": "Cette action est irréversible. Toutes vos données seront perdues.",
+      "deletion_consequences": "Conséquences de la suppression :",
+      "access_loss": "Vous perdrez l'accès à votre compte",
+      "data_deletion": "Toutes vos données seront effacées",
+      "action_irreversible": "Cette action ne peut pas être annulée",
+      "confirm_deletion": "Confirmer la suppression du compte",
+      "deletion_confirmation": "Êtes-vous certain de vouloir supprimer votre compte ?",
+      "final_deletion_warning": "Cette action supprimera définitivement votre compte et toutes les données associées.",
+      "type_delete_word": "Tapez 'DELETE' pour confirmer la suppression",
+      "confirm_account_deletion": "Oui, supprimer définitivement mon compte",
+      "delete_action": "Supprimer"
+    },
+    
+    "privacy_section": {
+      "privacy_title": "Confidentialité",
+      "private_account": "Compte privé",
+      "private_account_desc": "Votre profil ne sera visible que par vous-même"
+    },
+    
+    "notification_preferences": {
+      "notifications_title": "Préférences de notification",
+      "email_notifications": "Notifications par email",
+      "email_notifications_desc": "Recevoir les notifications importantes par email",
+      "book_due_reminders": "Rappels d'échéance",
+      "book_reminders_desc": "Notifications pour les dates de retour",
+      "system_news": "Actualités du système",
+      "system_news_desc": "Informations sur les nouvelles fonctionnalités"
+    },
+    
+    "image_upload": {
+      "click_or_drop": "Cliquez ou glissez-déposez une image",
+      "supported_file_types": "Formats acceptés : JPG, PNG, WebP",
+      "upload_in_progress": "Téléchargement en cours...",
+      "change_profile_photo": "Changer la photo de profil",
+      "upload_failed": "Échec du téléchargement",
+      "unsupported_format": "Format de fichier non supporté",
+      "file_size_exceeded": "Taille de fichier trop importante"
+    },
+    
+    "profile_completion": {
+      "fields_missing": "Champs manquants pour compléter votre profil",
+      "completion_rate": "{{percentage}}% du profil complété"
+    },
+    
+    "page_states": {
+      "offline_user_info": "Utilisateur hors ligne - Connectez-vous pour accéder à vos informations",
+      "demonstration_mode": "Mode démonstration",
+      "profile_loading": "Chargement du profil en cours...",
+      "profile_load_failed": "Échec du chargement du profil"
+    }
+  },
+  
+  "students": {
+    "students_list": "Liste des étudiants",
+    "manage_students_desc": "Gérez les comptes étudiants et leurs autorisations d'accès",
+    
+    "profile_picture": "Photo de profil",
+    "information": "Information",
+    "phone": "Téléphone",
+    "status": "Statut",
+    "possible_action": "Action possible",
+    "student_id": "Matricule",
+    "level": "Niveau",
+    "no_phone": "Aucun téléphone",
+    
+    "active": "Actif",
+    "blocked": "Bloqué",
+    "lock": "Bloquer",
+    "unlock": "Débloquer",
+    
+    "all_status": "Tous les statuts",
+    "recent_date": "Date récente",
+    "old_date": "Date ancienne",
+    "sort_by_name": "Trier par nom",
+    "sort_by_level": "Trier par niveau",
+    
+    "filters": "Filtres",
+    "filter_by_status": "Filtrer par statut",
+    "filter_by_level": "Filtrer par niveau",
+    "filter_by_department": "Filtrer par département",
+    "sort_by": "Trier par",
+    "enter_level": "Entrez le niveau",
+    "enter_department": "Entrez le département",
+    "clear_filters": "Effacer les filtres",
+    
+    "students_total": "étudiants au total",
+    "students": "étudiants",
+    "of": "sur",
+    "total": "Total",
+    
+    "loading": "Chargement des étudiants...",
+    "no_students_found": "Aucun étudiant trouvé",
+    "no_students_message": "Aucun étudiant ne correspond aux critères de recherche",
+    "error_loading": "Erreur lors du chargement des étudiants",
+    "retry": "Réessayer",
+    
+    "showing": "Affichage de",
+    "to": "à",
+    "results": "résultats",
     "previous": "Précédent",
     "next": "Suivant",
-    "page": "Page"
-  }
+    
+    "student_blocked_success": "Étudiant bloqué avec succès",
+    "student_unblocked_success": "Étudiant débloqué avec succès",
+    "status_update_error": "Erreur lors de la mise à jour du statut",
+    
+    "bulk_actions": "Actions groupées",
+    "select_all": "Tout sélectionner",
+    "selected_count": "{{count}} sélectionné(s)",
+    "block_selected": "Bloquer la sélection",
+    "unblock_selected": "Débloquer la sélection",
+    "delete_selected": "Supprimer la sélection",
+    
+    "confirm_block": "Confirmer le blocage",
+    "confirm_unblock": "Confirmer le déblocage",
+    "confirm_delete": "Confirmer la suppression",
+    "block_student_message": "Êtes-vous sûr de vouloir bloquer cet étudiant ?",
+    "unblock_student_message": "Êtes-vous sûr de vouloir débloquer cet étudiant ?",
+    "delete_student_message": "Êtes-vous sûr de vouloir supprimer cet étudiant ? Cette action est irréversible.",
+    
+    "export": "Exporter",
+    "export_csv": "Exporter en CSV",
+    "export_excel": "Exporter en Excel",
+    "export_pdf": "Exporter en PDF",
+    
+    "search_placeholder": "Rechercher par nom, email ou matricule...",
+    "advanced_search": "Recherche avancée",
+    
+    "statistics": "Statistiques",
+    "recent_registrations": "Inscriptions récentes",
+    "by_level": "Par niveau",
+    "by_department": "Par département",
+    
+    "student_details": "Détails de l'étudiant",
+    "edit_student": "Modifier l'étudiant",
+    "view_student": "Voir l'étudiant",
+    "student_history": "Historique de l'étudiant",
+    
+    "registration_date": "Date d'inscription",
+    "last_activity": "Dernière activité",
+    "account_created": "Compte créé le",
+    "never_connected": "Jamais connecté",
+    
+    "email": "Email",
+    "gender": "Genre",
+    "address": "Adresse",
+    "birth_date": "Date de naissance",
+    "department": "Département",
+    
+    "male": "Homme",
+    "female": "Femme",
+    
+    "actions_history": "Historique des actions",
+    "no_actions": "Aucune action enregistrée",
+    
+    "refresh": "Actualiser",
+    "add_student": "Ajouter un étudiant",
+    "import_students": "Importer des étudiants"
+  
 }
+}
+ 
+  
+

@@ -11,8 +11,18 @@
   "light_mode": "Mode clair",
   "dark_mode": "Mode sombre",
   "logout": "Déconnexion",
+<<<<<<< HEAD
+  "pagination": {
+  "previous": "Précédent",
+  "next": "Suivant",
+  "go_to_page": "Aller à la page",
+  "page": "Page",
+  "of": "sur"
+}
+=======
   "delete": "Supprimer",
   "edit_book": "Modifier le Livre",
   "save": "Enregistrer",
   "cancel": "Annuler"
+>>>>>>> 16df8847243401b5c2ee089c8fb89cbab0a8fdb0
 }

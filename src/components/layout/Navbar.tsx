@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
 			if (dynamicParam) {
 				// This is the key change: decode the URL-encoded string.
 				const decodedParam = decodeURIComponent(dynamicParam);
-
+				const sectionTitle = t(`pages:dashboard.${mainSection}`, { defaultValue: mainSection.charAt(0).toUpperCase() + mainSection.slice(1) });
 				// Return a combined title, e.g., "Books: Genie Informatique"
 				return `${sectionTitle}: ${decodedParam}`;
 			}
@@ -69,6 +69,7 @@ const Navbar: React.FC = () => {
 	// const shouldShowSearch = () => location.pathname.includes('/books') || location.pathname.includes('/users');
 	const shouldShowBackButton = () => location.pathname !== '/dashboard';
 	const goBack = () => navigate(-1);
+	const goToProfile = () => navigate('/dashboard/profile'); // ✅ Correction: ajouter /dashboard
 
 	return (
 		<header className="bg-white shadow-sm sticky top-0 z-10">
@@ -114,12 +115,15 @@ const Navbar: React.FC = () => {
               </span>
 						)}
 					</button>
-					<button onClick={toggleTheme} className="p-2 rounded-full hover:bg-secondary-100" title={isDarkMode ? t('common:light_mode') : t('common:dark_mode')}>
-						{isDarkMode ? <RiSunFill className="text-primary-800 text-xl" /> : <RiMoonFill className="text-primary-800 text-xl" />}
-					</button>
-					<button className="flex items-center space-x-2 ml-2 p-1 rounded-full hover:bg-secondary-100" title={t('components:navbar.profile')}>
+					
+					{/* ✅ Correction: onClick sur le bouton parent */}
+					<button 
+						onClick={goToProfile}
+						className="flex items-center space-x-2 ml-2 p-1 rounded-full hover:bg-secondary-100 cursor-pointer" 
+						title={t('components:navbar.profile')}
+					>
 						<BiUserCircle className="text-primary-800 text-2xl" />
-						<span className="text-sm font-medium hidden md:inline">{userLogin}</span>
+					
 					</button>
 				</div>
 			</div>

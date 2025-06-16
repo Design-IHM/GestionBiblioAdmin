@@ -75,3 +75,39 @@ export interface DocumentLoanItemProps {
   isProcessing: boolean;
   onReturn: () => void;
 }
+// Types pour les composants du dashboard
+export interface StatCardProps {
+  title: string;
+  value: number | string;
+  percentage?: number;
+  description?: string;
+  icon: string;
+  color?: string;
+  className?: string;
+}
+
+export interface ChartCardProps {
+  title: string;
+  children: React.ReactNode;
+  className?: string;
+  height?: number;
+}
+
+export interface BookListProps {
+  title: string;
+  books: Array<{
+    name: string;
+    count?: number;
+    date?: string;
+    info?: string;
+  }>;
+  icon?: string;
+  className?: string;
+  emptyMessage?: string;
+}
+
+export interface DocumentLoanItemProps {
+  document: import('./loans').DocumentLoan;
+  isProcessing: boolean;
+  onReturn: () => void;
+}
