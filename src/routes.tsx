@@ -21,6 +21,7 @@ import ThesisCatalogue from "./pages/ThesisCatalogue.tsx";
 import ThesisDepartment from "./pages/ThesisDepartment.tsx";
 import AddThesis from "./pages/AddThesis.tsx";
 import ThesisDetails from "./pages/ThesisDetails.tsx";
+import Profile from './pages/Profile.tsx';
 
 
 const routes = createBrowserRouter([
@@ -128,7 +129,7 @@ const routes = createBrowserRouter([
 			},
 			{
 				path: "profile",
-				element: <UnderDevelopment sectionName="Profile" />,
+				element: <Profile/>,
 			},
 			{
 				path: "*",

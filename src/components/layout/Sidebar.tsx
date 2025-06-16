@@ -20,10 +20,7 @@ const Sidebar: React.FC = () => {
 		{ id: 'reservations', label: t('components:sidebar.reservations'), icon: 'clipboard-check' },
 		{ id: 'archives', label: t('components:sidebar.archives'), icon: 'archive' },
 		{ id: 'settings', label: t('components:sidebar.settings'), icon: 'cog' },
-<<<<<<< HEAD
 		
-=======
->>>>>>> 16df8847243401b5c2ee089c8fb89cbab0a8fdb0
 	];
 
 	const bookManagementItems = [
