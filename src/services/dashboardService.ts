@@ -32,7 +32,7 @@ export class DashboardService {
 
   // Récupérer les statistiques des mémoires
   subscribeToMemoriesStats(callback: (stats: Partial<DashboardStats>) => void) {
-    const ref = collection(db, 'Memoire');
+    const ref = collection(db, 'BiblioThesis');
     return onSnapshot(ref, (querySnapshot) => {
       const thesesByDepartment: Record<string, number> = {};
       let totalTheses = 0;
@@ -52,7 +52,7 @@ export class DashboardService {
 
   // Récupérer les statistiques des livres
   subscribeToBooksStats(callback: (stats: Partial<DashboardStats>) => void) {
-    const ref = collection(db, 'BiblioInformatique');
+    const ref = collection(db, 'BiblioBooks');
     return onSnapshot(ref, (querySnapshot) => {
       const booksByCathegorie: Record<string, number> = {};
       let totalBooks = 0;
