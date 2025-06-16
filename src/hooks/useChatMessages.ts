@@ -13,17 +13,19 @@ export const useChatMessages = (conversationId: string | undefined) => {
 			setLoading(false);
 			return;
 		}
-		setLoading(true);
+		setLoading(true); // Set loading to true before starting to fetch
 
+		// Consider if markConversationAsRead should be here or called elsewhere,
+		// for now, keeping it as per original logic but ensuring it doesn't cause issues.
 		markConversationAsRead(conversationId);
 
 		const unsubscribe = getMessagesListener(conversationId, (updatedMessages) => {
 			setMessages(updatedMessages);
-			if (loading) setLoading(false);
+			setLoading(false); // Set loading to false after messages are updated
 		});
 
 		return () => unsubscribe();
-	}, [conversationId, loading]);
+	}, [conversationId]); // Dependency array changed here
 
 	return { messages, loading };
 };

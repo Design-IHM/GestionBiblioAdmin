@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
 			if (dynamicParam) {
 				// This is the key change: decode the URL-encoded string.
 				const decodedParam = decodeURIComponent(dynamicParam);
-
+				const sectionTitle = t(`pages:dashboard.${mainSection}`, { defaultValue: mainSection.charAt(0).toUpperCase() + mainSection.slice(1) });
 				// Return a combined title, e.g., "Books: Genie Informatique"
 				return `${sectionTitle}: ${decodedParam}`;
 			}
