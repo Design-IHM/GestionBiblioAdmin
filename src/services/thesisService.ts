@@ -1,7 +1,7 @@
 // src/services/thesisService.ts
 import { collection, doc, addDoc, getDoc, updateDoc, deleteDoc, getDocs, query, where, Timestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import type { Thesis } from '../types/thesis';
+import type { Thesis, ThesisComment } from '../types/thesis';
 
 const thesisCollectionRef = collection(db, 'BiblioThesis');
 
@@ -15,24 +15,24 @@ const thesisCollectionRef = collection(db, 'BiblioThesis');
  * @param doc - The Firestore document snapshot.
  * @returns A `Thesis` object.
  */
-const mapDocToThesis = (doc: any): Thesis => {
+const mapDocToThesis = (doc: { id: string; data: () => Record<string, unknown> }): Thesis => {
 	const data = doc.data();
 	return {
 		id: doc.id,
 		// Mapping Firestore fields (left) to our application's fields (right)
-		title: data.theme || '',
-		author: data.name || '',
-		supervisor: data.superviseur || '',
-		department: data.département || '',
-		year: data.annee || 0,
-		abstract: data.abstract || '',
+		title: (data.theme as string) || '',
+		author: (data.name as string) || '',
+		supervisor: (data.superviseur as string) || '',
+		department: (data.département as string) || '',
+		year: (data.annee as number) || 0,
+		abstract: (data.abstract as string) || '',
 		keywords: typeof data.keywords === 'string' ? data.keywords.split(',').map((k: string) => k.trim()) : [],
-		coverImageUrl: data.image || '',
-		pdfUrl: data.pdfUrl || '',
-		createdAt: data.createdAt || Timestamp.now(),
-		matricule: data.matricule || '',
-		etagere: data.etagere || '',
-		commentaire: data.commentaire || [],
+		coverImageUrl: (data.image as string) || '',
+		pdfUrl: (data.pdfUrl as string) || '',
+		createdAt: (data.createdAt as Timestamp) || Timestamp.now(),
+		matricule: (data.matricule as string) || '',
+		etagere: (data.etagere as string) || '',
+		commentaire: (data.commentaire as ThesisComment[]) || [],
 	};
 };
 
@@ -112,7 +112,7 @@ export const updateThesis = async (thesisId: string, data: Partial<Thesis>): Pro
 	const thesisDocRef = doc(db, 'BiblioThesis', thesisId);
 
 	// Create an object to hold the Firestore-compatible data
-	const firestoreUpdateData: { [key: string]: any } = {};
+	const firestoreUpdateData: Record<string, unknown> = {};
 
 	// Map fields from our clean Thesis object to Firestore field names
 	if (data.title !== undefined) firestoreUpdateData.theme = data.title;

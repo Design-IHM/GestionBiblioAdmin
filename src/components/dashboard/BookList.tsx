@@ -24,7 +24,7 @@ const BookList: React.FC<BookListProps> = ({
   className = '',
   emptyMessage = 'Aucune donnée disponible'
 }) => {
-  const IconComponent = icon ? LucideIcons[icon] as React.ComponentType<any> : null;
+  const IconComponent = icon ? LucideIcons[icon] as React.ComponentType<{ size?: number; className?: string }> : null;
 
   return (
     <div className={`bg-white rounded-lg shadow-sm border border-gray-200 p-6 h-full flex flex-col ${className}`}>

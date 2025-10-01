@@ -1,7 +1,7 @@
 // src/components/catalogue/CatalogueFilters.tsx
 import React from 'react';
 import useI18n from '../../hooks/useI18n';
-import type {CatalogueFiltersProps} from "../../types/book.ts";
+import type {CatalogueFiltersProps, SortOption} from "../../types/book.ts";
 
 const CatalogueFilters: React.FC<CatalogueFiltersProps> = ({ onSortChange }) => {
 	const { t } = useI18n();
@@ -9,7 +9,7 @@ const CatalogueFilters: React.FC<CatalogueFiltersProps> = ({ onSortChange }) => 
 		<div className="flex flex-col md:flex-row gap-4 mb-6">
 
 			<select
-				onChange={(e) => onSortChange(e.target.value as any)}
+				onChange={(e) => onSortChange(e.target.value as SortOption)}
 				className="w-full md:w-auto px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
 			>
 				<option value="nameAsc">{t('components:catalogue.sort_name_asc')}</option>

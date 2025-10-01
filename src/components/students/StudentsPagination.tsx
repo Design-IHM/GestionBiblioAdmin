@@ -30,7 +30,7 @@ const StudentsPagination: React.FC<StudentsPaginationProps> = ({
     
     // Afficher jusqu'à 5 numéros de page
     let startPage = Math.max(1, currentPage - 2);
-    let endPage = Math.min(totalPages, startPage + 4);
+    const endPage = Math.min(totalPages, startPage + 4);
     
     // Ajuster si on est près de la fin
     if (endPage - startPage < 4) {

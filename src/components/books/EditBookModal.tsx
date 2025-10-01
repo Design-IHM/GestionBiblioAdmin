@@ -42,7 +42,7 @@ export const EditBookModal: React.FC<EditBookModalProps> = ({ isOpen, onClose, b
 		try {
 			await onSave(formData, imageFile);
 			onClose();
-		} catch (error) {
+		} catch {
 			alert(t('pages:book_details.update_failed'));
 		}
 	};

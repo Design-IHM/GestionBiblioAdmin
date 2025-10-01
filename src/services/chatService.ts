@@ -73,7 +73,7 @@ export const getConversationsListener = (callback: (conversations: Conversation[
 };
 
 // Fetches a single user document
-export const getUserDoc = async (userId: string): Promise<any | null> => { // Consider defining a UserData type for the return
+export const getUserDoc = async (userId: string): Promise<Record<string, unknown> | null> => { // Consider defining a UserData type for the return
 	if (!userId) {
 		console.log("getUserDoc: userId is not provided.");
 		return null;
@@ -112,11 +112,11 @@ export const getMessagesListener = (userId: string, callback: (messages: Message
 			// The old structure is { texte: string, heure: Timestamp, recue: "R" | "E" }
 			// The current Message type is { id: string, text: string, senderId: string, timestamp: Timestamp }
 			// We need to map these fields.
-			const messages: Message[] = messagesData.map((msg: any, index: number) => ({
-				id: `${userId}-${index}-${msg.heure.toMillis()}`, // Construct a unique ID
-				text: msg.texte,
+			const messages: Message[] = messagesData.map((msg: Record<string, unknown>, index: number) => ({
+				id: `${userId}-${index}-${(msg.heure as Timestamp).toMillis()}`, // Construct a unique ID
+				text: msg.texte as string,
 				senderId: msg.recue === 'E' ? userId : 'admin', // 'E' (Envoyé by user), 'R' (Reçu by user from admin)
-				timestamp: msg.heure,
+				timestamp: msg.heure as Timestamp,
 			}));
 			callback(messages);
 		} else {
@@ -177,7 +177,7 @@ export const markConversationAsRead = async (userId: string) => {
 
 		if (docSnap.exists()) {
 			const userData = docSnap.data();
-			const updates: { [key: string]: any } = {};
+			const updates: Record<string, unknown> = {};
 
 			// Always update the adminLastReadTimestamp
 			updates.adminLastReadTimestamp = serverTimestamp();

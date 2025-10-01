@@ -19,6 +19,7 @@ interface ValidationErrors {
   [key: string]: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useFormValidation = <T extends Record<string, any>>(
   initialData: T,
   rules: ValidationRules
@@ -85,6 +86,7 @@ export const useFormValidation = <T extends Record<string, any>>(
   }, [data, rules, validateField]);
 
   // Mettre à jour un champ
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const updateField = useCallback((field: keyof T, value: any) => {
     setData(prev => ({ ...prev, [field]: value }));
     
@@ -153,7 +155,7 @@ export const profileValidationRules: ValidationRules = {
   phone: {
     minLength: 8,
     maxLength: 15,
-    pattern: /^[\+]?[1-9][\d]{0,15}$/
+    pattern: /^[+]?[1-9][\d]{0,15}$/
   },
   department: {
     maxLength: 100

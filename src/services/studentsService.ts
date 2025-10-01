@@ -55,9 +55,9 @@ export class StudentsService {
   // Récupérer les étudiants avec pagination
   async getStudentsPaginated(
     pageSize: number = 10,
-    lastDoc?: any,
+    lastDoc?: unknown,
     filters?: StudentsFilters
-  ): Promise<{ students: Student[]; lastDoc: any; hasMore: boolean }> {
+  ): Promise<{ students: Student[]; lastDoc: unknown; hasMore: boolean }> {
     try {
       const studentsRef = collection(db, this.collection);
       

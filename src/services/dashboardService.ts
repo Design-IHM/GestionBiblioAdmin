@@ -1,7 +1,7 @@
 // services/dashboardService.ts
 import { collection, doc, getDocs, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import type { DashboardStats, TopBorrowedBook, LowStockBook, WeeklyBorrow, RecentlyReturnedBook } from '../types/dashboard';
+import type { DashboardStats, TopBorrowedBook, LowStockBook, WeeklyBorrow, RecentlyReturnedBook, MonthlyBorrow, DepartmentBorrowStat } from '../types/dashboard';
 
 export class DashboardService {
   // private getInitialStats(): DashboardStats {
@@ -226,8 +226,8 @@ export class DashboardService {
       const archives = archivesSnapshot.data();
 
       if (archives && archives.tableauArchives) {
-        archives.tableauArchives.forEach((entry: any) => {
-          const entryDate = new Date(entry.heure);
+        archives.tableauArchives.forEach((entry: Record<string, unknown>) => {
+          const entryDate = new Date(entry.heure as string);
 
           if (entryDate >= firstDayOfWeek && entryDate <= lastDayOfWeek) {
             const dayIndex = entryDate.getDay() === 0 ? 6 : entryDate.getDay() - 1;
@@ -256,7 +256,7 @@ export class DashboardService {
           .map(entry => ({
             titre: entry.nomDoc,
             etudiant: entry.nomEtudiant,
-            date: new Date(entry.heure).toLocaleDateString()
+            date: new Date(entry.heure as string).toLocaleDateString()
           }));
       }
 
@@ -272,21 +272,21 @@ export class DashboardService {
     const ref = doc(db, 'ArchivesBiblio', 'Arch');
     return onSnapshot(ref, (doc) => {
       const data = doc.data();
-      const monthlyBorrows: any[] = [];
-      const departmentBorrowStats: any[] = [];
+      const monthlyBorrows: MonthlyBorrow[] = [];
+      const departmentBorrowStats: DepartmentBorrowStat[] = [];
 
       if (data && data.tableauArchives) {
         const oneYearAgo = new Date();
         oneYearAgo.setMonth(oneYearAgo.getMonth() - 12);
 
-        const recentEntries = data.tableauArchives.filter((entry: any) =>
-          new Date(entry.heure) >= oneYearAgo
+        const recentEntries = data.tableauArchives.filter((entry: Record<string, unknown>) =>
+          new Date(entry.heure as string) >= oneYearAgo
         );
 
         const monthsData: Record<string, number> = {};
 
-        recentEntries.forEach((entry: any) => {
-          const date = new Date(entry.heure);
+        recentEntries.forEach((entry: Record<string, unknown>) => {
+          const date = new Date(entry.heure as string);
           const monthYear = `${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()}`;
 
           monthsData[monthYear] = (monthsData[monthYear] || 0) + 1;
@@ -294,8 +294,8 @@ export class DashboardService {
           // Analyser le département
           let department = "Inconnu";
           if (entry.nomDoc) {
-            const parts = entry.nomDoc.split(' - ');
-            department = parts.length > 1 ? parts[1] : entry.nomDoc;
+            const parts = (entry.nomDoc as string).split(' - ');
+            department = parts.length > 1 ? parts[1] : entry.nomDoc as string;
           }
 
           const existingDepartment = departmentBorrowStats.find(d => d.department === department);

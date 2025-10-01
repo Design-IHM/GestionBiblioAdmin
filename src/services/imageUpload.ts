@@ -23,7 +23,7 @@ export interface UploadOptions {
 
 export interface UploadError {
 	message: string;
-	error: any;
+	error: unknown;
 }
 
 export class ImageUploadService {
@@ -200,7 +200,7 @@ export const imageUploadHelpers = {
 	},
 
 	// Get image URL with transformations
-	getImageUrl: (publicId: string, transformations?: any): string => {
+	getImageUrl: (publicId: string, transformations?: Record<string, unknown>): string => {
 		const service = ImageUploadService.getInstance();
 		return service.getImageUrl(publicId, transformations);
 	},

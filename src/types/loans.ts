@@ -15,7 +15,7 @@ export interface UserLoan {
   imageUri?: string;
   // États et tableaux dynamiques basés sur MaximumSimultaneousLoans
   // Le nombre exact d'etat et tabEtat dépend de MaximumSimultaneousLoans
-  [key: string]: any; // Pour permettre etat1, etat2, ..., etatN et tabEtat1, tabEtat2, ..., tabEtatN
+  [key: string]: unknown; // Pour permettre etat1, etat2, ..., etatN et tabEtat1, tabEtat2, ..., tabEtatN
 }
 
 export interface UserLoanSlot {
