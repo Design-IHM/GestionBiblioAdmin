@@ -1,5 +1,5 @@
 // src/services/thesisService.ts
-import { collection, doc, addDoc, getDoc, updateDoc, deleteDoc, getDocs, query, where, Timestamp } from 'firebase/firestore';
+import { collection, doc, addDoc, getDoc, updateDoc, deleteDoc, getDocs, query, where, Timestamp, DocumentSnapshot } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import type { Thesis } from '../types/thesis';
 
@@ -15,8 +15,11 @@ const thesisCollectionRef = collection(db, 'BiblioThesis');
  * @param doc - The Firestore document snapshot.
  * @returns A `Thesis` object.
  */
-const mapDocToThesis = (doc: any): Thesis => {
+const mapDocToThesis = (doc: DocumentSnapshot): Thesis => {
 	const data = doc.data();
+	if (!data) {
+		throw new Error('Document data is undefined');
+	}
 	return {
 		id: doc.id,
 		// Mapping Firestore fields (left) to our application's fields (right)
@@ -112,7 +115,7 @@ export const updateThesis = async (thesisId: string, data: Partial<Thesis>): Pro
 	const thesisDocRef = doc(db, 'BiblioThesis', thesisId);
 
 	// Create an object to hold the Firestore-compatible data
-	const firestoreUpdateData: { [key: string]: any } = {};
+	const firestoreUpdateData: Record<string, unknown> = {};
 
 	// Map fields from our clean Thesis object to Firestore field names
 	if (data.title !== undefined) firestoreUpdateData.theme = data.title;

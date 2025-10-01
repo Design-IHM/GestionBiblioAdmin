@@ -37,8 +37,9 @@ const Register: React.FC = () => {
 			await authService.registerAdmin(name, email, password, gender);
 			setSuccess("Compte créé avec succès ! Redirection vers la page de connexion...");
 			setTimeout(() => navigate('/authentication'), 2000);
-		} catch (err: any) {
-			setError(err.message);
+		} catch (err: unknown) {
+			const errorMessage = err instanceof Error ? err.message : 'Une erreur est survenue.';
+			setError(errorMessage);
 		} finally {
 			setIsLoading(false);
 		}
