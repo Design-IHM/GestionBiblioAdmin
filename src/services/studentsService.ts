@@ -11,7 +11,8 @@ import {
   orderBy, 
   limit,
   startAfter,
-  getDoc
+  getDoc,
+  QueryDocumentSnapshot
 } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import type { 
@@ -55,9 +56,9 @@ export class StudentsService {
   // Récupérer les étudiants avec pagination
   async getStudentsPaginated(
     pageSize: number = 10,
-    lastDoc?: any,
+    lastDoc?: QueryDocumentSnapshot,
     filters?: StudentsFilters
-  ): Promise<{ students: Student[]; lastDoc: any; hasMore: boolean }> {
+  ): Promise<{ students: Student[]; lastDoc: QueryDocumentSnapshot | null; hasMore: boolean }> {
     try {
       const studentsRef = collection(db, this.collection);
       
