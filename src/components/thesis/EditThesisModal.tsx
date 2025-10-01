@@ -54,7 +54,7 @@ export const EditThesisModal: React.FC<EditThesisModalProps> = ({ isOpen, onClos
 		try {
 			await onSave(formData, coverFile, pdfFile);
 			onClose();
-		} catch (error) {
+		} catch {
 			alert('Failed to update thesis details.');
 		}
 	};

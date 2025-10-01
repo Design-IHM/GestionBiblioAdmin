@@ -153,7 +153,7 @@ export const profileValidationRules: ValidationRules = {
   phone: {
     minLength: 8,
     maxLength: 15,
-    pattern: /^[\+]?[1-9][\d]{0,15}$/
+    pattern: /^[+]?[1-9][\d]{0,15}$/
   },
   department: {
     maxLength: 100
