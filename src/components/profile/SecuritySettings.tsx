@@ -35,7 +35,7 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({
     actionColor = 'blue',
     isDanger = false 
   }: {
-    icon: any;
+    icon: React.ComponentType<{ className?: string }>;
     title: string;
     description: string;
     action: () => void;

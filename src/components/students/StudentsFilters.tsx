@@ -62,7 +62,7 @@ const StudentsFiltersComponent: React.FC<StudentsFiltersProps> = ({
           </label>
           <select
             value={filters.status}
-            onChange={(e) => onFiltersChange({ status: e.target.value as any })}
+            onChange={(e) => onFiltersChange({ status: e.target.value as 'all' | 'ras' | 'bloc' })}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             {statusOptions.map(option => (
@@ -109,7 +109,7 @@ const StudentsFiltersComponent: React.FC<StudentsFiltersProps> = ({
           </label>
           <select
             value={filters.sortBy}
-            onChange={(e) => onFiltersChange({ sortBy: e.target.value as any })}
+            onChange={(e) => onFiltersChange({ sortBy: e.target.value as 'recent' | 'old' | 'name' | 'level' })}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             style={{ 
               backgroundColor: "white",
