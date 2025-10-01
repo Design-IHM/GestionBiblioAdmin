@@ -23,7 +23,7 @@ export interface UploadOptions {
 
 export interface UploadError {
 	message: string;
-	error: any;
+	error: Error | unknown;
 }
 
 export class ImageUploadService {
@@ -200,7 +200,14 @@ export const imageUploadHelpers = {
 	},
 
 	// Get image URL with transformations
-	getImageUrl: (publicId: string, transformations?: any): string => {
+	getImageUrl: (publicId: string, transformations?: {
+		width?: number;
+		height?: number;
+		crop?: 'fill' | 'fit' | 'scale' | 'crop' | 'thumb' | 'pad';
+		quality?: 'auto' | number;
+		format?: 'auto' | 'webp' | 'jpg' | 'png';
+		gravity?: 'auto' | 'face' | 'center' | 'north' | 'south' | 'east' | 'west';
+	}): string => {
 		const service = ImageUploadService.getInstance();
 		return service.getImageUrl(publicId, transformations);
 	},

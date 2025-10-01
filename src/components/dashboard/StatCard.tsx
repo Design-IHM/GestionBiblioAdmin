@@ -24,7 +24,7 @@ const StatCard: React.FC<StatCardProps> = ({
   const [showTooltip, setShowTooltip] = useState(false);
   
   // Récupérer l'icône dynamiquement
-  const IconComponent = LucideIcons[icon] as React.ComponentType<any>;
+  const IconComponent = LucideIcons[icon] as React.ComponentType<{ className?: string; size?: number }>;
 
   const getColorClasses = (colorName: string) => {
     const colorMap = {
