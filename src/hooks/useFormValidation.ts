@@ -19,7 +19,7 @@ interface ValidationErrors {
   [key: string]: string;
 }
 
-export const useFormValidation = <T extends Record<string, any>>(
+export const useFormValidation = <T extends Record<string, unknown>>(
   initialData: T,
   rules: ValidationRules
 ) => {
@@ -29,38 +29,41 @@ export const useFormValidation = <T extends Record<string, any>>(
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   // Valider un champ spécifique
-  const validateField = useCallback((field: string, value: string): string | null => {
+  const validateField = useCallback((field: string, value: unknown): string | null => {
     const rule = rules[field];
     if (!rule) return null;
 
+    // Convert value to string for validation
+    const stringValue = String(value ?? '');
+
     // Required validation
-    if (rule.required && (!value || value.trim() === '')) {
+    if (rule.required && (!stringValue || stringValue.trim() === '')) {
       return t('validation.required', { field });
     }
 
     // Skip other validations if value is empty and not required
-    if (!value || value.trim() === '') {
+    if (!stringValue || stringValue.trim() === '') {
       return null;
     }
 
     // Min length validation
-    if (rule.minLength && value.length < rule.minLength) {
+    if (rule.minLength && stringValue.length < rule.minLength) {
       return t('validation.min_length', { field, min: rule.minLength });
     }
 
     // Max length validation
-    if (rule.maxLength && value.length > rule.maxLength) {
+    if (rule.maxLength && stringValue.length > rule.maxLength) {
       return t('validation.max_length', { field, max: rule.maxLength });
     }
 
     // Pattern validation
-    if (rule.pattern && !rule.pattern.test(value)) {
+    if (rule.pattern && !rule.pattern.test(stringValue)) {
       return t('validation.invalid_format', { field });
     }
 
     // Custom validation
     if (rule.custom) {
-      return rule.custom(value);
+      return rule.custom(stringValue);
     }
 
     return null;
@@ -85,7 +88,7 @@ export const useFormValidation = <T extends Record<string, any>>(
   }, [data, rules, validateField]);
 
   // Mettre à jour un champ
-  const updateField = useCallback((field: keyof T, value: any) => {
+  const updateField = useCallback((field: keyof T, value: T[keyof T]) => {
     setData(prev => ({ ...prev, [field]: value }));
     
     // Marquer comme touché
@@ -153,7 +156,7 @@ export const profileValidationRules: ValidationRules = {
   phone: {
     minLength: 8,
     maxLength: 15,
-    pattern: /^[\+]?[1-9][\d]{0,15}$/
+    pattern: /^[+]?[1-9][\d]{0,15}$/
   },
   department: {
     maxLength: 100

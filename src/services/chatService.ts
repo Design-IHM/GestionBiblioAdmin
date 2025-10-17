@@ -12,6 +12,7 @@ import {
 	arrayUnion,
 	getDoc
 } from 'firebase/firestore';
+import type { DocumentData } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import type { Conversation, Message } from '../types/chat';
 
@@ -73,7 +74,7 @@ export const getConversationsListener = (callback: (conversations: Conversation[
 };
 
 // Fetches a single user document
-export const getUserDoc = async (userId: string): Promise<any | null> => { // Consider defining a UserData type for the return
+export const getUserDoc = async (userId: string): Promise<DocumentData | null> => {
 	if (!userId) {
 		console.log("getUserDoc: userId is not provided.");
 		return null;
@@ -112,7 +113,7 @@ export const getMessagesListener = (userId: string, callback: (messages: Message
 			// The old structure is { texte: string, heure: Timestamp, recue: "R" | "E" }
 			// The current Message type is { id: string, text: string, senderId: string, timestamp: Timestamp }
 			// We need to map these fields.
-			const messages: Message[] = messagesData.map((msg: any, index: number) => ({
+			const messages: Message[] = messagesData.map((msg: { texte: string; heure: Timestamp; recue: 'R' | 'E' }, index: number) => ({
 				id: `${userId}-${index}-${msg.heure.toMillis()}`, // Construct a unique ID
 				text: msg.texte,
 				senderId: msg.recue === 'E' ? userId : 'admin', // 'E' (Envoyé by user), 'R' (Reçu by user from admin)
@@ -177,7 +178,7 @@ export const markConversationAsRead = async (userId: string) => {
 
 		if (docSnap.exists()) {
 			const userData = docSnap.data();
-			const updates: { [key: string]: any } = {};
+			const updates: Record<string, unknown> = {};
 
 			// Always update the adminLastReadTimestamp
 			updates.adminLastReadTimestamp = serverTimestamp();

@@ -156,7 +156,7 @@ export class LoanService {
 
       // Mettre à jour l'état de l'utilisateur
       const userRef = doc(this.userCollection, userEmail);
-      const updateData: any = {};
+      const updateData: Record<string, unknown> = {};
       updateData[`etat${documentSlot}`] = 'ras';
       updateData[`tabEtat${documentSlot}`] = ['', '', '', 0, '', ''];
 

@@ -116,7 +116,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     options = null,
     error = ''
   }: {
-    icon: any;
+    icon: React.ComponentType<{ className?: string }>;
     label: string;
     value: string;
     onChange: (value: string) => void;

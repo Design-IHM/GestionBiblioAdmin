@@ -48,7 +48,7 @@ export const AddCommentForm: React.FC<AddCommentFormProps> = ({ onAddComment, is
 			await onAddComment(text, rating);
 			setText(''); // Clear form on success
 			setRating(0);
-		} catch (error) {
+		} catch {
 			// The page component will handle displaying the alert
 		}
 	};

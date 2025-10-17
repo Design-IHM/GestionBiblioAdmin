@@ -31,8 +31,8 @@ const Login: React.FC = () => {
 				},
 				replace: true // Remplace la page de login dans l'historique
 			});
-		} catch (err: any) {
-			setError(err.message || 'Une erreur est survenue.');
+		} catch (err: unknown) {
+			setError(err instanceof Error ? err.message : 'Une erreur est survenue.');
 		} finally {
 			setIsLoading(false);
 		}

@@ -1,7 +1,7 @@
 // services/dashboardService.ts
 import { collection, doc, getDocs, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import type { DashboardStats, TopBorrowedBook, LowStockBook, WeeklyBorrow, RecentlyReturnedBook } from '../types/dashboard';
+import type { DashboardStats, TopBorrowedBook, LowStockBook, WeeklyBorrow, RecentlyReturnedBook, MonthlyBorrow, DepartmentBorrowStat } from '../types/dashboard';
 
 export class DashboardService {
   // private getInitialStats(): DashboardStats {
@@ -226,7 +226,7 @@ export class DashboardService {
       const archives = archivesSnapshot.data();
 
       if (archives && archives.tableauArchives) {
-        archives.tableauArchives.forEach((entry: any) => {
+        archives.tableauArchives.forEach((entry: { heure: string }) => {
           const entryDate = new Date(entry.heure);
 
           if (entryDate >= firstDayOfWeek && entryDate <= lastDayOfWeek) {
@@ -272,20 +272,20 @@ export class DashboardService {
     const ref = doc(db, 'ArchivesBiblio', 'Arch');
     return onSnapshot(ref, (doc) => {
       const data = doc.data();
-      const monthlyBorrows: any[] = [];
-      const departmentBorrowStats: any[] = [];
+      const monthlyBorrows: MonthlyBorrow[] = [];
+      const departmentBorrowStats: DepartmentBorrowStat[] = [];
 
       if (data && data.tableauArchives) {
         const oneYearAgo = new Date();
         oneYearAgo.setMonth(oneYearAgo.getMonth() - 12);
 
-        const recentEntries = data.tableauArchives.filter((entry: any) =>
+        const recentEntries = data.tableauArchives.filter((entry: { heure: string; nomDoc?: string }) =>
           new Date(entry.heure) >= oneYearAgo
         );
 
         const monthsData: Record<string, number> = {};
 
-        recentEntries.forEach((entry: any) => {
+        recentEntries.forEach((entry: { heure: string; nomDoc?: string }) => {
           const date = new Date(entry.heure);
           const monthYear = `${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()}`;
 

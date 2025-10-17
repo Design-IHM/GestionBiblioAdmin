@@ -38,7 +38,7 @@ export interface StudentsStats {
 export interface StudentUpdateRequest {
   studentId: string;
   field: keyof Student;
-  value: any;
+  value: unknown;
 }
 
 export interface StudentBulkAction {

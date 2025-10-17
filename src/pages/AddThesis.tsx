@@ -65,7 +65,6 @@ const AddThesis: React.FC = () => {
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		// @ts-ignore
 		handleAddThesis(formData, coverFile, pdfFile);
 	};
 
