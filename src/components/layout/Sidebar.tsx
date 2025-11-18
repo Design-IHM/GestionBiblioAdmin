@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useConfig } from "../theme/ConfigProvider.tsx";
-import { GiBookPile } from "react-icons/gi";
 import { BiLogOut } from "react-icons/bi";
 import { FiChevronDown, FiChevronRight } from "react-icons/fi";
 import useI18n from '../../hooks/useI18n';
