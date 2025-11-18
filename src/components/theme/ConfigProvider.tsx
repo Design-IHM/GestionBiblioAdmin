@@ -35,6 +35,25 @@ export const ConfigProvider: React.FC<ConfigProviderProps> = ({ children, orgNam
 		initializeDefaultTheme();
 	}, []);
 
+	// Update favicon dynamically when config.Logo changes
+	useEffect(() => {
+	if (!loading && config?.Logo) {
+		const favicon = document.querySelector("link[rel='icon']") as HTMLLinkElement;
+
+		if (favicon) {
+		favicon.href = config.Logo; // Set the dynamic logo
+		console.log("🔄 Favicon updated to:", config.Logo);
+		} else {
+		// If no favicon tag exists, create one
+		const newFavicon = document.createElement("link");
+		newFavicon.rel = "icon";
+		newFavicon.href = config.Logo;
+		document.head.appendChild(newFavicon);
+		console.log("✨ Favicon element created:", config.Logo);
+		}
+	}
+	}, [config, loading]);
+
 	// Apply theme from configuration when it's loaded
 	useEffect(() => {
 		// Only apply theme when loading is complete and we have a config

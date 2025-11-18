@@ -47,7 +47,21 @@ const Sidebar: React.FC = () => {
 		setIsBookManagementOpen(!isBookManagementOpen);
 	};
 
-	const renderLogo = () => <GiBookPile className="w-8 h-8 text-primary" />;
+	const renderLogo = () => {
+		if (!config?.Logo) return null; // wait until config is loaded
+		return (
+			<img
+			src={config.Logo}
+			alt={`${config.Name} Logo`}
+			className="w-10 h-10 object-contain"
+			onError={(e) => {
+				console.error("Failed to load logo:", config.Logo);
+				e.currentTarget.style.display = "none"; // optional fallback
+			}}
+			/>
+		);
+	};
+
 
 	const renderIcon = (iconName: string) => {
 		switch (iconName) {
