@@ -1,4 +1,3 @@
-import { GiBookPile } from "react-icons/gi";
 import useI18n from "../../hooks/useI18n.ts";
 import {useConfig} from "../theme/ConfigProvider.tsx";
 

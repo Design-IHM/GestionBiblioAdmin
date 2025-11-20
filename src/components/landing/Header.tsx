@@ -1,6 +1,5 @@
 import {useNavigate} from "react-router-dom";
 import useI18n from "../../hooks/useI18n.ts";
-import {GiBookPile} from "react-icons/gi";
 import LanguageSwitcher from "../common/LanguageSwitcher.tsx";
 import {useConfig} from "../theme/ConfigProvider.tsx";
 
@@ -29,7 +28,7 @@ function Header() {
 			/>
 		);
 	};
-	
+
 	return (
 		<header className="bg-primary shadow-md">
 			<div className="container mx-auto px-4 py-4 flex justify-between items-center">
